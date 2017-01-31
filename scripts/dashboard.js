@@ -1,9 +1,6 @@
 (function(root) {
     const template = `
         <div>
-                      <article
-                    v-for="item in items">{{item.name}}
-                    </article>
             <section class="fl w-100 w-50-ns pl3 min-vh-75">
                 <tasksList :tasks="filteredTasks" :clickBranch="openBranch"/>
             </section>
