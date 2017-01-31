@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Dashboard">
+    <meta name="author" content="Dmitri Kunin">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel="stylesheet" href="https://npmcdn.com/tachyons@4.6.0/css/tachyons.min.css">
+    <link rel="stylesheet" href="./styles.css">
+    <script>
+        const LOCAL_IP = 'http://10.10.12.13';
+        const KANBAN_MAIN = LOCAL_IP + ':4747/api/kanban';
+        const PRS = LOCAL_IP + ':4848/api/prs';
+    </script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/2.1.3/vue-router.min.js"></script>
+    <script type="text/javascript" src="./tasksList.js"></script>
+    <script type="text/javascript" src="./stashList.js"></script>
+    <script type="text/javascript" src="./dashboard.js"></script>
+    <script type="text/javascript" src="./settings.js"></script>
+    <script type="text/javascript" src="./mainApp.js"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="text/javascript">
+        function makeRequest(url) {
+            return fetch(url)
+                .then(response => {
+                    if (response.status >= 200 && response.status < 300) {
+                        return response.json();
+                    }
+                    return {};
+                })
+                .catch(error => {
+                    return [];
+                });
+        }
+        document.addEventListener('DOMContentLoaded', function () {
+            Vue.component('tasksList', tasksList);
+            Vue.component('stashList', stashList);
+            const app = new Vue(mainApp);
+            Vue.set(app, 'items', [{ name: 'Something else' }]);
+        });
+    </script>
+  </body>
+</html>
