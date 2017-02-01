@@ -70,4 +70,4 @@
             this.$set(this, 'hideWips', hideWips);
         }
     };
-})(this);
+})(this || (typeof window !== 'undefined' ? window : global));

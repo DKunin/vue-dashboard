@@ -46,4 +46,4 @@
           </div>
       `
     };
-})(this);
+})(this || (typeof window !== 'undefined' ? window : global));

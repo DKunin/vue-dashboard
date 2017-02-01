@@ -25,4 +25,4 @@
         name: 'mainApp',
         data: () => ({ tasks: [], requests: [], hideWips: false, hideMaster: false })
     };
-})(this);
+})(this || (typeof window !== 'undefined' ? window : global));
