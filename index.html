@@ -11,11 +11,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <link rel="stylesheet" href="https://npmcdn.com/tachyons@4.6.0/css/tachyons.min.css">
     <link rel="stylesheet" href="./styles/styles.css">
-    <script>
-        const LOCAL_IP = 'http://10.10.12.13';
-        const KANBAN_MAIN = LOCAL_IP + ':4747/api/kanban';
-        const PRS = LOCAL_IP + ':4848/api/prs';
-    </script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/2.2.0/vue-router.min.js"></script>
     <script type="text/javascript" src="./scripts/tasksList.js"></script>
@@ -27,6 +22,10 @@
   <body>
     <div id="app"></div>
     <script type="text/javascript">
+        const LOCAL_IP = 'http://10.10.12.13';
+        const KANBAN_MAIN = LOCAL_IP + ':4747/api/kanban';
+        const PRS = LOCAL_IP + ':4848/api/prs';
+
         function makeRequest(url) {
             return fetch(url)
                 .then(response => {
@@ -39,11 +38,60 @@
                     return [];
                 });
         }
+
+        function updateTasks(boardId, app) {
+            Promise
+                .all([
+                    makeRequest(
+                        KANBAN_MAIN +
+                            `?boardId=${boardId}&jql=assignee%20=%20currentUser()`
+                    )
+                ])
+                .then((tasks, secondTasks) => {
+                    const concatinated = tasks.reduce(
+                        function(newArray, singleItem) {
+                            return newArray.concat(singleItem);
+                        },
+                        []
+                    );
+                    Vue.set(app, 'tasks', concatinated);
+                });
+        }
+
+        function updateStash(stashUserName, app) {
+            makeRequest(PRS + '?username=' + stashUserName)
+                .then(data => {
+                    Vue.set(app, 'requests', data);
+                });
+        }
+
+        let lastUpdate = Date.now();
+
         document.addEventListener('DOMContentLoaded', function () {
             Vue.component('tasksList', tasksList);
             Vue.component('stashList', stashList);
             const app = new Vue(mainApp);
-            Vue.set(app, 'items', [{ name: 'Something else' }]);
+            const { boardId, stashUserName, hideMaster, hideWips } = JSON.parse(
+                localStorage.getItem('settings')
+            )
+
+            Vue.set(app, 'hideMaster', hideMaster);
+            Vue.set(app, 'hideWips', hideWips);
+
+            document.addEventListener(
+                'visibilitychange',
+                () => {
+                    const timeSinceLastUpdate = Math.abs(lastUpdate - Date.now()) / 1000;
+                    if (timeSinceLastUpdate > 120) {
+                        updateTasks(boardId, app);
+                        updateStash(stashUserName, app);
+                        lastUpdate = Date.now();
+                    }
+                },
+                false
+            );
+            updateTasks(boardId, app);
+            updateStash(stashUserName, app);
         });
     </script>
   </body>

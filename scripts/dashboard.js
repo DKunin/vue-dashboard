@@ -13,18 +13,16 @@
     root['dashboard'] = {
         template,
         props: {
-            items: {
-                type: Array,
-                default: [ { name: 'one' }, { name: 'two' } ]
+            state: {
+                type: Object,
+                default: {}
             }
         },
-        data: () =>
-            ({ tasks: [], requests: [], hideWips: false, hideMaster: false }),
         computed: {
             filteredRequests: function() {
-                return this.requests.reduce(
+                return this.state.requests.reduce(
                     (newArray, singleItem) => {
-                        if (this.hideWips && singleItem.title.includes('WIP')) {
+                        if (this.state.hideWips && singleItem.title.includes('WIP')) {
                             return newArray;
                         }
                         return newArray.concat(singleItem);
@@ -33,12 +31,10 @@
                 );
             },
             filteredTasks: function() {
-                if (!this.tasks)
-                    return null;
-                return this.tasks.reduce(
+                return this.state.tasks.reduce(
                     (newArray, singleItem) => {
                         if (
-                            this.hideMaster &&
+                            this.state.hideMaster &&
                                 singleItem.fields.status.name === 'In Master'
                         ) {
                             return newArray;
@@ -50,58 +46,9 @@
             }
         },
         methods: {
-            // updateTasks: function(boardId) {
-            //     Promise
-            //         .all([
-            //             makeRequest(
-            //                 KANBAN_MAIN +
-            //                     `?boardId=${boardId}&jql=assignee%20=%20currentUser()`
-            //             )
-            //         ])
-            //         .then((tasks, secondTasks) => {
-            //             const concatinated = tasks.reduce(
-            //                 function(newArray, singleItem) {
-            //                     return newArray.concat(singleItem);
-            //                 },
-            //                 []
-            //             );
-            //             this.$set(this, 'tasks', concatinated);
-            //         });
-            // },
-            // updateStash: function(stashUserName) {
-            //     makeRequest(PRS + '?username=' + stashUserName)
-            //         .then(data => {
-            //             console.log(data);
-            //             this.$set(this, 'requests', data);
-            //         });
-            // }
             openBranch: function(branch) {
                 console.log(branch);
             }
-        },
-        mounted: function() {
-            const { stashUserName, boardId, hideMaster, hideWips } = JSON.parse(
-                localStorage.getItem('settings')
-            ) ||
-                {
-                    stashUserName: '',
-                    boardId: '',
-                    hideMaster: false,
-                    hideWips: false
-                };
-
-            this.$set(this, 'hideMaster', hideMaster);
-            this.$set(this, 'hideWips', hideWips);
-            // this.updateTasks(boardId);
-            // this.updateStash(stashUserName);
-            // document.addEventListener(
-            //     'visibilitychange',
-            //     () => {
-            //         this.updateTasks(boardId);
-            //         this.updateStash(stashUserName);
-            //     },
-            //     false
-            // );
         }
     };
 })(this);

@@ -14,7 +14,7 @@
                 <router-link class="link dim gray f5 f4-ns dib mr3" to="/settings">Settings</router-link>
               </div>
             </nav>
-            <router-view :items="items"></router-view>
+            <router-view :state="{ tasks, requests, hideWips, hideMaster }" />
         </main>
     `;
 
@@ -23,6 +23,6 @@
         el: '#app',
         template,
         name: 'mainApp',
-        data: () => ({ items: [ { name: 'three' } ] })
+        data: () => ({ tasks: [], requests: [], hideWips: false, hideMaster: false })
     };
 })(this);
