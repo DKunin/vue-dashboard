@@ -21,6 +21,13 @@
             },
             doesNeedWork: function(reviewers) {
                 return reviewers.some(({ status }) => status === 'NEEDS_WORK');
+            },
+            isConflicted: function(properties) {
+                if (properties.mergeResult) {
+                    return properties.mergeResult.outcome === 'CONFLICTED';
+                }
+                return false;
+
             }
         },
         template: `
@@ -31,9 +38,9 @@
                     v-for="request in requests"
                     style="height: 240px;max-width: 160px;">
 
-                    <div v-bind:class="[{ 
-                        'bg-dark-red': request.properties.mergeResult.outcome === 'CONFLICTED',
-                        'bg-dark-green': request.properties.mergeResult.outcome !== 'CONFLICTED',
+                    <div v-bind:class="['bg-dark-red', 
+                    { 
+                        'bg-dark-green': isConflicted(request.properties),
                         'bg-light-yellow': doesNeedWork(request.reviewers)
                     }, 'db br3 ph3 pv2 mb2 white']"> </div>
                     <div>
