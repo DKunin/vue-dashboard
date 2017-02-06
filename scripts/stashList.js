@@ -18,6 +18,9 @@
                     return withoutNumber;
                 }
                 return withoutNumber.slice(0, 40) + '...';
+            },
+            doesNeedWork: function(reviewers) {
+                return reviewers.some(({ status }) => status === 'NEEDS_WORK');
             }
         },
         template: `
@@ -28,7 +31,11 @@
                     v-for="request in requests"
                     style="height: 240px;max-width: 160px;">
 
-                    <div v-bind:class="[{ 'bg-dark-red': request.mergability.conflicted, 'bg-dark-green': !request.mergability.conflicted }, 'db br3 ph3 pv2 mb2 white']"> </div>
+                    <div v-bind:class="[{ 
+                        'bg-dark-red': request.properties.mergeResult.outcome === 'CONFLICTED',
+                        'bg-dark-green': request.properties.mergeResult.outcome !== 'CONFLICTED',
+                        'bg-light-yellow': doesNeedWork(request.reviewers)
+                    }, 'db br3 ph3 pv2 mb2 white']"> </div>
                     <div>
                         <a class="link black" :href='request.links.self[0].href' target="_blank">{{processTitle(request.title)}}...</a>
                     </div>
