@@ -4,7 +4,7 @@
         methods: {
             articleClass: function(request) {
                 return [
-                    'fl br3 pa3 ma1 ba b--black-10',
+                    'fl br3 pa2 ma1 ba b--black-10',
                     {
                         'o-30': request.title.indexOf('WIP') !== -1,
                         'bg-white': request.mine,
@@ -36,7 +36,7 @@
                 <article
                     :class="articleClass(request)"
                     v-for="request in requests"
-                    style="height: 240px;max-width: 160px;">
+                    style="height: 240px;max-width: 150px;">
 
                     <div v-bind:class="['bg-dark-red', 
                     { 
