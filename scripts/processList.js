@@ -4,7 +4,7 @@
           processes: []
         }),
         mounted: function(){
-          this.$http.get('http://localhost:4949/command/pm2?options=jlist').then(response => {
+          this.$http.get('http://10.10.12.13:4949/command/pm2?options=jlist').then(response => {
               this.processes = response.body;
             }, response => {
             });

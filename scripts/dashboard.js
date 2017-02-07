@@ -3,6 +3,7 @@
         <div>
             <section class="fl w-100 w-50-ns min-vh-75 pr3">
                 <tasksList :tasks="filteredTasks" :clickBranch="openBranch"/>
+                <planList/>
                 <processList/>
             </section>
             <section class="fl w-100 w-50-ns min-vh-75">

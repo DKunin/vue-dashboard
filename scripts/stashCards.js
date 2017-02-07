@@ -4,7 +4,7 @@
         methods: {
             articleClass: function(request) {
                 return [
-                    'pa1 mv2 ba b--black-10 v-mid',
+                    'fl br3 pa2 ma1 ba b--black-10',
                     {
                         'o-30': request.title.indexOf('WIP') !== -1,
                         'bg-white': request.mine,
@@ -35,20 +35,21 @@
                 <div v-if="!requests.length" class="loader">Loader</div>
                 <article
                     :class="articleClass(request)"
-                    v-for="request in requests">
-                    <div class="pv1">
-                        <div v-bind:class="['bg-dark-red v-mid', 
-                        { 
-                            'bg-dark-green': isConflicted(request.properties),
-                            'bg-light-yellow': doesNeedWork(request.reviewers)
-                        }, 'dib br3 pa2 ']"> </div>
-                            <a class="link black" :href='request.links.self[0].href' target="_blank">{{processTitle(request.title)}}...</a>
-                    </div>
+                    v-for="request in requests"
+                    style="height: 240px;max-width: 150px;">
+
+                    <div v-bind:class="['bg-dark-red', 
+                    { 
+                        'bg-dark-green': isConflicted(request.properties),
+                        'bg-light-yellow': doesNeedWork(request.reviewers)
+                    }, 'db br3 ph3 pv2 mb2 white']"> </div>
                     <div>
-                        <div
-                            v-for="reviewer in request.reviewers"
-                            v-bind:class="[{ 'bg-dark-green white': reviewer.approved, 'black': !reviewer.approved }, 'dib br3 pa1 tc mb1 v-mid']" title="{{reviewer.user.name}}">{{reviewer.user.slug}}</div>
+                        <a class="link black" :href='request.links.self[0].href' target="_blank">{{processTitle(request.title)}}...</a>
                     </div>
+                    <hr class="mw3 bb bw1 b--black-10">
+                    <div
+                        v-for="reviewer in request.reviewers"
+                        v-bind:class="[{ 'bg-dark-green': reviewer.approved, 'bg-dark-red': !reviewer.approved }, 'dib fl br3 pa1 tc mr1 mb1 white']" title="{{reviewer.user.name}}">{{reviewer.user.slug}}</div>
                 </article>
             </div>
       `
