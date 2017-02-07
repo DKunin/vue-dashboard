@@ -56,7 +56,7 @@
                     <div>
                         <span
                             v-for="reviewer in request.reviewers"
-                            v-bind:class="[{ 'bg-dark-green white': reviewer.approved, 'black': !reviewer.approved }, 'dib br3 pa1 tc mb1 mr1 v-mid']" title="{{reviewer.user.name}}">{{reviewer.user.slug}}</span>
+                            v-bind:class="[{ 'bg-dark-green white': reviewer.approved, 'black': !reviewer.approved }, 'dib br3 pa1 tc mb1 mr1 v-mid']" :title="reviewer.user.name">{{reviewer.user.slug}}</span>
                     </div>
                 </article>
             </div>
