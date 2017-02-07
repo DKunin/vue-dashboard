@@ -13,8 +13,10 @@
     <link rel="stylesheet" href="./styles/styles.css">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/2.2.0/vue-router.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.2.0/vue-resource.min.js"></script>
     <script type="text/javascript" src="./scripts/tasksList.js"></script>
     <script type="text/javascript" src="./scripts/stashList.js"></script>
+    <script type="text/javascript" src="./scripts/processList.js"></script>
     <script type="text/javascript" src="./scripts/dashboard.js"></script>
     <script type="text/javascript" src="./scripts/settings.js"></script>
     <script type="text/javascript" src="./scripts/mainApp.js"></script>
@@ -71,6 +73,7 @@
         document.addEventListener('DOMContentLoaded', function () {
             Vue.component('tasksList', tasksList);
             Vue.component('stashList', stashList);
+            Vue.component('processList', processList);
             const app = new Vue(mainApp);
             const { boardId, stashUserName, hideMaster, hideWips } = JSON.parse(
                 localStorage.getItem('settings')
