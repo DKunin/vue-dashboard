@@ -8,7 +8,7 @@
         methods: {
             articleClass: function(request) {
                 return [
-                    'pa1 mv2 ba b--black-10 v-mid',
+                    'pv1 ph2 mv2 ba b--black-10 v-mid',
                     {
                         'o-30': request.title.indexOf('WIP') !== -1,
                         'bg-white': request.mine,
@@ -51,12 +51,12 @@
                             'bg-dark-green': isConflicted(request.properties),
                             'bg-light-yellow': doesNeedWork(request.reviewers)
                         }, 'dib br3 pa2 ']"> </div>
-                            <a class="link black" :href='request.links.self[0].href' target="_blank">{{processTitle(request.title)}}</a>
+                            <a class="link black fw7" :href='request.links.self[0].href' target="_blank">{{processTitle(request.title)}}</a>
                     </div>
                     <div>
-                        <div
+                        <span
                             v-for="reviewer in request.reviewers"
-                            v-bind:class="[{ 'bg-dark-green white': reviewer.approved, 'black': !reviewer.approved }, 'dib br3 pa1 tc mb1 v-mid']" title="{{reviewer.user.name}}">{{reviewer.user.slug}}</div>
+                            v-bind:class="[{ 'bg-dark-green white': reviewer.approved, 'black': !reviewer.approved }, 'dib br3 pa1 tc mb1 mr1 v-mid']" title="{{reviewer.user.name}}">{{reviewer.user.slug}}</span>
                     </div>
                 </article>
             </div>
