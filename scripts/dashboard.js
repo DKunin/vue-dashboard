@@ -1,13 +1,15 @@
 (function(root) {
     const template = `
         <div>
-            <section class="fl w-100 w-50-ns min-vh-75 pr3">
+            <section class="fl w-100 w-33-ns min-vh-75 pr3">
                 <tasksList :tasks="filteredTasks" :clickBranch="openBranch"/>
+            </section>
+            <section class="fl w-100 w-33-ns min-vh-75">
+                <stashList :requests="filteredRequests" />
+            </section>
+            <section class="fl w-100 w-33-ns min-vh-75">
                 <planList/>
                 <processList/>
-            </section>
-            <section class="fl w-100 w-50-ns min-vh-75">
-                <stashList :requests="filteredRequests" />
             </section>
         </div>
     `;

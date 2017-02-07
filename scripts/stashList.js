@@ -1,4 +1,8 @@
 (function(root) {
+    function mineWeight(bool) {
+        return bool ? 1 : 0;
+    }
+
     root['stashList'] = {
         props: { requests: { type: Array, default: [] } },
         methods: {
@@ -17,7 +21,7 @@
                 if (withoutNumber.length < 40) {
                     return withoutNumber;
                 }
-                return withoutNumber.slice(0, 40) + '...';
+                return withoutNumber;
             },
             doesNeedWork: function(reviewers) {
                 return reviewers.some(({ status }) => status === 'NEEDS_WORK');
@@ -28,6 +32,11 @@
                 }
                 return false;
 
+            },
+            sorted: function(list) {
+                return list.sort((a, b) => {
+                  return (a.title.indexOf('WIP') - b.title.indexOf('WIP')) + (mineWeight(b.mine) - mineWeight(a.mine)) ;
+                });
             }
         },
         template: `
@@ -35,14 +44,14 @@
                 <div v-if="!requests.length" class="loader">Loader</div>
                 <article
                     :class="articleClass(request)"
-                    v-for="request in requests">
+                    v-for="request in sorted(requests)">
                     <div class="pv1">
                         <div v-bind:class="['bg-dark-red v-mid', 
                         { 
                             'bg-dark-green': isConflicted(request.properties),
                             'bg-light-yellow': doesNeedWork(request.reviewers)
                         }, 'dib br3 pa2 ']"> </div>
-                            <a class="link black" :href='request.links.self[0].href' target="_blank">{{processTitle(request.title)}}...</a>
+                            <a class="link black" :href='request.links.self[0].href' target="_blank">{{processTitle(request.title)}}</a>
                     </div>
                     <div>
                         <div
