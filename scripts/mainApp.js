@@ -23,6 +23,11 @@
         el: '#app',
         template,
         name: 'mainApp',
-        data: () => ({ tasks: [], requests: [], hideWips: false, hideMaster: false })
+        data: () => ({
+            tasks: [],
+            requests: [],
+            hideWips: false,
+            hideMaster: false
+        })
     };
 })(this || (typeof window !== 'undefined' ? window : global));

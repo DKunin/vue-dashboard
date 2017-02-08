@@ -1,15 +1,22 @@
 (function(root) {
     root['planList'] = {
         data: () => ({
-          files: []
+            files: []
         }),
-        mounted: function(){
-          this.$http.get('http://10.10.12.13:4949/command/_Users_dikunin_Projects_work-calendar-exchange_calendar').then(response => {
-              this.files = response.body.split('\n');
-            }, response => {
-            });
+        mounted: function() {
+            this.$http
+                .get(
+                    'http://10.10.12.13:4949/command/_Users_dikunin_Projects_work-calendar-exchange_calendar'
+                )
+                .then(
+                    response => {
+                        this.files = response.body.split('\n');
+                    },
+                    response => {}
+                );
         },
-        template: `
+        template: (
+            `
           <div class="ph3 pv1">
             <div v-if="files === null">No data</div>
             <div v-if="files">
@@ -20,5 +27,6 @@
             </div>
           </div>
       `
+        )
     };
 })(this || (typeof window !== 'undefined' ? window : global));

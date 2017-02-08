@@ -31,15 +31,17 @@
                     return properties.mergeResult.outcome === 'CONFLICTED';
                 }
                 return false;
-
             },
             sorted: function(list) {
                 return list.sort((a, b) => {
-                  return (a.title.indexOf('WIP') - b.title.indexOf('WIP')) + (mineWeight(b.mine) - mineWeight(a.mine)) ;
+                    return a.title.indexOf('WIP') -
+                        b.title.indexOf('WIP') +
+                        (mineWeight(b.mine) - mineWeight(a.mine));
                 });
             }
         },
-        template: `
+        template: (
+            `
             <div>
                 <div v-if="!requests.length" class="loader">Loader</div>
                 <article
@@ -61,5 +63,6 @@
                 </article>
             </div>
       `
+        )
     };
 })(this || (typeof window !== 'undefined' ? window : global));

@@ -1,15 +1,20 @@
 (function(root) {
     root['changedFiles'] = {
         data: () => ({
-          files: []
+            files: []
         }),
-        mounted: function(){
-          this.$http.get('http://10.10.12.13:4949/command/comparemaster').then(response => {
-              this.files = response.body.split('\n');
-            }, response => {
-            });
+        mounted: function() {
+            this.$http
+                .get('http://10.10.12.13:4949/command/comparemaster')
+                .then(
+                    response => {
+                        this.files = response.body.split('\n');
+                    },
+                    response => {}
+                );
         },
-        template: `
+        template: (
+            `
           <div class="pv2">
             <div v-if="files === null">No data</div>
             <div v-if="files">
@@ -20,5 +25,6 @@
             </div>
           </div>
       `
+        )
     };
 })(this || (typeof window !== 'undefined' ? window : global));

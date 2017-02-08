@@ -9,13 +9,16 @@
                 return [
                     'dt w-100 bb b--black-05 pb2 mt2',
                     {
-                        'o-30': name.toLowerCase().indexOf('review') !== -1 ||
-                            name.toLowerCase().indexOf('master') !== -1
+                        'o-30': (
+                            name.toLowerCase().indexOf('review') !== -1 ||
+                                name.toLowerCase().indexOf('master') !== -1
+                        )
                     }
                 ];
             }
         },
-        template: `
+        template: (
+            `
           <div>
             <div v-if="tasks === null">No data</div>
             <div v-if="tasks">
@@ -45,5 +48,6 @@
             </div>
           </div>
       `
+        )
     };
 })(this || (typeof window !== 'undefined' ? window : global));

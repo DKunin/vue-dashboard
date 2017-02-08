@@ -8,7 +8,8 @@
     };
     root['settings'] = {
         data: () => initialState,
-        template: `
+        template: (
+            `
           <main class="pa4 black-80">
             <form class="measure center" v-on:submit="saveSettings">
               <fieldset class="ba b--transparent ph0 mh0">
@@ -43,7 +44,8 @@
               </div>
             </form>
           </main>
-      `,
+      `
+        ),
         methods: {
             saveSettings: function(event) {
                 event.preventDefault();

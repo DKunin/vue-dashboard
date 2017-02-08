@@ -1,15 +1,20 @@
 (function(root) {
     root['processList'] = {
         data: () => ({
-          processes: []
+            processes: []
         }),
-        mounted: function(){
-          this.$http.get('http://10.10.12.13:4949/command/pm2?options=jlist').then(response => {
-              this.processes = response.body;
-            }, response => {
-            });
+        mounted: function() {
+            this.$http
+                .get('http://10.10.12.13:4949/command/pm2?options=jlist')
+                .then(
+                    response => {
+                        this.processes = response.body;
+                    },
+                    response => {}
+                );
         },
-        template: `
+        template: (
+            `
           <div class="ph3 pv1">
             <div v-if="processes === null">No data</div>
             <div v-if="processes">
@@ -24,5 +29,6 @@
             </div>
           </div>
       `
+        )
     };
 })(this || (typeof window !== 'undefined' ? window : global));

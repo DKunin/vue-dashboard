@@ -26,7 +26,10 @@
             filteredRequests: function() {
                 return this.state.requests.reduce(
                     (newArray, singleItem) => {
-                        if (this.state.hideWips && singleItem.title.includes('WIP')) {
+                        if (
+                            this.state.hideWips &&
+                                singleItem.title.includes('WIP')
+                        ) {
                             return newArray;
                         }
                         return newArray.concat(singleItem);
