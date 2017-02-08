@@ -48,9 +48,9 @@
                     :class="articleClass(request)"
                     v-for="request in sorted(requests)">
                     <div class="pv1">
-                        <div v-bind:class="['bg-dark-red v-mid', 
+                        <div v-bind:class="['bg-dark-green v-mid', 
                         { 
-                            'bg-dark-green': isConflicted(request.properties),
+                            'bg-dark-red': isConflicted(request.properties),
                             'bg-light-yellow': doesNeedWork(request.reviewers)
                         }, 'dib br3 pa2 ']"> </div>
                             <a class="link black fw7" :href='request.links.self[0].href' target="_blank">{{processTitle(request.title)}}</a>
