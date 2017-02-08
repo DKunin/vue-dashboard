@@ -8,8 +8,11 @@
                 <stashList :requests="filteredRequests" />
             </section>
             <section class="fl w-100 w-33-ns min-vh-75">
-                <planList/>
-                <processList/>
+                <planList />
+                <processList />
+                <div class="pa3">
+                    <tasksList :tasks="state.techDept" :clickBranch="openBranch"/>
+                </div>
             </section>
         </div>
     `;
