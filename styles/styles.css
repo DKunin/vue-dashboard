@@ -3,7 +3,7 @@
 }
 
 body {
-    padding: 20px 0;
+    padding: 0;
     font-size: 14px;
     background-color: #ecf0f1;
 }
@@ -65,6 +65,7 @@ label {
 
 .flex-container {
     display: flex;
+    margin: 0 5px;
 }
 
 .flex-section {
@@ -105,4 +106,27 @@ label {
 }
 .stash-list-item-yellow {
     border-left: 4px solid #fbf1a9;
+}
+
+.left-side-navigation {
+    float: left;
+}
+.left-side-navigation ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.left-side-navigation-link {
+    display: table-cell;
+    text-decoration: none;
+    text-align: center;
+    width: 50px;
+    height: 50px;
+    vertical-align: middle;
+    font-weight: bold;
+    font-size: 20px;
+    color: #95a5a6;
+}
+.router-link-active {
+    color: black;
 }

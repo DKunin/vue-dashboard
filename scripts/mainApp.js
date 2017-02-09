@@ -8,11 +8,15 @@
 
     const template = `
         <main>
-            <nav class="pb2">
-              <div class="nowrap overflow-x-auto">
-                <router-link class="link dim gray f5 f4-ns dib mr3" to="/">Dashboard</router-link>
-                <router-link class="link dim gray f5 f4-ns dib mr3" to="/settings">Settings</router-link>
-              </div>
+            <nav class="left-side-navigation">
+              <ul>
+                <li>
+                    <router-link class="left-side-navigation-link" to="/">D</router-link>
+                </li>
+                <li>
+                    <router-link class="left-side-navigation-link" to="/settings">S</router-link>
+                </li>
+              </ul>
             </nav>
             <router-view :state="{ tasks, requests, hideWips, hideMaster, techDept }" />
         </main>
