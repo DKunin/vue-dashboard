@@ -1,16 +1,15 @@
 (function(root) {
     const template = `
-        <div>
-            <section class="fl w-100 w-33-ns min-vh-75 pr3">
+        <div class="flex-container">
+            <section class="flex-section">
                 <tasksList :tasks="filteredTasks" :clickBranch="openBranch"/>
             </section>
-            <section class="fl w-100 w-33-ns min-vh-75">
+            <section class="flex-section">
                 <stashList :requests="filteredRequests" />
             </section>
-            <section class="fl w-100 w-33-ns min-vh-75">
+            <section class="flex-section">
                 <planList />
-                <processList />
-                <div class="pa3">
+                <div class="">
                     <tasksList :tasks="state.techDept" :clickBranch="openBranch"/>
                 </div>
             </section>

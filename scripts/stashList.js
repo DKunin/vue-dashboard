@@ -8,11 +8,11 @@
         methods: {
             articleClass: function(request) {
                 return [
-                    'pv1 ph2 mv2 ba b--black-10 v-mid',
+                    'pv1 ph2 mv2 v-mid',
                     {
                         'o-30': request.title.indexOf('WIP') !== -1,
-                        'bg-white': request.mine,
-                        'bg-light-gray': !request.mine
+                        'bg-white': request.mine//,
+                        // 'bg-light-gray': !request.mine
                     }
                 ];
             },
@@ -42,7 +42,7 @@
         },
         template: (
             `
-            <div>
+            <div class="dash-panel">
                 <div v-if="!requests.length" class="loader">Loader</div>
                 <article
                     :class="articleClass(request)"

@@ -15,7 +15,7 @@
         },
         template: (
             `
-          <div class="ph3 pv1">
+          <div class="">
             <div v-if="processes === null">No data</div>
             <div v-if="processes">
                 <div v-if="!processes.length" class="loader">Loader</div>

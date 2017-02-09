@@ -19,7 +19,7 @@
         },
         template: (
             `
-          <div>
+          <div class="dash-panel">
             <div v-if="tasks === null">No data</div>
             <div v-if="tasks">
                 <div v-if="!tasks.length" class="loader">Loader</div>
