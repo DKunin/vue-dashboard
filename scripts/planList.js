@@ -21,7 +21,7 @@
             <div v-if="files === null">No data</div>
             <div v-if="files">
                 <div v-if="!files.length" class="loader">Loader</div>
-                  <div v-for="file in files" class="f4 lh-cop">
+                  <div v-for="file in files" class="f5 lh-cop bb b--black-05 pv3">
                     {{file}}
                   </div>
             </div>

@@ -8,10 +8,13 @@
         methods: {
             articleClass: function(request) {
                 return [
-                    'pv1 ph2 mv2 v-mid bb b--black-05',
+                    'stash-list-item pv1 ph2 mv2 v-mid bb b--black-05',
                     {
                         'o-30': request.title.indexOf('WIP') !== -1,
-                        'bg-white': request.mine//,
+                        'bg-white': request.mine,
+                        'stash-list-item-green': !this.isConflicted(request.properties),
+                        'stash-list-item-red': this.isConflicted(request.properties),
+                        'stash-list-item-yellow': this.doesNeedWork(request.reviewers)
                         // 'bg-light-gray': !request.mine
                     }
                 ];
@@ -48,18 +51,12 @@
                     :class="articleClass(request)"
                     v-for="request in sorted(requests)">
                     <div class="pv1">
-                        <div v-bind:class="['v-mid', 
-                        { 
-                            'bg-dark-green': !isConflicted(request.properties),
-                            'bg-dark-red': isConflicted(request.properties),
-                            'bg-light-yellow': doesNeedWork(request.reviewers)
-                        }, 'dib br3 pa2 ']"> </div>
-                            <a class="link black fw7" :href='request.links.self[0].href' target="_blank">{{processTitle(request.title)}}</a>
+                        <a class="link black fw7" :href='request.links.self[0].href' target="_blank">{{processTitle(request.title)}}</a>
                     </div>
                     <div>
                         <span
                             v-for="reviewer in request.reviewers"
-                            v-bind:class="[{ 'bg-dark-green white': reviewer.approved, 'black': !reviewer.approved }, 'dib br3 pa1 tc mb1 mr1 v-mid']" :title="reviewer.user.name">{{reviewer.user.slug}}</span>
+                            v-bind:class="[{ 'bg-dark-green white': reviewer.approved, 'black': !reviewer.approved }, 'dib pa1 tc mb1 mr1 v-mid']" :title="reviewer.user.name">{{reviewer.user.slug}}</span>
                     </div>
                 </article>
             </div>
