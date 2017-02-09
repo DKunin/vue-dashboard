@@ -8,7 +8,7 @@
         methods: {
             articleClass: function(request) {
                 return [
-                    'pv1 ph2 mv2 v-mid',
+                    'pv1 ph2 mv2 v-mid bb b--black-05',
                     {
                         'o-30': request.title.indexOf('WIP') !== -1,
                         'bg-white': request.mine//,
@@ -28,7 +28,7 @@
             },
             isConflicted: function(properties) {
                 if (properties.mergeResult) {
-                    return properties.mergeResult.outcome === 'CONFLICTED';
+                    return properties.mergeResult.outcome.trim() === 'CONFLICTED';
                 }
                 return false;
             },
@@ -48,8 +48,9 @@
                     :class="articleClass(request)"
                     v-for="request in sorted(requests)">
                     <div class="pv1">
-                        <div v-bind:class="['bg-dark-green v-mid', 
+                        <div v-bind:class="['v-mid', 
                         { 
+                            'bg-dark-green': !isConflicted(request.properties),
                             'bg-dark-red': isConflicted(request.properties),
                             'bg-light-yellow': doesNeedWork(request.reviewers)
                         }, 'dib br3 pa2 ']"> </div>
