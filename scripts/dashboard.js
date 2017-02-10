@@ -9,9 +9,7 @@
             </section>
             <section class="flex-section">
                 <planList />
-                <div class="">
-                    <tasksList :tasks="state.techDept" :clickBranch="openBranch"/>
-                </div>
+                <tasksListReport :tasks="state.techDept"/>
             </section>
         </div>
     `;
