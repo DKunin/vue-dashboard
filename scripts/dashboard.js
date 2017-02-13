@@ -6,10 +6,10 @@
             </section>
             <section class="flex-section">
                 <stashList :requests="filteredRequests" />
+                <tasksListReport :tasks="state.techDept"/>
             </section>
             <section class="flex-section">
                 <planList />
-                <tasksListReport :tasks="state.techDept"/>
             </section>
         </div>
     `;

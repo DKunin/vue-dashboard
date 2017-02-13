@@ -10,7 +10,7 @@
                     {
                         'o-30': (
                             name.toLowerCase().indexOf('review') !== -1 ||
-                                name.toLowerCase().indexOf('master') !== -1
+                            name.toLowerCase().indexOf('master') !== -1
                         )
                     }
                 ];
@@ -27,7 +27,9 @@
         template: (
             `
           <div class="dash-panel">
-            <div v-if="tasks === null">No data</div>
+            <div v-if="!onlySolved(tasks).length" class="tc v-mid pa5 o-30">
+              No data
+            </div>
             <div v-if="tasks">
                 <div v-if="!tasks.length" class="loader">Loader</div>
                 <article :class="articleClass(issue.fields.status.name)" v-for="issue in onlySolved(tasks)" >
