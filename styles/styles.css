@@ -91,6 +91,13 @@ label {
     margin: 10px 5px;
     position: relative;
 }
+.dash-panel-time {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
 
 .stash-list-item {
     margin: 0 -10px;
@@ -129,9 +136,19 @@ label {
     height: 50px;
     vertical-align: middle;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 37px;
     color: #95a5a6;
 }
 .router-link-active {
     color: black;
+}
+
+.refresh-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+    background-color: aliceblue;
 }

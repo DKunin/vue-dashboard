@@ -5,7 +5,7 @@
         }),
         mounted: function() {
             this.$http
-                .get('http://10.10.12.13:4949/command/pm2?options=jlist')
+                .get(root.LOCAL_IP + ':4949/command/pm2?options=jlist')
                 .then(
                     response => {
                         this.processes = response.body;

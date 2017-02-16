@@ -11,10 +11,10 @@
             <nav class="left-side-navigation">
               <ul>
                 <li>
-                    <router-link class="left-side-navigation-link" to="/">D</router-link>
+                    <router-link class="left-side-navigation-link" to="/">♖</router-link>
                 </li>
                 <li>
-                    <router-link class="left-side-navigation-link" to="/settings">S</router-link>
+                    <router-link class="left-side-navigation-link" to="/settings">♙</router-link>
                 </li>
               </ul>
             </nav>
