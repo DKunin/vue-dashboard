@@ -4,6 +4,10 @@
             updateData: {
                 type: Function,
                 default: () => {}
+            },
+            hideTime: {
+                type: Boolean,
+                default: false
             }
         },
         methods: {
@@ -20,7 +24,7 @@
           <div class="dash-panel">
             <button class="refresh-button" v-on:click.prevent="forceUpdate">↻</button>
             <slot>∅</slot>
-            <small class="dash-panel-time">{{updatedTime}}</small>
+            <small v-if="!hideTime" class="dash-panel-time">{{updatedTime}}</small>
           </div>
       `
         )
