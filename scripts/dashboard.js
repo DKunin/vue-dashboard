@@ -10,6 +10,7 @@
             </section>
             <section class="flex-section">
                 <planList />
+                <pocketList />
             </section>
         </div>
     `;
