@@ -11,10 +11,14 @@
             <nav class="left-side-navigation">
               <ul>
                 <li>
-                    <router-link class="left-side-navigation-link" to="/">♖</router-link>
+                    <router-link class="left-side-navigation-link" to="/">
+                        <i class="fa fa-desktop" aria-hidden="true"></i>
+                    </router-link>
                 </li>
                 <li>
-                    <router-link class="left-side-navigation-link" to="/settings">♙</router-link>
+                    <router-link class="left-side-navigation-link" to="/settings">
+                        <i class="fa fa-cogs" aria-hidden="true"></i>
+                    </router-link>
                 </li>
               </ul>
             </nav>

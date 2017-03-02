@@ -52,6 +52,10 @@
                     v-for="request in sorted(requests)">
                     <div class="pv1">
                         <a class="link black fw7" :href='request.links.self[0].href' target="_blank">{{processTitle(request.title)}}</a>
+                        <span class="fr">
+                            {{request.properties.commentCount}}
+                            <i class="fa fa-comment-o" aria-hidden="true"></i>
+                        </span>
                     </div>
                     <div>
                         <span
