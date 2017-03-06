@@ -151,4 +151,5 @@ label {
     outline: 0;
     cursor: pointer;
     background-color: aliceblue;
+    z-index: 2;
 }

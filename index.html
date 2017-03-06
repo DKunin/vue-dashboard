@@ -70,24 +70,6 @@
                 });
         }
 
-        function updateTechDebt(search, app) {
-            Promise
-                .all([
-                    makeRequest(
-                        SEARCH + search
-                    )
-                ])
-                .then((tasks, secondTasks) => {
-                    const concatinated = tasks.reduce(
-                        function(newArray, singleItem) {
-                            return newArray.concat(singleItem);
-                        },
-                        []
-                    );
-                    Vue.set(app, 'techDept', concatinated);
-                });
-        }
-
         function updateStash(stashUserName, app) {
             makeRequest(PRS + '?username=' + stashUserName)
                 .then(data => {
@@ -122,7 +104,6 @@
                     if (timeSinceLastUpdate > 120) {
                         updateTasks(boardId, app);
                         updateStash(stashUserName, app);
-                        updateTechDebt('?jql=labels = techdebt-fe AND updated >= startOfWeek() ORDER BY updated DESC', app);
                         lastUpdate = Date.now();
                     }
                 },
@@ -130,7 +111,6 @@
             );
             updateTasks(boardId, app);
             updateStash(stashUserName, app);
-            updateTechDebt('?jql=labels = techdebt-fe AND updated >= startOfWeek() ORDER BY updated DESC', app);
         });
     </script>
   </body>

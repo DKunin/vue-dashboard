@@ -1,19 +1,24 @@
 (function(root) {
     root['planList'] = {
         data: () => ({
-            files: []
+            plans: [],
+            loading: false
         }),
         methods: {
             updateData: function() {
+                this.loading = true;
                 this.$http
                     .get(
                         root.LOCAL_IP + ':4949/command/_Users_dikunin_Projects_work-calendar-exchange_calendar'
                     )
                     .then(
                         response => {
-                            this.files = response.body.split('\n');
+                            this.loading = false;
+                            this.plans = response.body.split('\n');
                         },
-                        response => {}
+                        response => {
+                            this.loading = false;
+                        }
                     );
             }
         },
@@ -22,16 +27,16 @@
         },
         template: (
             `
-          <dashCard :updateData="updateData">
-            <div v-if="files === null">No data</div>
-            <div v-if="files">
-                <div v-if="!files.length" class="loader"></div>
-                  <div v-for="file in files" class="f5 lh-cop bb b--black-05 pv3">
-                    {{file}}
-                  </div>
-            </div>
-          </dashCard>
-      `
+                <dashCard :updateData="updateData">
+                    <div v-if="plans === null && !loading">No data</div>
+                    <div v-if="plans">
+                        <div v-if="loading" class="loader"></div>
+                        <div v-for="file in plans" class="f5 lh-cop bb b--black-05 pv3">
+                            {{file}}
+                        </div>
+                    </div>
+                </dashCard>
+            `
         )
     };
 })(this || (typeof window !== 'undefined' ? window : global));
