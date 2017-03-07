@@ -6,6 +6,7 @@
         }),
         methods: {
             updateData: function() {
+                this.plans = [];
                 this.loading = true;
                 this.$http
                     .get(
