@@ -2,10 +2,10 @@
     const template = `
         <div class="flex-container">
             <section class="flex-section">
-                <tasksList :tasks="filteredTasks" :clickBranch="openBranch"/>
+                <tasksList :tasks="[]" :clickBranch="openBranch" :hideMaster="state.hideMaster" :boardId="state.boardId"/>
             </section>
             <section class="flex-section">
-                <stashList :requests="filteredRequests" />
+                <stashList :user="state.stashUserName" :hideWips="state.hideWips" />
                 <tasksListReport :tasks="state.techDept"/>
             </section>
             <section class="flex-section">
@@ -24,34 +24,7 @@
             }
         },
         computed: {
-            filteredRequests: function() {
-                return this.state.requests.reduce(
-                    (newArray, singleItem) => {
-                        if (
-                            this.state.hideWips &&
-                                singleItem.title.includes('WIP')
-                        ) {
-                            return newArray;
-                        }
-                        return newArray.concat(singleItem);
-                    },
-                    []
-                );
-            },
-            filteredTasks: function() {
-                return this.state.tasks.reduce(
-                    (newArray, singleItem) => {
-                        if (
-                            this.state.hideMaster &&
-                                singleItem.fields.status.name === 'In Master'
-                        ) {
-                            return newArray;
-                        }
-                        return newArray.concat(singleItem);
-                    },
-                    []
-                );
-            }
+            
         },
         methods: {
             openBranch: function(branch) {

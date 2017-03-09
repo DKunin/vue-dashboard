@@ -18,16 +18,12 @@
     <script>
         window.LOCAL_IP = 'http://10.10.11.21';
         window.LOCAL_DOCKER_IP = 'http://192.168.99.100';
-        const KANBAN_MAIN = LOCAL_DOCKER_IP + ':4747/api/kanban';
-        const SEARCH = LOCAL_DOCKER_IP + ':4747/api/search';
-        const PRS = LOCAL_DOCKER_IP + ':4848/api/prs';
+        window.KANBAN_MAIN = LOCAL_DOCKER_IP + ':4747/api/kanban';
     </script>
     <script type="text/javascript" src="./scripts/dashCard.js"></script>
     <script type="text/javascript" src="./scripts/tasksList.js"></script>
     <script type="text/javascript" src="./scripts/tasksListReport.js"></script>
     <script type="text/javascript" src="./scripts/stashList.js"></script>
-    <script type="text/javascript" src="./scripts/processList.js"></script>
-    <script type="text/javascript" src="./scripts/changedFiles.js"></script>
     <script type="text/javascript" src="./scripts/planList.js"></script>
     <script type="text/javascript" src="./scripts/pocketList.js"></script>
     <script type="text/javascript" src="./scripts/dashboard.js"></script>
@@ -37,80 +33,24 @@
   <body>
     <div id="app"></div>
     <script type="text/javascript">
-
-        function makeRequest(url) {
-            return fetch(url)
-                .then(response => {
-                    if (response.status >= 200 && response.status < 300) {
-                        return response.json();
-                    }
-                    return {};
-                })
-                .catch(error => {
-                    return [];
-                });
-        }
-
-        function updateTasks(boardId, app) {
-            Promise
-                .all([
-                    makeRequest(
-                        KANBAN_MAIN +
-                            `?boardId=${boardId}&jql=assignee%20=%20currentUser()`
-                    )
-                ])
-                .then((tasks, secondTasks) => {
-                    const concatinated = tasks.reduce(
-                        function(newArray, singleItem) {
-                            return newArray.concat(singleItem);
-                        },
-                        []
-                    );
-                    Vue.set(app, 'tasks', concatinated);
-                });
-        }
-
-        function updateStash(stashUserName, app) {
-            makeRequest(PRS + '?username=' + stashUserName)
-                .then(data => {
-                    Vue.set(app, 'requests', data);
-                });
-        }
-
-        let lastUpdate = Date.now();
-
-
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function initiateApplication() {
             Vue.component('dashCard', dashCard);
+
             Vue.component('tasksListReport', tasksListReport);
             Vue.component('tasksList', tasksList);
             Vue.component('stashList', stashList);
-            Vue.component('changedFiles', changedFiles);
-            Vue.component('processList', processList);
             Vue.component('planList', planList);
             Vue.component('pocketList', pocketList);
-            const app = new Vue(mainApp);
+
             const { boardId, stashUserName, hideMaster, hideWips } = JSON.parse(
                 localStorage.getItem('settings')
             )
 
+            const app = new Vue(mainApp);
+            Vue.set(app, 'stashUserName', stashUserName);
             Vue.set(app, 'hideMaster', hideMaster);
             Vue.set(app, 'hideWips', hideWips);
-
-            document.addEventListener(
-                'visibilitychange',
-                () => {
-                    const timeSinceLastUpdate = Math.abs(lastUpdate - Date.now()) / 1000;
-                    if (timeSinceLastUpdate > 120) {
-                        updateTasks(boardId, app);
-                        updateStash(stashUserName, app);
-                        lastUpdate = Date.now();
-                    }
-                },
-                false
-            );
-            updateTasks(boardId, app);
-            updateStash(stashUserName, app);
+            Vue.set(app, 'boardId', boardId);
         });
     </script>
   </body>

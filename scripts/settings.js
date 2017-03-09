@@ -19,10 +19,6 @@
                   <input v-model="stashUserName" class="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="text" name="stashUserName"  id="stashUserName">
                 </div>
                 <div class="mt3">
-                  <label class="db fw6 lh-copy f6" for="stashUrl">stash url</label>
-                  <input v-model="stashUrl" class="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="text" name="stashUrl"  id="stashUrl">
-                </div>
-                <div class="mt3">
                   <label class="db fw6 lh-copy f6" for="boardId">BoardId</label>
                   <input v-model="boardId" class="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="text" name="boardId"  id="boardId">
                 </div>
