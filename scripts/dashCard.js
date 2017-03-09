@@ -11,7 +11,7 @@
             }
         },
         methods: {
-            forceUpdate: function(){
+            forceUpdate: function() {
                 this.$set(this, 'updatedTime', new Date());
                 this.updateData();
             }

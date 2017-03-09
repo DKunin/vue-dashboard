@@ -9,9 +9,7 @@
             updateData: function() {
                 this.loading = true;
                 this.$http
-                    .get(
-                        'http://192.168.99.100:5050/api/pocket'
-                    )
+                    .get('http://192.168.99.100:5050/api/pocket')
                     .then(
                         response => {
                             this.loading = false;

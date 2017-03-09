@@ -10,7 +10,8 @@
                 this.loading = true;
                 this.$http
                     .get(
-                        root.LOCAL_IP + ':4949/command/_Users_dikunin_Projects_work-calendar-exchange_calendar'
+                        root.LOCAL_IP +
+                            ':4949/command/_Users_dikunin_Projects_work-calendar-exchange_calendar'
                     )
                     .then(
                         response => {

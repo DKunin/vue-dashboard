@@ -32,7 +32,8 @@
 
                 this.$http
                     .get(
-                        root.KANBAN_MAIN + `?boardId=${this.boardId}&jql=assignee%20=%20currentUser()`
+                        root.KANBAN_MAIN +
+                            `?boardId=${this.boardId}&jql=assignee%20=%20currentUser()`
                     )
                     .then(
                         response => {
@@ -68,7 +69,10 @@
             document.addEventListener(
                 'visibilitychange',
                 function tasksVisibilityUpdate() {
-                    const timeSinceLastUpdate = Math.abs(lastUpdate - Date.now()) / 1000;
+                    const timeSinceLastUpdate = Math.abs(
+                        lastUpdate - Date.now()
+                    ) /
+                        1000;
                     if (timeSinceLastUpdate > 120) {
                         self.updateData();
                         lastUpdate = Date.now();

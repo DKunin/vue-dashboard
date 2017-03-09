@@ -11,24 +11,27 @@
                     {
                         'o-30': (
                             name.toLowerCase().indexOf('review') !== -1 ||
-                            name.toLowerCase().indexOf('master') !== -1
+                                name.toLowerCase().indexOf('master') !== -1
                         )
                     }
                 ];
             },
-            onlySolved: function(issues){
-              return issues.filter(singleItem => {
-                return (
-                    (singleItem.fields.status.name === 'Resolved' || singleItem.fields.status.name === 'Closed') &&
-                    !singleItem.fields.labels.includes('techdebt-fe-reported')
-                );
-              });
+            onlySolved: function(issues) {
+                return issues.filter(singleItem => {
+                    return (singleItem.fields.status.name === 'Resolved' ||
+                        singleItem.fields.status.name === 'Closed') &&
+                        !singleItem.fields.labels.includes(
+                            'techdebt-fe-reported'
+                        );
+                });
             },
             updateData: function() {
                 this.loading = true;
                 this.$http
                     .get(
-                        root.LOCAL_DOCKER_IP + ':4747/api/search' + '?jql=labels = techdebt-fe AND updated >= startOfWeek() ORDER BY updated DESC'
+                        root.LOCAL_DOCKER_IP +
+                            ':4747/api/search' +
+                            '?jql=labels = techdebt-fe AND updated >= startOfWeek() ORDER BY updated DESC'
                     )
                     .then(
                         response => {

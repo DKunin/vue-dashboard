@@ -23,9 +23,7 @@
                 default: {}
             }
         },
-        computed: {
-            
-        },
+        computed: {},
         methods: {
             openBranch: function(branch) {
                 console.log(branch);

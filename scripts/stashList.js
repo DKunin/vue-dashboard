@@ -33,9 +33,15 @@
                     {
                         'o-30': request.title.indexOf('WIP') !== -1,
                         'bg-white': request.mine,
-                        'stash-list-item-green': !this.isConflicted(request.properties),
-                        'stash-list-item-red': this.isConflicted(request.properties),
-                        'stash-list-item-yellow': this.doesNeedWork(request.reviewers)
+                        'stash-list-item-green': !this.isConflicted(
+                            request.properties
+                        ),
+                        'stash-list-item-red': this.isConflicted(
+                            request.properties
+                        ),
+                        'stash-list-item-yellow': this.doesNeedWork(
+                            request.reviewers
+                        )
                         // 'bg-light-gray': !request.mine
                     }
                 ];
@@ -52,17 +58,15 @@
             },
             isConflicted: function(properties) {
                 if (properties.mergeResult) {
-                    return properties.mergeResult.outcome.trim() === 'CONFLICTED';
+                    return properties.mergeResult.outcome.trim() ===
+                        'CONFLICTED';
                 }
                 return false;
             },
             filteredRequests: function(list) {
                 return list.reduce(
                     (newArray, singleItem) => {
-                        if (
-                            this.hideWips &&
-                                singleItem.title.includes('WIP')
-                        ) {
+                        if (this.hideWips && singleItem.title.includes('WIP')) {
                             return newArray;
                         }
                         return newArray.concat(singleItem);
@@ -80,12 +84,16 @@
 
                 this.$http
                     .get(
-                        root.LOCAL_DOCKER_IP + ':4848/api/prs?username=' + this.user
+                        root.LOCAL_DOCKER_IP +
+                            ':4848/api/prs?username=' +
+                            this.user
                     )
                     .then(
                         response => {
                             this.loading = false;
-                            this.list = sorted(this.filteredRequests(response.body));
+                            this.list = sorted(
+                                this.filteredRequests(response.body)
+                            );
                         },
                         response => {
                             this.loading = false;
@@ -102,7 +110,10 @@
             document.addEventListener(
                 'visibilitychange',
                 function stashVisibilityUpdate() {
-                    const timeSinceLastUpdate = Math.abs(lastUpdate - Date.now()) / 1000;
+                    const timeSinceLastUpdate = Math.abs(
+                        lastUpdate - Date.now()
+                    ) /
+                        1000;
                     if (timeSinceLastUpdate > 120) {
                         self.updateData();
                         lastUpdate = Date.now();

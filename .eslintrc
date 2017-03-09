@@ -55,11 +55,6 @@
                 "nonwords": false
             }
         ],
-        "comma-spacing": [
-            2, {
-                "before": false
-            }
-        ],
         "no-spaced-func": 2,
         "space-before-function-paren": [
             2, {
