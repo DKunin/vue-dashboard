@@ -26,7 +26,7 @@
         </main>
     `;
 
-    root['mainApp'] = {
+    root.mainApp = {
         router,
         el: '#app',
         template,

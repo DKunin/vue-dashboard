@@ -11,7 +11,33 @@
         });
     }
 
-    root['stashList'] = {
+    const template = `
+        <dashCard :updateData="updateData" :hideTime="true">
+            <div v-if="list === null && !loading">No data</div>
+            <div v-if="loading" class="loader"></div>
+            <article
+                :class="articleClass(request)"
+                v-for="request in list">
+                <div class="pv1">
+                    <a class="link black fw7" :href='request.links.self[0].href' target="_blank">{{processTitle(request.title)}}</a>
+                    <span class="fr">
+                        {{request.properties.commentCount}}
+                        <i v-if="request.properties.commentCount" class="fa fa-comment-o" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <div>
+                    <span
+                        v-for="reviewer in request.reviewers"
+                        v-bind:class="[{ 
+                            'stash-list-reviewer-green': reviewer.approved,
+                            'black': !reviewer.approved 
+                        }, 'dib tc mb1 mr1 v-mid']" :title="reviewer.user.name">{{reviewer.user.slug}}</span>
+                </div>
+            </article>
+        </dashCard>
+    `;
+
+    root.stashList = {
         props: {
             user: {
                 type: String,
@@ -95,7 +121,7 @@
                                 this.filteredRequests(response.body)
                             );
                         },
-                        response => {
+                        () => {
                             this.loading = false;
                             this.list = [];
                         }
@@ -121,32 +147,6 @@
                 }
             );
         },
-        template: (
-            `
-                <dashCard :updateData="updateData" :hideTime="true">
-                    <div v-if="list === null && !loading">No data</div>
-                    <div v-if="loading" class="loader"></div>
-                    <article
-                        :class="articleClass(request)"
-                        v-for="request in list">
-                        <div class="pv1">
-                            <a class="link black fw7" :href='request.links.self[0].href' target="_blank">{{processTitle(request.title)}}</a>
-                            <span class="fr">
-                                {{request.properties.commentCount}}
-                                <i v-if="request.properties.commentCount" class="fa fa-comment-o" aria-hidden="true"></i>
-                            </span>
-                        </div>
-                        <div>
-                            <span
-                                v-for="reviewer in request.reviewers"
-                                v-bind:class="[{ 
-                                    'stash-list-reviewer-green': reviewer.approved,
-                                    'black': !reviewer.approved 
-                                }, 'dib tc mb1 mr1 v-mid']" :title="reviewer.user.name">{{reviewer.user.slug}}</span>
-                        </div>
-                    </article>
-                </dashCard>
-            `
-        )
+        template
     };
 })(this || (typeof window !== 'undefined' ? window : global));

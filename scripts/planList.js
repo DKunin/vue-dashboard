@@ -1,5 +1,17 @@
 (function(root) {
-    root['planList'] = {
+    const template = `
+        <dashCard :updateData="updateData">
+            <div v-if="plans === null && !loading">No data</div>
+            <div v-if="plans">
+                <div v-if="loading" class="loader"></div>
+                <div v-for="file in plans" class="f5 lh-cop bb b--black-05 pv3">
+                    {{file}}
+                </div>
+            </div>
+        </dashCard>
+    `;
+
+    root.planList = {
         data: () => ({
             plans: [],
             loading: false
@@ -18,7 +30,7 @@
                             this.loading = false;
                             this.plans = response.body.split('\n');
                         },
-                        response => {
+                        () => {
                             this.loading = false;
                         }
                     );
@@ -27,18 +39,6 @@
         mounted: function() {
             this.updateData();
         },
-        template: (
-            `
-                <dashCard :updateData="updateData">
-                    <div v-if="plans === null && !loading">No data</div>
-                    <div v-if="plans">
-                        <div v-if="loading" class="loader"></div>
-                        <div v-for="file in plans" class="f5 lh-cop bb b--black-05 pv3">
-                            {{file}}
-                        </div>
-                    </div>
-                </dashCard>
-            `
-        )
+        template
     };
 })(this || (typeof window !== 'undefined' ? window : global));

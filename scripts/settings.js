@@ -6,11 +6,8 @@
         hideMaster: false,
         hideWips: false
     };
-    root['settings'] = {
-        data: () => initialState,
-        template: (
-            `
-          <main class="pa4 black-80">
+    const template = `
+        <main class="pa4 black-80">
             <form class="measure center" v-on:submit="saveSettings">
               <fieldset class="ba b--transparent ph0 mh0">
                 <legend class="f4 fw6 ph0 mh0">Settings</legend>
@@ -39,9 +36,12 @@
                 <input class="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" type="submit" value="Save">
               </div>
             </form>
-          </main>
-      `
-        ),
+        </main>
+    `;
+
+    root.settings = {
+        data: () => initialState,
+        template,
         methods: {
             saveSettings: function(event) {
                 event.preventDefault();

@@ -143,7 +143,12 @@
             }
         ]
     },
-    "globals": {},
+    "globals": {
+        "Vue": true,
+        "settings": true,
+        "dashboard": true,
+        "VueRouter": true
+    },
     "env": {
         "browser": true,
         "es6": true,

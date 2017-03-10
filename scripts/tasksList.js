@@ -1,5 +1,36 @@
 (function(root) {
-    root['tasksList'] = {
+    const template = `
+        <dashCard :updateData="updateData" :hideTime="true">
+            <div v-if="list === null">No data</div>
+            <div v-if="list">
+                <div v-if="!list.length" class="loader">Loader</div>
+                <article :class="articleClass(issue.fields.status.name)" v-for="issue in list" >
+                    <img class="fr mw1 dib" :src="issue.fields.issuetype.iconUrl" >
+                    <img class="fr mw1 dib" :src="issue.fields.priority.iconUrl" >
+                    <a
+                      class="link black hover-bg-silver"
+                      tabindex="0"
+                      :href='"https://jr.avito.ru/browse/" + issue.key'
+                      target='_blank'>{{issue.key}}: {{issue.fields.summary}}
+                    </a>
+                    <div>
+                      <small>{{issue.fields.status.name}}</small>
+                    </div>
+                    <div>
+                      <a
+                        v-on:click="clickBranch(issue.fields.customfield_10010)"
+                        class="link black hover-bg-silver" >{{issue.fields.customfield_10010}}
+                      </a>
+                    </div>
+                    <div class="dn">
+                      {{issue.fields.description}}
+                    </div>
+                </article>
+            </div>
+        </dashCard>
+    `;
+
+    root.tasksList = {
         props: {
             tasks: { type: Array, default: [] },
             boardId: { type: Number, default: 0 },
@@ -40,7 +71,7 @@
                             this.loading = false;
                             this.list = this.filteredTasks(response.body);
                         },
-                        response => {
+                        () => {
                             this.loading = false;
                             this.list = [];
                         }
@@ -80,37 +111,6 @@
                 }
             );
         },
-        template: (
-            `
-                <dashCard :updateData="updateData" :hideTime="true">
-                    <div v-if="list === null">No data</div>
-                    <div v-if="list">
-                        <div v-if="!list.length" class="loader">Loader</div>
-                        <article :class="articleClass(issue.fields.status.name)" v-for="issue in list" >
-                            <img class="fr mw1 dib" :src="issue.fields.issuetype.iconUrl" >
-                            <img class="fr mw1 dib" :src="issue.fields.priority.iconUrl" >
-                            <a
-                              class="link black hover-bg-silver"
-                              tabindex="0"
-                              :href='"https://jr.avito.ru/browse/" + issue.key'
-                              target='_blank'>{{issue.key}}: {{issue.fields.summary}}
-                            </a>
-                            <div>
-                              <small>{{issue.fields.status.name}}</small>
-                            </div>
-                            <div>
-                              <a
-                                v-on:click="clickBranch(issue.fields.customfield_10010)"
-                                class="link black hover-bg-silver" >{{issue.fields.customfield_10010}}
-                              </a>
-                            </div>
-                            <div class="dn">
-                              {{issue.fields.description}}
-                            </div>
-                        </article>
-                    </div>
-                </dashCard>
-            `
-        )
+        template
     };
 })(this || (typeof window !== 'undefined' ? window : global));

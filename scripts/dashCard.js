@@ -1,5 +1,13 @@
 (function(root) {
-    root['dashCard'] = {
+    const template = `
+        <div class="dash-panel">
+            <button class="refresh-button" v-on:click.prevent="forceUpdate">↻</button>
+            <slot>∅</slot>
+            <small v-if="!hideTime" class="dash-panel-time">{{updatedTime}}</small>
+        </div>
+    `;
+
+    root.dashCard = {
         props: {
             updateData: {
                 type: Function,
@@ -19,14 +27,6 @@
         data: () => ({
             updatedTime: new Date()
         }),
-        template: (
-            `
-          <div class="dash-panel">
-            <button class="refresh-button" v-on:click.prevent="forceUpdate">↻</button>
-            <slot>∅</slot>
-            <small v-if="!hideTime" class="dash-panel-time">{{updatedTime}}</small>
-          </div>
-      `
-        )
+        template
     };
 })(this || (typeof window !== 'undefined' ? window : global));

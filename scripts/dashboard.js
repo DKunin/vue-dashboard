@@ -15,7 +15,7 @@
         </div>
     `;
 
-    root['dashboard'] = {
+    root.dashboard = {
         template,
         props: {
             state: {
@@ -23,11 +23,8 @@
                 default: {}
             }
         },
-        computed: {},
         methods: {
-            openBranch: function(branch) {
-                console.log(branch);
-            }
+            openBranch: function() {}
         }
     };
 })(this || (typeof window !== 'undefined' ? window : global));

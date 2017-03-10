@@ -1,5 +1,24 @@
 (function(root) {
-    root['tasksListReport'] = {
+    const template = `
+        <dashCard :updateData="updateData">
+            <div v-if="!onlySolved(list).length && !loading" class="tc v-mid pa5 o-30">
+                No data
+            </div>
+            <div v-if="list">
+                <div v-if="loading" class="loader">Loader</div>
+                <article :class="articleClass(issue.fields.status.name)" v-for="issue in onlySolved(list)" >
+                  - {{issue.fields.summary}} 
+                    <a
+                      class="link black hover-bg-silver"
+                      tabindex="0"
+                      :href='"https://jr.avito.ru/browse/" + issue.key'
+                      target='_blank'>[https://jr.avito.ru/browse/{{issue.key}}]</a>
+                </article>
+            </div>
+        </dashCard>
+    `;
+
+    root.tasksListReport = {
         data: () => ({
             list: [],
             loading: false
@@ -38,7 +57,7 @@
                             this.loading = false;
                             this.list = response.body;
                         },
-                        response => {
+                        () => {
                             this.loading = false;
                         }
                     );
@@ -47,25 +66,6 @@
         mounted: function() {
             this.updateData();
         },
-        template: (
-            `
-            <dashCard :updateData="updateData">
-                <div v-if="!onlySolved(list).length && !loading" class="tc v-mid pa5 o-30">
-                    No data
-                </div>
-                <div v-if="list">
-                    <div v-if="loading" class="loader">Loader</div>
-                    <article :class="articleClass(issue.fields.status.name)" v-for="issue in onlySolved(list)" >
-                      - {{issue.fields.summary}} 
-                        <a
-                          class="link black hover-bg-silver"
-                          tabindex="0"
-                          :href='"https://jr.avito.ru/browse/" + issue.key'
-                          target='_blank'>[https://jr.avito.ru/browse/{{issue.key}}]</a>
-                    </article>
-                </div>
-            </dashCard>
-            `
-        )
+        template
     };
 })(this || (typeof window !== 'undefined' ? window : global));
