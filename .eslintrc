@@ -1,6 +1,7 @@
 {
     "extends": "eslint:recommended",
     "rules": {
+        "wrap-iife": [2, "any"],
         "valid-jsdoc": 2,
         "no-underscore-dangle": 2,
         "no-empty": [
@@ -39,9 +40,7 @@
         ],
         "quote-props": [
             2,
-            "as-needed", {
-                "keywords": true
-            }
+            "as-needed"
         ],
         "key-spacing": [
             2, {
@@ -94,7 +93,6 @@
         ],
         "dot-notation": 2,
         "eol-last": 2,
-        "wrap-iife": 2,
         "semi": [
             2,
             "always"
