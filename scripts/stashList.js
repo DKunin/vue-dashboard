@@ -12,9 +12,8 @@
     }
 
     const template = `
-        <dashCard :updateData="updateData" :hideTime="true">
+        <dashCard :updateData="updateData" :hideTime="true" :loading="loading">
             <div v-if="list === null && !loading">No data</div>
-            <div v-if="loading" class="loader"></div>
             <article
                 :class="articleClass(request)"
                 v-for="request in list">
@@ -34,6 +33,7 @@
                         }, 'dib tc mb1 mr1 v-mid']" :title="reviewer.user.name">{{reviewer.user.slug}}</span>
                 </div>
             </article>
+            <div v-if="loading" class="loader"></div>
         </dashCard>
     `;
 
@@ -68,7 +68,6 @@
                         'stash-list-item-yellow': this.doesNeedWork(
                             request.reviewers
                         )
-                        // 'bg-light-gray': !request.mine
                     }
                 ];
             },
@@ -100,13 +99,15 @@
                     []
                 );
             },
-            updateData: function() {
+            updateData: function(silent) {
                 if (!this.user) {
                     return setTimeout(this.updateData, 500);
                 }
-
                 this.loading = true;
-                this.list = [];
+
+                if (!silent) {
+                    this.list = [];
+                }
 
                 this.$http
                     .get(
@@ -141,7 +142,7 @@
                     ) /
                         1000;
                     if (timeSinceLastUpdate > 120) {
-                        self.updateData();
+                        self.updateData(true);
                         lastUpdate = Date.now();
                     }
                 }

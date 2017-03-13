@@ -153,3 +153,22 @@ label {
     background-color: aliceblue;
     z-index: 2;
 }
+.refresh-button-updating > span {
+    display: inline-block;
+    animation: spin 1s infinite ease-in-out;
+}
+
+
+@keyframes spin {
+    0% {
+        transform: rotate(0);
+    }
+
+    50% {
+        transform: rotate(180deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

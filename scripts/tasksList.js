@@ -1,9 +1,8 @@
 (function(root) {
     const template = `
-        <dashCard :updateData="updateData" :hideTime="true">
+        <dashCard :updateData="updateData" :hideTime="true" :loading="loading">
             <div v-if="list === null">No data</div>
             <div v-if="list">
-                <div v-if="!list.length" class="loader">Loader</div>
                 <article :class="articleClass(issue.fields.status.name)" v-for="issue in list" >
                     <img class="fr mw1 dib" :src="issue.fields.issuetype.iconUrl" >
                     <img class="fr mw1 dib" :src="issue.fields.priority.iconUrl" >
@@ -26,6 +25,7 @@
                       {{issue.fields.description}}
                     </div>
                 </article>
+                <div v-if="!list.length" class="loader">Loader</div>
             </div>
         </dashCard>
     `;
@@ -53,13 +53,15 @@
                     }
                 ];
             },
-            updateData: function() {
+            updateData: function(silent) {
                 if (!this.boardId) {
                     return setTimeout(this.updateData, 500);
                 }
 
                 this.loading = true;
-                this.list = [];
+                if (!silent) {
+                    this.list = [];
+                }
 
                 this.$http
                     .get(
@@ -93,23 +95,7 @@
             }
         },
         mounted: function() {
-            const self = this;
             this.updateData();
-            let lastUpdate = Date.now();
-
-            document.addEventListener(
-                'visibilitychange',
-                function tasksVisibilityUpdate() {
-                    const timeSinceLastUpdate = Math.abs(
-                        lastUpdate - Date.now()
-                    ) /
-                        1000;
-                    if (timeSinceLastUpdate > 120) {
-                        self.updateData();
-                        lastUpdate = Date.now();
-                    }
-                }
-            );
         },
         template
     };
