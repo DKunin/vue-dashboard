@@ -1,7 +1,11 @@
 (function(root) {
     const template = `
         <dashCard :updateData="updateData">
-            <div v-if="plans === null && !loading">No data</div>
+            <div v-if="!plans && !loading">
+                <div class="tc v-mid pa5 o-30">
+                    No data
+                </div>
+            </div>
             <div v-if="plans">
                 <div v-if="loading" class="loader"></div>
                 <div v-for="file in plans" class="f5 lh-cop bb b--black-05 pv3">
@@ -28,7 +32,8 @@
                     .then(
                         response => {
                             this.loading = false;
-                            this.plans = response.body.split('\n');
+                            console.log();
+                            this.plans = typeof response.body === 'string' ? response.body.split('\n') : null;
                         },
                         () => {
                             this.loading = false;
