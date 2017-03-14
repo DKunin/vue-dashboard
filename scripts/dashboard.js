@@ -1,8 +1,8 @@
 (function(root) {
-    const template = `
+    let template = `
         <div class="flex-container">
             <section class="flex-section">
-                <tasksList :tasks="[]" :clickBranch="openBranch" :hideMaster="state.hideMaster" :boardId="state.boardId"/>
+                <tasksList :tasks="[]" :hideMaster="state.hideMaster" :boardId="state.boardId"/>
             </section>
             <section class="flex-section">
                 <stashList :user="state.stashUserName" :hideWips="state.hideWips" />
@@ -15,6 +15,11 @@
         </div>
     `;
 
+    fetch('./dashboard.html')
+        .then(result => result.text()).then(result => {
+            template = result;
+        });
+
     root.dashboard = {
         template,
         props: {
@@ -22,9 +27,6 @@
                 type: Object,
                 default: {}
             }
-        },
-        methods: {
-            openBranch: function() {}
         }
     };
 })(this || (typeof window !== 'undefined' ? window : global));

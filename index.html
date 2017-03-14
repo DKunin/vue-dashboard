@@ -35,8 +35,8 @@
     <div id="app"></div>
     <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function initiateApplication() {
+            fetch('./dashboard.html').then(result => result.text()).then(console.log);
             Vue.component('dashCard', dashCard);
-
             Vue.component('tasksListReport', tasksListReport);
             Vue.component('tasksList', tasksList);
             Vue.component('stashList', stashList);
