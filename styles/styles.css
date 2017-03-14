@@ -1,8 +1,5 @@
-* {
-    font-family: Roboto;
-}
-
 body {
+    font-family: Roboto;
     padding: 0;
     font-size: 14px;
     background-color: #ecf0f1;
@@ -11,11 +8,11 @@ body {
 html, body, main {
     height: 100%;
 }
+
 .loader,
 .loader:before,
 .loader:after {
     background: #c2c2c2;
-    -webkit-animation: load1 1s infinite ease-in-out;
     animation: load1 1s infinite ease-in-out;
     width: 1em;
     height: 4em;
@@ -23,13 +20,11 @@ html, body, main {
 .loader {
     color: #c2c2c2;
     text-indent: -9999em;
+    direction: ltr;
     margin: 88px auto;
     position: relative;
     font-size: 11px;
-    -webkit-transform: translateZ(0);
-    -ms-transform: translateZ(0);
     transform: translateZ(0);
-    -webkit-animation-delay: -0.16s;
     animation-delay: -0.16s;
 }
 .loader:before,
@@ -40,7 +35,6 @@ html, body, main {
 }
 .loader:before {
     left: -1.5em;
-    -webkit-animation-delay: -0.32s;
     animation-delay: -0.32s;
 }
 .loader:after {
@@ -66,6 +60,7 @@ label {
 .flex-container {
     display: flex;
     margin: 0 5px;
+    height: 100%;
 }
 
 .flex-section {
@@ -73,9 +68,9 @@ label {
 }
 
 @media (max-width: 600px) {
-  .flex-container {
-    flex-direction: column;
-  }
+    .flex-container {
+        flex-direction: column;
+    }
 }
 
 ::-webkit-scrollbar { 
@@ -84,9 +79,9 @@ label {
 
 .dash-panel {
     overflow: scroll;
-    height: 300px;
+    height: 48%;
     background-color: white;
-    padding: 0px 10px;
+    padding: 0 10px;
     border: 1px solid #c2c2c2;
     margin: 10px 5px;
     position: relative;
@@ -115,7 +110,6 @@ label {
     border-left: 4px solid #fbf1a9;
 }
 .stash-list-reviewer-green {
-    /*border-bottom: 4px solid #137752;*/
     color: #137752;
     display: none;
 }

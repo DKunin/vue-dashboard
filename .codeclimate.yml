@@ -1,12 +1,13 @@
 ---
 engines:
   csslint:
-    enabled: false
+    enabled: true
   duplication:
     enabled: true
     config:
       languages:
       - javascript
+      - css
   eslint:
     enabled: true
   fixme:
@@ -21,3 +22,4 @@ exclude_paths:
 - test/
 - vendor/
 - var/www/s/build/
+- styles/*.min.css
