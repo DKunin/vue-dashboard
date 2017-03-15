@@ -87,6 +87,11 @@ label {
     padding: 0 10px;
     position: relative;
 }
+
+.dash-panel-no-padding {
+    padding: 0;
+}
+
 .dash-panel-time {
     bottom: 0;
     left: 0;
@@ -146,6 +151,16 @@ label {
     right: 0;
     top: 0;
     z-index: 2;
+    opacity: .1;
+    transition: opacity .3s linear;
+}
+
+.refresh-button:hover {
+    opacity: 1;
+}
+
+.refresh-button-updating {
+    opacity: 1;
 }
 
 .refresh-button-updating > span {
@@ -165,4 +180,15 @@ label {
     100% {
         transform: rotate(360deg);
     }
+}
+
+.jira-task-item {
+    margin: 0;
+    display: block;
+    word-break: break-all;
+    padding: .5rem;
+}
+
+.jira-task-item {
+    border-left: 4px solid #137752;
 }

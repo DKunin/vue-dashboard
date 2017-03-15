@@ -1,12 +1,12 @@
 (function(root) {
     const template = `
-        <dashCard :updateData="updateData">
+        <dashCard :updateData="updateData" :nopadding="true">
             <div v-if="!onlySolved(list).length && !loading" class="tc v-mid pa5 o-30">
                 No data
             </div>
             <div v-if="list">
                 <div v-if="loading" class="loader">Loader</div>
-                <article :class="articleClass(issue.fields.status.name)" v-for="issue in onlySolved(list)" >
+                <article :class="articleClass(issue.fields.status.name + issue.fields.resolution.name)" v-for="issue in onlySolved(list)" >
                   - {{issue.fields.summary}} 
                     <a
                       class="link black hover-bg-silver"
@@ -25,12 +25,15 @@
         }),
         methods: {
             articleClass: function(name) {
+                let lowerName = name.toLowerCase();
                 return [
                     'dt w-100 bb b--black-05 pb2 mt2',
+                    'jira-task-item',
                     {
+                        'jira-task-item-fixed': lowerName.indexOf('fixed') !== -1,
                         'o-30': (
-                            name.toLowerCase().indexOf('review') !== -1 ||
-                                name.toLowerCase().indexOf('master') !== -1
+                            lowerName.indexOf('review') !== -1 ||
+                            lowerName.indexOf('master') !== -1
                         )
                     }
                 ];

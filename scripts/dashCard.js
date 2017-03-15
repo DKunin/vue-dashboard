@@ -1,6 +1,6 @@
 (function(root) {
     const template = `
-        <div class="dash-panel">
+        <div :class="'dash-panel ' + (nopadding? 'dash-panel-no-padding':'')">
             <button :class="'refresh-button ' + (loading ? 'refresh-button refresh-button-updating': '')" v-on:click.prevent="forceUpdate"><span>↻</span></button>
             <slot>∅</slot>
             <small v-if="!hideTime" class="dash-panel-time">{{updatedTime}}</small>
@@ -18,6 +18,10 @@
                 default: false
             },
             loading: {
+                type: Boolean,
+                default: false
+            },
+            nopadding: {
                 type: Boolean,
                 default: false
             }
