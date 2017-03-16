@@ -1,11 +1,11 @@
 (function(root) {
     const template = `
         <dashCard :updateData="updateData" nopadding hideTime>
+            <span class="refresh-button copy-button" @click.prevent="copy">{{copyStatus}}</span>
             <div v-if="!onlySolved(list).length && !loading" class="tc v-mid pa5 o-30">
                 No data
             </div>
             <div v-if="list" class="search-list">
-                <div v-if="loading" class="loader">Loader</div>
                 <article :class="articleClass(issue.fields.status.name + issue.fields.resolution.name)" v-for="issue in onlySolved(list)" >
                   - {{issue.fields.summary}} 
                     <a
@@ -15,7 +15,7 @@
                       target='_blank'>[https://jr.avito.ru/browse/{{issue.key}}]</a>
                 </article>
             </div>
-            <span class="refresh-button copy-button" @click.prevent="copy">{{copyStatus}}</span>
+            <div v-if="loading" class="loader">Loader</div>
         </dashCard>
     `;
 
