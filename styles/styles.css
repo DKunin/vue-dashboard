@@ -168,6 +168,11 @@ label {
     display: inline-block;
 }
 
+.copy-button {
+    right: 30px;
+    padding: 4px;
+}
+
 @keyframes spin {
     0% {
         transform: rotate(0);
