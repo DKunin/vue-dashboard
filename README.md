@@ -1,3 +1,5 @@
+[![Code Climate](https://codeclimate.com/github/DKunin/vue-dashboard/badges/gpa.svg)](https://codeclimate.com/github/DKunin/vue-dashboard)
+
 #  Vue Dashboard
 
 [WIP] 
