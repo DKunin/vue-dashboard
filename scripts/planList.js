@@ -32,17 +32,15 @@
                     .then(
                         response => {
                             this.loading = false;
-                            console.log();
-                            this.plans = typeof response.body === 'string' ? response.body.split('\n') : null;
+                            this.plans = typeof response.body === 'string' ?
+                                response.body.split('\n') :
+                                null;
                         },
                         () => {
                             this.loading = false;
                         }
                     );
             }
-        },
-        mounted: function() {
-            this.updateData();
         },
         template
     };

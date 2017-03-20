@@ -20,6 +20,7 @@
         window.LOCAL_DOCKER_IP = 'http://192.168.99.100';
         window.KANBAN_MAIN = LOCAL_DOCKER_IP + ':4747/api/kanban';
     </script>
+    <script type="text/javascript" src="./scripts/directives/visibilityUpdate.js"></script>
     <script type="text/javascript" src="./scripts/dashCard.js"></script>
     <script type="text/javascript" src="./scripts/trends.js"></script>
     <script type="text/javascript" src="./scripts/tasksList.js"></script>
@@ -47,8 +48,9 @@
         }
 
         document.addEventListener('DOMContentLoaded', function initiateApplication() {
-            // fetch('./dashboard.html').then(result => result.text()).then(console.log);
-            
+            console.log(visibilityUpdate);
+            Vue.directive('visibilityUpdate', visibilityUpdate);
+
             Vue.component('dashCard', dashCard);
             Vue.component('tasksListReport', tasksListReport);
             Vue.component('tasksList', tasksList);

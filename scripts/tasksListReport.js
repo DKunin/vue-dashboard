@@ -32,10 +32,12 @@
                     'dt w-100 bb b--black-05 pb2 mt2',
                     'jira-task-item',
                     {
-                        'jira-task-item-fixed': lowerName.indexOf('fixed') !== -1,
+                        'jira-task-item-fixed': (
+                            lowerName.indexOf('fixed') !== -1
+                        ),
                         'o-30': (
                             lowerName.indexOf('review') !== -1 ||
-                            lowerName.indexOf('master') !== -1
+                                lowerName.indexOf('master') !== -1
                         )
                     }
                 ];
@@ -68,11 +70,14 @@
                     );
             },
             copy: function() {
-                selectText('.search-list');
+                window.selectText('.search-list');
                 this.copyStatus = 'copied';
-                setTimeout(() => {
-                    this.copyStatus = 'copy';
-                }, 3000)
+                setTimeout(
+                    () => {
+                        this.copyStatus = 'copy';
+                    },
+                    3000
+                );
             }
         },
         mounted: function() {

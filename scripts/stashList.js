@@ -38,6 +38,7 @@
     `;
 
     root.stashList = {
+        name: 'stashList',
         props: {
             user: {
                 type: String,
@@ -128,25 +129,6 @@
                         }
                     );
             }
-        },
-        mounted: function() {
-            const self = this;
-            this.updateData();
-            let lastUpdate = Date.now();
-
-            document.addEventListener(
-                'visibilitychange',
-                function stashVisibilityUpdate() {
-                    const timeSinceLastUpdate = Math.abs(
-                        lastUpdate - Date.now()
-                    ) /
-                        1000;
-                    if (timeSinceLastUpdate > 120) {
-                        self.updateData(true);
-                        lastUpdate = Date.now();
-                    }
-                }
-            );
         },
         template
     };

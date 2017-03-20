@@ -1,7 +1,7 @@
 (function(root) {
     const template = `
         <dashCard :updateData="updateData" :hideTime="true" :loading="loading">
-            <div v-if="list === null">No data</div>
+            <div v-if="!list.length && !loading" class="tc v-mid pa5 o-30">No data</div>
             <div v-if="list">
                 <article :class="articleClass(issue.fields.status.name)" v-for="issue in list" >
                     <img class="fr mw1 dib" :src="issue.fields.issuetype.iconUrl" >
@@ -25,8 +25,8 @@
                       {{issue.fields.description}}
                     </div>
                 </article>
-                <div v-if="!list.length" class="loader">Loader</div>
             </div>
+            <div v-if="loading" class="loader">Loader</div>
         </dashCard>
     `;
 
@@ -93,9 +93,6 @@
                     []
                 );
             }
-        },
-        mounted: function() {
-            this.updateData();
         },
         template
     };

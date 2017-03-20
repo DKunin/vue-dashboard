@@ -2,23 +2,22 @@
     let template = `
         <div class="flex-container">
             <section class="flex-section">
-                <tasksList :tasks="[]" :hideMaster="state.hideMaster" :boardId="state.boardId"/>
+                <tasksList v-visibilityUpdate :tasks="[]" :hideMaster="state.hideMaster" :boardId="state.boardId"/>
             </section>
             <section class="flex-section">
-                <stashList :user="state.stashUserName" :hideWips="state.hideWips" />
+                <stashList v-visibilityUpdate :user="state.stashUserName" :hideWips="state.hideWips" />
                 <tasksListReport :tasks="state.techDept"/>
             </section>
             <section class="flex-section">
-                <planList />
+                <planList v-visibilityUpdate />
                 <pocketList />
             </section>
         </div>
     `;
 
-    fetch('./dashboard.html')
-        .then(result => result.text()).then(result => {
-            template = result;
-        });
+    fetch('./dashboard.html').then(result => result.text()).then(result => {
+        template = result;
+    });
 
     root.dashboard = {
         template,

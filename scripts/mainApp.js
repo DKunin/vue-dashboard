@@ -1,5 +1,4 @@
 (function(root) {
-    console.log(dashboard);
     const routes = [
         { path: '/', component: root.dashboard },
         { path: '/settings', component: settings }
