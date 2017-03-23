@@ -3,8 +3,8 @@
     let template = `
         <div class="flex-container">
             <section class="flex-section">
-                <tasksList v-visibilityUpdate :tasks="[]" :hideMaster="state.hideMaster" :search="kanban + '?boardId=' + state.boardId + '&jql=assignee%20=%20currentUser()'"/>
                 <tasksList v-visibilityUpdate :tasks="[]" :hideMaster="state.hideMaster" search="http://192.168.99.100:4747/api/search?jql=assignee%20=%20currentUser()%20AND%20resolution%20=%20Unresolved%20order%20by%20updated%20DESC"/>
+                <tasksList v-visibilityUpdate :tasks="[]" :hideMaster="state.hideMaster" :search="kanban + '?boardId=' + state.boardId + '&jql=assignee%20=%20currentUser()'"/>
             </section>
             <section class="flex-section">
                 <stashList v-visibilityUpdate :user="state.stashUserName" :hideWips="state.hideWips" />
