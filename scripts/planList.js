@@ -32,9 +32,9 @@
                     .then(
                         response => {
                             this.loading = false;
-                            this.plans = typeof response.body === 'string' ?
-                                response.body.split('\n') :
-                                null;
+                            this.plans = typeof response.body === 'string'
+                                ? response.body.split('\n')
+                                : null;
                         },
                         () => {
                             this.loading = false;

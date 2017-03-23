@@ -32,8 +32,8 @@
 
     root.tasksList = {
         props: {
+            search: { type: String, default: '' },
             tasks: { type: Array, default: [] },
-            boardId: { type: Number, default: 0 },
             hideMaster: { type: Boolean, default: false },
             clickBranch: { type: Function, default: () => {} }
         },
@@ -41,6 +41,14 @@
             list: [],
             loading: false
         }),
+        computed: {
+            query() {
+                if (this.search && !this.search.includes('undefined')) {
+                    return this.search;
+                }
+                return null;
+            }
+        },
         methods: {
             articleClass: function(name) {
                 return [
@@ -54,7 +62,7 @@
                 ];
             },
             updateData: function(silent) {
-                if (!this.boardId) {
+                if (!this.query) {
                     return setTimeout(this.updateData, 500);
                 }
 
@@ -63,21 +71,13 @@
                     this.list = [];
                 }
 
-                this.$http
-                    .get(
-                        root.KANBAN_MAIN +
-                            `?boardId=${this.boardId}&jql=assignee%20=%20currentUser()`
-                    )
-                    .then(
-                        response => {
-                            this.loading = false;
-                            this.list = this.filteredTasks(response.body);
-                        },
-                        () => {
-                            this.loading = false;
-                            this.list = [];
-                        }
-                    );
+                this.$http.get(this.query).then(response => {
+                    this.loading = false;
+                    this.list = this.filteredTasks(response.body);
+                }, () => {
+                    this.loading = false;
+                    this.list = [];
+                });
             },
             filteredTasks: function(list) {
                 return list.reduce(
