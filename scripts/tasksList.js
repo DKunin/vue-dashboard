@@ -76,10 +76,13 @@
                     this.list = this.filteredTasks(response.body);
                 }, () => {
                     this.loading = false;
-                    this.list = [];
+                    this.list = this.filteredTasks([]);
                 });
             },
             filteredTasks: function(list) {
+                if (!Array.isArray(list)) {
+                    return [];
+                };
                 return list.reduce(
                     (newArray, singleItem) => {
                         if (
