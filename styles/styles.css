@@ -100,6 +100,10 @@ label {
     text-align: center;
 }
 
+.dash-panel-half {
+    height: 23.3%;
+}
+
 .stash-list-item {
     margin: 0 -10px;
 }

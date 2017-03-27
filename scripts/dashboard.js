@@ -12,11 +12,12 @@
             </section>
             <section class="flex-section">
                 <planList v-visibilityUpdate />
-                <pocketList />
+                <pocketList half />
+                
             </section>
         </div>
     `;
-
+    //<rescueTime v-visibilityUpdate hideTime half />
     fetch('./dashboard.html').then(result => result.text()).then(result => {
         template = result;
     });

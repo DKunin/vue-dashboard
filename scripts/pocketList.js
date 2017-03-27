@@ -1,6 +1,6 @@
 (function(root) {
     const template = `
-        <dashCard :updateData="updateData" :hideTime="true">
+        <dashCard :updateData="updateData" :hideTime="true" :half="half">
             <div v-if="list === null && !loading">No data</div>
             <div v-if="loading" class="loader"></div>
             <div v-if="list && !loading">
@@ -15,6 +15,12 @@
     `;
 
     root.pocketList = {
+        props: {
+            half: {
+                type: Boolean,
+                default: false
+            }
+        },
         data: () => ({
             list: [],
             count: 0,
