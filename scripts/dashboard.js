@@ -12,8 +12,7 @@
             </section>
             <section class="flex-section">
                 <planList v-visibilityUpdate />
-                <pocketList half />
-                <rescueTime v-visibilityUpdate hideTime half :resqueKey="state.resqueApi" />
+                <rescueTime v-visibilityUpdate hideTime :resqueKey="state.resqueApi" />
             </section>
         </div>
     `;
