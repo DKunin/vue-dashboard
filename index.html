@@ -60,13 +60,14 @@
             Vue.component('rescueTime', rescueTime);
             Vue.component('trends', trends);
 
-            const { boardId, stashUserName, hideMaster, hideWips } = JSON.parse(
+            const { boardId, stashUserName, hideMaster, hideWips, resqueApi } = JSON.parse(
                 localStorage.getItem('settings')
             )
 
             const app = new Vue(mainApp);
             Vue.set(app, 'stashUserName', stashUserName);
             Vue.set(app, 'hideMaster', hideMaster);
+            Vue.set(app, 'resqueApi', resqueApi);
             Vue.set(app, 'hideWips', hideWips);
             Vue.set(app, 'boardId', boardId);
         });

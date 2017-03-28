@@ -3,6 +3,7 @@
         stashUrl: '',
         stashUserName: '',
         boardId: '',
+        resqueApi: '',
         hideMaster: false,
         hideWips: false
     };
@@ -18,6 +19,10 @@
                 <div class="mt3">
                   <label class="db fw6 lh-copy f6" for="boardId">BoardId</label>
                   <input v-model="boardId" class="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="text" name="boardId"  id="boardId">
+                </div>
+                <div class="mt3">
+                  <label class="db fw6 lh-copy f6" for="resqueApi">resqueApi</label>
+                  <input v-model="resqueApi" class="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="text" name="resqueApi"  id="resqueApi">
                 </div>
                 <div class="mt3">
                   <label class="pa0 ma0 lh-copy f6 pointer">
@@ -45,11 +50,12 @@
         methods: {
             saveSettings: function(event) {
                 event.preventDefault();
-                const { stashUserName, boardId, hideMaster, hideWips } = this;
+                const { stashUserName, boardId, hideMaster, hideWips, resqueApi } = this;
                 localStorage.setItem(
                     'settings',
                     JSON.stringify({
                         stashUserName,
+                        resqueApi,
                         boardId,
                         hideMaster,
                         hideWips
@@ -58,11 +64,12 @@
             }
         },
         mounted: function() {
-            const { stashUserName, boardId, hideMaster, hideWips } = JSON.parse(
+            const { stashUserName, boardId, hideMaster, hideWips, resqueApi } = JSON.parse(
                 localStorage.getItem('settings')
             ) ||
                 initialState;
             this.$set(this, 'stashUserName', stashUserName);
+            this.$set(this, 'resqueApi', resqueApi);
             this.$set(this, 'boardId', boardId);
             this.$set(this, 'hideMaster', hideMaster);
             this.$set(this, 'hideWips', hideWips);

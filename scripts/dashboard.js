@@ -13,11 +13,10 @@
             <section class="flex-section">
                 <planList v-visibilityUpdate />
                 <pocketList half />
-                
+                <rescueTime v-visibilityUpdate hideTime half :resqueKey="state.resqueApi" />
             </section>
         </div>
     `;
-    //<rescueTime v-visibilityUpdate hideTime half />
     fetch('./dashboard.html').then(result => result.text()).then(result => {
         template = result;
     });

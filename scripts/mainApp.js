@@ -22,7 +22,7 @@
                 </li>
               </ul>
             </nav>
-            <router-view :state="{ tasks, requests, hideWips, hideMaster, techDept, stashUserName, boardId }" />
+            <router-view :state="{ tasks, requests, hideWips, hideMaster, techDept, stashUserName, boardId, resqueApi }" />
         </main>
     `;
 
@@ -36,6 +36,7 @@
             techDept: [],
             requests: [],
             stashUserName: '',
+            resqueApi: '',
             boardId: 0,
             hideWips: false,
             hideMaster: false
