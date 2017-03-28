@@ -8,19 +8,14 @@
                     <img class="fr mw1 dib" :src="issue.fields.priority.iconUrl" >
                     <a
                       class="link black hover-bg-silver"
-                      tabindex="0"
                       :href='"https://jr.avito.ru/browse/" + issue.key'
                       target='_blank'>{{issue.key}}: {{issue.fields.summary}}
                     </a>
-                    <div>
-                      <small>{{issue.fields.status.name}}</small>
-                    </div>
-                    <div>
+                    <small class="db pv1">{{issue.fields.status.name}}</small>
                       <a
                         v-on:click="clickBranch(issue.fields.customfield_10010)"
-                        class="link black hover-bg-silver" >{{issue.fields.customfield_10010}}
+                        class="link black hover-bg-silver db" >{{issue.fields.customfield_10010}}
                       </a>
-                    </div>
                     <div class="dn">
                       {{issue.fields.description}}
                     </div>
@@ -33,9 +28,12 @@
     root.tasksList = {
         props: {
             search: { type: String, default: '' },
-            tasks: { type: Array, default: [] },
-            hideMaster: { type: Boolean, default: false },
-            clickBranch: { type: Function, default: () => {} }
+            clickBranch: {
+                type: Function,
+                default: branchNumber => {
+                    console.log(branchNumber);
+                }
+            }
         },
         data: () => ({
             list: [],
@@ -73,28 +71,11 @@
 
                 this.$http.get(this.query).then(response => {
                     this.loading = false;
-                    this.list = this.filteredTasks(response.body);
+                    this.list = response.body;
                 }, () => {
                     this.loading = false;
-                    this.list = this.filteredTasks([]);
+                    this.list = [];
                 });
-            },
-            filteredTasks: function(list) {
-                if (!Array.isArray(list)) {
-                    return [];
-                };
-                return list.reduce(
-                    (newArray, singleItem) => {
-                        if (
-                            this.hideMaster &&
-                                singleItem.fields.status.name === 'In Master'
-                        ) {
-                            return newArray;
-                        }
-                        return newArray.concat(singleItem);
-                    },
-                    []
-                );
             }
         },
         template

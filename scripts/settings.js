@@ -50,7 +50,13 @@
         methods: {
             saveSettings: function(event) {
                 event.preventDefault();
-                const { stashUserName, boardId, hideMaster, hideWips, resqueApi } = this;
+                const {
+                    stashUserName,
+                    boardId,
+                    hideMaster,
+                    hideWips,
+                    resqueApi
+                } = this;
                 localStorage.setItem(
                     'settings',
                     JSON.stringify({
@@ -64,10 +70,13 @@
             }
         },
         mounted: function() {
-            const { stashUserName, boardId, hideMaster, hideWips, resqueApi } = JSON.parse(
-                localStorage.getItem('settings')
-            ) ||
-                initialState;
+            const {
+                stashUserName,
+                boardId,
+                hideMaster,
+                hideWips,
+                resqueApi
+            } = JSON.parse(localStorage.getItem('settings')) || initialState;
             this.$set(this, 'stashUserName', stashUserName);
             this.$set(this, 'resqueApi', resqueApi);
             this.$set(this, 'boardId', boardId);
