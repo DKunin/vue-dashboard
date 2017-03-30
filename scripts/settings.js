@@ -4,6 +4,7 @@
         stashUserName: '',
         boardId: '',
         resqueApi: '',
+        newsApi: '',
         hideMaster: false,
         hideWips: false
     };
@@ -23,6 +24,10 @@
                 <div class="mt3">
                   <label class="db fw6 lh-copy f6" for="resqueApi">resqueApi</label>
                   <input v-model="resqueApi" class="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="text" name="resqueApi"  id="resqueApi">
+                </div>
+                <div class="mt3">
+                  <label class="db fw6 lh-copy f6" for="newsApi">newsApi</label>
+                  <input v-model="newsApi" class="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="text" name="newsApi"  id="newsApi">
                 </div>
                 <div class="mt3">
                   <label class="pa0 ma0 lh-copy f6 pointer">
@@ -55,6 +60,7 @@
                     boardId,
                     hideMaster,
                     hideWips,
+                    newsApi,
                     resqueApi
                 } = this;
                 localStorage.setItem(
@@ -64,6 +70,7 @@
                         resqueApi,
                         boardId,
                         hideMaster,
+                        newsApi,
                         hideWips
                     })
                 );
@@ -74,6 +81,7 @@
                 stashUserName,
                 boardId,
                 hideMaster,
+                newsApi,
                 hideWips,
                 resqueApi
             } = JSON.parse(localStorage.getItem('settings')) || initialState;
@@ -81,6 +89,7 @@
             this.$set(this, 'resqueApi', resqueApi);
             this.$set(this, 'boardId', boardId);
             this.$set(this, 'hideMaster', hideMaster);
+            this.$set(this, 'newsApi', newsApi);
             this.$set(this, 'hideWips', hideWips);
         }
     };

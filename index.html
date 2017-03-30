@@ -24,6 +24,7 @@
     <script type="text/javascript" src="./scripts/dashCard.js"></script>
     <script type="text/javascript" src="./scripts/trends.js"></script>
     <script type="text/javascript" src="./scripts/tasksList.js"></script>
+    <script type="text/javascript" src="./scripts/newsList.js"></script>
     <script type="text/javascript" src="./scripts/rescueTime.js"></script>
     <script type="text/javascript" src="./scripts/tasksListReport.js"></script>
     <script type="text/javascript" src="./scripts/stashList.js"></script>
@@ -56,11 +57,12 @@
             Vue.component('tasksList', tasksList);
             Vue.component('stashList', stashList);
             Vue.component('planList', planList);
+            Vue.component('newsList', newsList);
             Vue.component('pocketList', pocketList);
             Vue.component('rescueTime', rescueTime);
             Vue.component('trends', trends);
 
-            const { boardId, stashUserName, hideMaster, hideWips, resqueApi } = JSON.parse(
+            const { boardId, stashUserName, hideMaster, hideWips, resqueApi, newsApi } = JSON.parse(
                 localStorage.getItem('settings')
             )
 
@@ -68,6 +70,7 @@
             Vue.set(app, 'stashUserName', stashUserName);
             Vue.set(app, 'hideMaster', hideMaster);
             Vue.set(app, 'resqueApi', resqueApi);
+            Vue.set(app, 'newsApi', newsApi);
             Vue.set(app, 'hideWips', hideWips);
             Vue.set(app, 'boardId', boardId);
         });

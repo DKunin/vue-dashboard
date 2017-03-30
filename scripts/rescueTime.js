@@ -109,7 +109,6 @@
                                 },
                                 {}
                             );
-                            console.log(JSON.stringify(singleObj));
                             this.plans = singleObj;
                         },
                         () => {

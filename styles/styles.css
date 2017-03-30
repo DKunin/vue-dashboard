@@ -201,3 +201,14 @@ label {
 .jira-task-item {
     border-left: 4px solid #137752;
 }
+
+.news-article {
+    display: flex;
+}
+.news-article-image {
+    height: 50px;
+    min-width: 72px;
+}
+.news-article-link {
+    /*padding-left: 20px;*/
+}
