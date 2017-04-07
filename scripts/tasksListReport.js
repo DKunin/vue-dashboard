@@ -12,7 +12,7 @@
                       class="link black hover-bg-silver"
                       tabindex="0"
                       :href='"https://jr.avito.ru/browse/" + issue.key'
-                      target='_blank'>[https://jr.avito.ru/browse/{{issue.key}}]</a>
+                      target='_blank'>[{{issue.fields.creator.displayName}}, https://jr.avito.ru/browse/{{issue.key}}]</a>
                 </article>
             </div>
             <div v-if="loading" class="loader">Loader</div>
