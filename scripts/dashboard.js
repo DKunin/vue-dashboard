@@ -16,10 +16,6 @@
         </div>
     `;
 
-    // fetch('./dashboard.html').then(result => result.text()).then(result => {
-    //     template = result;
-    // });
-
     root.dashboard = {
         template,
         props: {
@@ -29,10 +25,6 @@
             }
         },
         mounted() {
-            console.log(this.state);
-            setTimeout(() => {
-                console.log(this.state);
-            }, 3000)
         },
         data() {
             return {

@@ -63,7 +63,7 @@
             Vue.component('trends', trends);
 
             const { boardId, stashUserName, hideMaster, hideWips, resqueApi, newsApi } = JSON.parse(
-                localStorage.getItem('settings')
+                localStorage.getItem('settings') || '{}'
             )
 
             const app = new Vue(mainApp);
