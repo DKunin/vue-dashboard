@@ -2,11 +2,8 @@
     const initialState = {
         stashUrl: '',
         stashUserName: '',
-        boardId: '',
         resqueApi: '',
-        newsApi: '',
-        hideMaster: false,
-        hideWips: false
+        newsApi: ''
     };
     const template = `
         <main class="pa4 black-80">
@@ -18,28 +15,12 @@
                   <input v-model="stashUserName" class="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="text" name="stashUserName"  id="stashUserName">
                 </div>
                 <div class="mt3">
-                  <label class="db fw6 lh-copy f6" for="boardId">BoardId</label>
-                  <input v-model="boardId" class="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="text" name="boardId"  id="boardId">
-                </div>
-                <div class="mt3">
                   <label class="db fw6 lh-copy f6" for="resqueApi">resqueApi</label>
                   <input v-model="resqueApi" class="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="text" name="resqueApi"  id="resqueApi">
                 </div>
                 <div class="mt3">
                   <label class="db fw6 lh-copy f6" for="newsApi">newsApi</label>
                   <input v-model="newsApi" class="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="text" name="newsApi"  id="newsApi">
-                </div>
-                <div class="mt3">
-                  <label class="pa0 ma0 lh-copy f6 pointer">
-                      <input type="checkbox" v-model="hideMaster" />
-                      Hide inMaster
-                  </label>
-                </div>
-                <div class="mt3">
-                  <label class="pa0 ma0 lh-copy f6 pointer">
-                      <input type="checkbox" v-model="hideWips" />
-                      Hide wips
-                  </label>
                 </div>
               </fieldset>
               <div class="">
@@ -57,9 +38,6 @@
                 event.preventDefault();
                 const {
                     stashUserName,
-                    boardId,
-                    hideMaster,
-                    hideWips,
                     newsApi,
                     resqueApi
                 } = this;
@@ -68,29 +46,21 @@
                     JSON.stringify({
                         stashUserName,
                         resqueApi,
-                        boardId,
-                        hideMaster,
-                        newsApi,
-                        hideWips
+                        newsApi
                     })
                 );
+                this.$router.push('/');
             }
         },
         mounted: function() {
             const {
                 stashUserName,
-                boardId,
-                hideMaster,
                 newsApi,
-                hideWips,
                 resqueApi
             } = JSON.parse(localStorage.getItem('settings')) || initialState;
             this.$set(this, 'stashUserName', stashUserName);
             this.$set(this, 'resqueApi', resqueApi);
-            this.$set(this, 'boardId', boardId);
-            this.$set(this, 'hideMaster', hideMaster);
             this.$set(this, 'newsApi', newsApi);
-            this.$set(this, 'hideWips', hideWips);
         }
     };
 })(this || (typeof window !== 'undefined' ? window : global));
