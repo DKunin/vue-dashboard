@@ -1,6 +1,6 @@
 (function(root) {
     const template = `
-        <dashCard :updateData="updateData">
+        <dashCard :updateData="updateData" :hideTime="hideTime">
             <div v-if="!plans && !loading">
                 <div class="tc v-mid pa5 o-30">
                     No data
@@ -20,6 +20,12 @@
             plans: [],
             loading: false
         }),
+        props: {
+            hideTime: {
+                type: Boolean,
+                default: false
+            }
+        },
         methods: {
             updateData: function() {
                 this.plans = [];
