@@ -1,35 +1,104 @@
 (function(root) {
-    const KANBAN = root.KANBAN_MAIN;
-    let template = `
-        <div class="flex-container">
-            <section class="flex-section">
-                <tasksList v-visibilityUpdate search="http://192.168.99.100:4747/api/search?jql=assignee%20=%20currentUser()%20AND%20resolution%20=%20Unresolved%20order%20by%20updated%20DESC"/>
-            </section>
-            <section class="flex-section">
-                <stashList v-visibilityUpdate :user="state.stashUserName" :hideWips="state.hideWips" />
-                <tasksListReport :tasks="state.techDept"/>
-            </section>
-            <section class="flex-section">
-                <planList v-visibilityUpdate />
-                <rescueTime v-visibilityUpdate hideTime :resqueKey="state.resqueApi" />
-            </section>
-        </div>
-    `;
-
     root.dashboard = {
-        template,
         props: {
             state: {
                 type: Object,
                 default: {}
             }
         },
-        mounted() {
-        },
-        data() {
-            return {
-                kanban: KANBAN
-            };
+        render(createElement) {
+            return createElement(
+                'div',
+                {
+                    class: {
+                        'flex-container': true
+                    }
+                },
+                [
+                    createElement(
+                        'section',
+                        {
+                            class: {
+                                'flex-section': true
+                            }
+                        },
+                        [
+                            createElement(root.tasksList, {
+                                props: {
+                                    search: (
+                                        this.$localDockerIp +
+                                            ':4747/api/search?jql=assignee%20=%20currentUser()%20AND%20resolution%20=%20Unresolved%20order%20by%20updated%20DESC'
+                                    )
+                                },
+                                directives: [
+                                    {
+                                        name: 'visibilityUpdate'
+                                    }
+                                ]
+                            })
+                        ]
+                    ),
+                    createElement(
+                        'section',
+                        {
+                            class: {
+                                'flex-section': true
+                            }
+                        },
+                        [
+                            createElement(root.stashList, {
+                                props: {
+                                    user: this.state.stashUserName
+                                },
+                                directives: [
+                                    {
+                                        name: 'visibilityUpdate'
+                                    }
+                                ]
+                            }),
+                            createElement(root.tasksListReport, {
+                                props: {
+                                    tasks: this.state.techDept
+                                },
+                                directives: [
+                                    {
+                                        name: 'visibilityUpdate'
+                                    }
+                                ]
+                            })
+                        ]
+                    ),
+                    createElement(
+                        'section',
+                        {
+                            class: {
+                                'flex-section': true
+                            }
+                        },
+                        [
+                            createElement(root.planList, {
+                                props: { hideTime: true },
+                                directives: [
+                                    {
+                                        name: 'visibilityUpdate'
+                                    }
+                                ]
+                            }),
+                            createElement(root.rescueTime, {
+                                props: {
+                                    resqueKey: this.state.resqueApi,
+                                    hideTime: true
+                                },
+                                directives: [
+                                    {
+                                        name: 'visibilityUpdate'
+                                    }
+                                ]
+                            })
+                        ]
+                    )
+                ]
+            );
         }
     };
 })(this || (typeof window !== 'undefined' ? window : global));

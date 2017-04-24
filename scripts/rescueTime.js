@@ -70,7 +70,7 @@
                 return (time * 100 / max).toFixed();
             },
             updateData() {
-                if (!this.resqueKey) {
+                if (!this.resqueKey || this.resqueKey === 'noKey') {
                     setTimeout(() => this.updateData(), 800);
                     return;
                 }

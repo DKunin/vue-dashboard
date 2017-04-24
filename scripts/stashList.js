@@ -112,7 +112,7 @@
 
                 this.$http
                     .get(
-                        root.LOCAL_DOCKER_IP +
+                        this.$localDockerIp +
                             ':4848/api/prs?username=' +
                             this.user
                     )

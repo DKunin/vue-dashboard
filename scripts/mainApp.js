@@ -1,7 +1,6 @@
 (function(root) {
     const routes = [
         { path: '/', component: root.dashboard },
-        { path: '/custom', component: root.dashboardCustom },
         { path: '/settings', component: settings }
     ];
 

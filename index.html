@@ -15,11 +15,6 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/2.2.0/vue-router.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.2.0/vue-resource.min.js"></script>
-    <script>
-        window.LOCAL_IP = 'http://10.10.11.29';
-        window.LOCAL_DOCKER_IP = 'http://192.168.99.100';
-        window.KANBAN_MAIN = LOCAL_DOCKER_IP + ':4747/api/kanban';
-    </script>
     <script type="text/javascript" src="./scripts/directives/visibilityUpdate.js"></script>
     <script type="text/javascript" src="./scripts/dashCard.js"></script>
     <script type="text/javascript" src="./scripts/tasksList.js"></script>
@@ -29,7 +24,6 @@
     <script type="text/javascript" src="./scripts/stashList.js"></script>
     <script type="text/javascript" src="./scripts/planList.js"></script>
     <script type="text/javascript" src="./scripts/pocketList.js"></script>
-    <script type="text/javascript" src="./scripts/dashboard-custom.js"></script>
     <script type="text/javascript" src="./scripts/dashboard.js"></script>
     <script type="text/javascript" src="./scripts/settings.js"></script>
     <script type="text/javascript" src="./scripts/mainApp.js"></script>
@@ -51,6 +45,9 @@
         }
 
         document.addEventListener('DOMContentLoaded', function initiateApplication() {
+            Object.defineProperty(Vue.prototype, '$localIp', { value: 'http://10.10.11.29' });
+            Object.defineProperty(Vue.prototype, '$localDockerIp', { value: 'http://192.168.99.100' });
+
             Vue.directive('visibilityUpdate', visibilityUpdate);
 
             Vue.component('dashCard', dashCard);
@@ -61,7 +58,7 @@
             Vue.component('newsList', newsList);
             Vue.component('pocketList', pocketList);
             Vue.component('rescueTime', rescueTime);
-            Vue.component('dashboardCustom', dashboardCustom);
+            Vue.component('dashboard', dashboard);
 
             const { boardId, stashUserName, hideMaster, hideWips, resqueApi, newsApi } = JSON.parse(
                 localStorage.getItem('settings') || '{}'

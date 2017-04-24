@@ -40,9 +40,7 @@
         },
         methods: {
             articleClass: function(name) {
-                return [
-                    'dt w-100 bb b--black-05 pb2 mt2 news-article'
-                ];
+                return ['dt w-100 bb b--black-05 pb2 mt2 news-article'];
             },
             updateData: function(silent) {
                 if (!this.query) {

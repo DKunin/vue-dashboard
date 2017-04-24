@@ -55,7 +55,7 @@
                 this.loading = true;
                 this.$http
                     .get(
-                        root.LOCAL_DOCKER_IP +
+                        this.$localDockerIp +
                             ':4747/api/search' +
                             '?jql=labels = techdebt-fe AND updated >= startOfWeek() ORDER BY updated DESC'
                     )

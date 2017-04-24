@@ -17,7 +17,7 @@
         }),
         mounted: function() {
             this.$http
-                .get(root.LOCAL_IP + ':4949/command/comparemaster')
+                .get(this.$localIp + ':4949/command/comparemaster')
                 .then(response => {
                     this.files = response.body.split('\n');
                 });
