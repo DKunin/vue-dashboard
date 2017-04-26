@@ -57,9 +57,6 @@
                                 ]
                             }),
                             createElement(root.tasksListReport, {
-                                props: {
-                                    tasks: this.state.techDept
-                                },
                                 directives: [
                                     {
                                         name: 'visibilityUpdate'

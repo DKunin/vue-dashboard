@@ -8,6 +8,7 @@
 
     const template = `
         <main>
+            <favIcon text="d" fill="purple"/>
             <nav class="left-side-navigation">
               <ul>
                 <li>
@@ -22,7 +23,7 @@
                 </li>
               </ul>
             </nav>
-            <router-view :state="{ tasks, requests, hideWips, hideMaster, techDept, stashUserName, boardId, resqueApi, newsApi }" />
+            <router-view :state="{ stashUserName, resqueApi }" />
         </main>
     `;
 
@@ -32,15 +33,8 @@
         template,
         name: 'mainApp',
         data: () => ({
-            tasks: [],
-            techDept: [],
-            requests: [],
             stashUserName: '',
-            newsApi: '',
-            resqueApi: 'noKey',
-            boardId: 0,
-            hideWips: false,
-            hideMaster: false
+            resqueApi: 'noKey'
         })
     };
 })(this || (typeof window !== 'undefined' ? window : global));

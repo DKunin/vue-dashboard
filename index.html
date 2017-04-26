@@ -17,6 +17,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.2.0/vue-resource.min.js"></script>
     <script type="text/javascript" src="./scripts/directives/visibilityUpdate.js"></script>
     <script type="text/javascript" src="./scripts/dashCard.js"></script>
+    <script type="text/javascript" src="./scripts/favIcon.js"></script>
     <script type="text/javascript" src="./scripts/tasksList.js"></script>
     <script type="text/javascript" src="./scripts/newsList.js"></script>
     <script type="text/javascript" src="./scripts/rescueTime.js"></script>
@@ -59,6 +60,7 @@
             Vue.component('pocketList', pocketList);
             Vue.component('rescueTime', rescueTime);
             Vue.component('dashboard', dashboard);
+            Vue.component('favIcon', favIcon);
 
             const { boardId, stashUserName, hideMaster, hideWips, resqueApi, newsApi } = JSON.parse(
                 localStorage.getItem('settings') || '{}'
