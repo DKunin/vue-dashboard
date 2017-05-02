@@ -13,6 +13,7 @@
 
     const template = `
         <dashCard :updateData="updateData" :hideTime="true" :loading="loading">
+            <div class="tc dark-red pt6" v-if="user === ''">No username</div>
             <div v-if="list === null && !loading">No data</div>
             <article
                 :class="articleClass(request)"

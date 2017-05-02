@@ -49,6 +49,12 @@
                         newsApi
                     })
                 );
+
+                updateSettings({
+                    stashUserName,
+                    newsApi,
+                    resqueApi
+                });
                 this.$router.push('/');
             }
         },
