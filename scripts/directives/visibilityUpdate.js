@@ -1,5 +1,5 @@
 (function(root) {
-    root.visibilityUpdate = {
+    const visibilityUpdate = {
         bind(el, binding, vnode) {
             let lastUpdate = Date.now();
             const updateFunction = vnode.componentInstance.updateData;
@@ -14,4 +14,8 @@
             });
         }
     };
+    root.visibilityUpdate = visibilityUpdate;
+
 })(this || (typeof window !== 'undefined' ? window : global));
+
+// export default visibilityUpdate;
