@@ -38,7 +38,7 @@
         },
         computed: {
             computedClass() {
-                let basic = ['dash-panel'];
+                let basic = [ 'dash-panel' ];
                 if (this.nopadding) {
                     basic.push('dash-panel-no-padding');
                 }

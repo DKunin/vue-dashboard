@@ -10,7 +10,7 @@
                 <svg class="pv2" width="100%" height="50" viewBox="0 0 200 80" preserveAspectRatio="none">
                     <rect style="fill: #2980b9;" v-for="(singleKey, index) in order" :y="18 * index" x="0" height="14px" :width="(plans[singleKey + '_percent'] || 0) + '%'" />
                 </svg>
-                <div v-for="singleKey in order" class="f5 lh-cop bb b--black-05 pv3">
+                <div v-for="singleKey in order" class="f6 lh-cop bb b--black-05 pv3">
                     {{singleKey}} <span class="fr">{{plans[singleKey]}}</span>
                 </div>
             </div>
@@ -44,13 +44,12 @@
         methods: {
             formatToday() {
                 const today = new Date();
-                return `${today.getFullYear()}-${today.getMonth() +
-                    1}-${today.getDate()}`;
+                return `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
             },
-            formatTime(sec_num) {
-                let hours = Math.floor(sec_num / 3600);
-                let minutes = Math.floor((sec_num - hours * 3600) / 60);
-                let seconds = sec_num - hours * 3600 - minutes * 60;
+            formatTime(secNum) {
+                let hours = Math.floor(secNum / 3600);
+                let minutes = Math.floor((secNum - hours * 3600) / 60);
+                let seconds = secNum - hours * 3600 - minutes * 60;
 
                 if (hours < 10) {
                     hours = '0' + hours;
@@ -84,12 +83,6 @@
                     .then(
                         response => {
                             this.loading = false;
-                            const rows = response.rows.map(singleRow => {
-                                return {
-                                    name: this.processName(singleRow[3]),
-                                    time: this.formatTime(singleRow[1])
-                                };
-                            });
                             const time = response.rows.map(singleRow => {
                                 return singleRow[1];
                             });

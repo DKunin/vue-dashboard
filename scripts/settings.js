@@ -36,11 +36,7 @@
         methods: {
             saveSettings: function(event) {
                 event.preventDefault();
-                const {
-                    stashUserName,
-                    newsApi,
-                    resqueApi
-                } = this;
+                const { stashUserName, newsApi, resqueApi } = this;
                 localStorage.setItem(
                     'settings',
                     JSON.stringify({
@@ -59,11 +55,8 @@
             }
         },
         mounted: function() {
-            const {
-                stashUserName,
-                newsApi,
-                resqueApi
-            } = JSON.parse(localStorage.getItem('settings')) || initialState;
+            const { stashUserName, newsApi, resqueApi } =
+                JSON.parse(localStorage.getItem('settings')) || initialState;
             this.$set(this, 'stashUserName', stashUserName);
             this.$set(this, 'resqueApi', resqueApi);
             this.$set(this, 'newsApi', newsApi);

@@ -2,8 +2,8 @@
     const template = `
         <dashCard :updateData="updateData" nopadding hideTime>
             <span class="refresh-button copy-button" @click.prevent="copy">{{copyStatus}}</span>
-            <div v-if="!onlySolved(list).length && !loading" class="tc v-mid pa5 o-30">
-                No data
+            <div v-if="!onlySolved(list).length && !loading" class="fw1 tc v-mid pa5 o-30">
+                no data
             </div>
             <div v-if="list" class="search-list">
                 <article :class="articleClass(issue.fields.status.name + issue.fields.resolution.name)" v-for="issue in onlySolved(list)" >
@@ -32,23 +32,22 @@
                     'dt w-100 bb b--black-05 pb2 mt2',
                     'jira-task-item',
                     {
-                        'jira-task-item-fixed': (
-                            lowerName.indexOf('fixed') !== -1
-                        ),
-                        'o-30': (
-                            lowerName.indexOf('review') !== -1 ||
-                                lowerName.indexOf('master') !== -1
-                        )
+                        'jira-task-item-fixed': lowerName.indexOf('fixed') !==
+                            -1,
+                        'o-30': lowerName.indexOf('review') !== -1 ||
+                            lowerName.indexOf('master') !== -1
                     }
                 ];
             },
             onlySolved: function(issues) {
                 return issues.filter(singleItem => {
-                    return (singleItem.fields.status.name === 'Resolved' ||
-                        singleItem.fields.status.name === 'Closed') &&
+                    return (
+                        (singleItem.fields.status.name === 'Resolved' ||
+                            singleItem.fields.status.name === 'Closed') &&
                         !singleItem.fields.labels.includes(
                             'techdebt-fe-reported'
-                        );
+                        )
+                    );
                 });
             },
             updateData: function() {
@@ -72,12 +71,9 @@
             copy: function() {
                 window.selectText('.search-list');
                 this.copyStatus = 'copied';
-                setTimeout(
-                    () => {
-                        this.copyStatus = 'copy';
-                    },
-                    3000
-                );
+                setTimeout(() => {
+                    this.copyStatus = 'copy';
+                }, 3000);
             }
         },
         mounted: function() {

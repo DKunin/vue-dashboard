@@ -81,9 +81,9 @@ label {
 .dash-panel {
     background-color: white;
     border: 1px solid #c2c2c2;
-    min-height: 300px;
     height: 48%;
     margin: 10px 5px;
+    min-height: 300px;
     overflow: scroll;
     padding: 0 10px;
     position: relative;
@@ -215,7 +215,4 @@ label {
 .news-article-image {
     height: 50px;
     min-width: 72px;
-}
-.news-article-link {
-    /*padding-left: 20px;*/
 }

@@ -8,7 +8,7 @@
             </div>
             <div v-if="plans">
                 <div v-if="loading" class="loader"></div>
-                <div v-for="file in plans" class="f5 lh-cop bb b--black-05 pv3">
+                <div v-for="file in plans" class="f6 lh-cop bb b--black-05 pv3">
                     {{file}}
                 </div>
             </div>
@@ -38,9 +38,9 @@
                     .then(
                         response => {
                             this.loading = false;
-                            this.plans = typeof response.body === 'string'
-                                ? response.body.split('\n')
-                                : null;
+                            this.plans = typeof response.body === 'string' ?
+                                response.body.split('\n') :
+                                null;
                         },
                         () => {
                             this.loading = false;

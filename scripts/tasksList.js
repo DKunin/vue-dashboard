@@ -31,6 +31,7 @@
             clickBranch: {
                 type: Function,
                 default: branchNumber => {
+                    // eslint-disable-next-line
                     console.log(branchNumber);
                 }
             }
@@ -52,10 +53,8 @@
                 return [
                     'dt w-100 bb b--black-05 pb2 mt2',
                     {
-                        'o-30': (
-                            name.toLowerCase().indexOf('review') !== -1 ||
-                                name.toLowerCase().indexOf('master') !== -1
-                        )
+                        'o-30': name.toLowerCase().indexOf('review') !== -1 ||
+                            name.toLowerCase().indexOf('master') !== -1
                     }
                 ];
             },
@@ -69,13 +68,16 @@
                     this.list = [];
                 }
 
-                this.$http.get(this.query).then(response => {
-                    this.loading = false;
-                    this.list = response.body;
-                }, () => {
-                    this.loading = false;
-                    this.list = [];
-                });
+                this.$http.get(this.query).then(
+                    response => {
+                        this.loading = false;
+                        this.list = response.body;
+                    },
+                    () => {
+                        this.loading = false;
+                        this.list = [];
+                    }
+                );
             }
         },
         template

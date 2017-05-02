@@ -5,8 +5,8 @@
             const updateFunction = vnode.componentInstance.updateData;
             updateFunction();
             document.addEventListener('visibilitychange', function() {
-                const timeSinceLastUpdate = Math.abs(lastUpdate - Date.now()) /
-                    1000;
+                const timeSinceLastUpdate =
+                    Math.abs(lastUpdate - Date.now()) / 1000;
                 if (timeSinceLastUpdate > 120) {
                     updateFunction(true);
                     lastUpdate = Date.now();
