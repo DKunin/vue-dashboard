@@ -1,9 +1,9 @@
 (function(root) {
     const template = `
         <dashCard :updateData="updateData" :hideTime="hideTime">
-            <div v-if="!plans && !loading">
-                <div class="tc v-mid pa5 o-30">
-                    No data
+            <div v-if="!plans.length && !loading">
+                <div class="fw1 tc v-mid pa5 o-30">
+                    no data
                 </div>
             </div>
             <div v-if="plans">
@@ -39,7 +39,7 @@
                         response => {
                             this.loading = false;
                             this.plans = typeof response.body === 'string' ?
-                                response.body.split('\n') :
+                                response.body.trim().split('\n').filter(Boolean) :
                                 null;
                         },
                         () => {
