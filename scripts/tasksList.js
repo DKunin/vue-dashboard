@@ -4,6 +4,9 @@
             <div v-if="!list.length && !loading" class="tc v-mid pa5 o-30">No data</div>
             <div v-if="list">
                 <article :class="articleClass(issue.fields.status.name)" v-for="issue in list" >
+                    <div class="fr mw1 dib">
+                        <focusIcon :size="20" />
+                    </div>
                     <img alt="issue-type" class="fr mw1 dib" :src="issue.fields.issuetype.iconUrl" >
                     <img alt="priority" class="fr mw1 dib" :src="issue.fields.priority.iconUrl" >
                     <a
