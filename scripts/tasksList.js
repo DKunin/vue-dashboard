@@ -5,7 +5,7 @@
             <div v-if="list">
                 <article :class="articleClass(issue.fields.status.name)" v-for="issue in list" >
                     <div class="fr mw1 dib">
-                        <focusIcon :size="20" />
+                        <focusIcon :size="20" :state="issue.focused" :uniqueKey="issue.key" :handleChange="processFocusUpdate"/>
                     </div>
                     <img alt="issue-type" class="fr mw1 dib" :src="issue.fields.issuetype.iconUrl" >
                     <img alt="priority" class="fr mw1 dib" :src="issue.fields.priority.iconUrl" >
@@ -31,6 +31,7 @@
     root.tasksList = {
         props: {
             search: { type: String, default: '' },
+            uniqueName: { type: String, default: 'tasks' },
             clickBranch: {
                 type: Function,
                 default: branchNumber => {
@@ -40,7 +41,7 @@
             }
         },
         data: () => ({
-            list: [],
+            list: JSON.parse(localStorage.getItem(this.uniqueName || 'tasks')) || [],
             loading: false
         }),
         computed: {
@@ -52,7 +53,17 @@
             }
         },
         methods: {
-            articleClass: function(name) {
+            processFocusUpdate(key) {
+                this.list = this.list.map(singleItem => {
+                    if (singleItem.key === key) {
+                        singleItem.focused = !singleItem.focused;
+                    }
+
+                    return singleItem;
+                }).sort((a, b) => (a.focused === b.focused) ? 0 : a.focused ? -1 : 1);
+                localStorage.setItem(this.uniqueName, JSON.stringify(this.list));
+            },
+            articleClass(name) {
                 return [
                     'dt w-100 bb b--black-05 pb2 mt2',
                     {
@@ -61,20 +72,24 @@
                     }
                 ];
             },
-            updateData: function(silent) {
+            updateData() {
                 if (!this.query) {
                     return setTimeout(this.updateData, 500);
                 }
 
                 this.loading = true;
-                if (!silent) {
-                    this.list = [];
-                }
 
                 this.$http.get(this.query).then(
                     response => {
                         this.loading = false;
-                        this.list = response.body;
+                        this.list = response.body
+                            .map(singleItem => {
+                                const found = this.list.find(singleKey => singleKey.key === singleItem.key);
+                                if (found) {
+                                    singleItem.focused = found.focused;
+                                }
+                                return singleItem;
+                            }).sort((a, b) => (a.focused === b.focused) ? 0 : a.focused ? -1 : 1);
                     },
                     () => {
                         this.loading = false;

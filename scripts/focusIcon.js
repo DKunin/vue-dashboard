@@ -1,6 +1,6 @@
 (function(root) {
     const template = `
-        <div :width="size">
+        <div :width="size" :style="'cursor: pointer;opacity: ' + opacityState" @click="handleClick">
             <svg viewBox="0 0 48 48" width="100%" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h48v48h-48z" fill="none"/><path d="M10 30h-4v8c0 2.21 1.79 4 4 4h8v-4h-8v-8zm0-20h8v-4h-8c-2.21 0-4 1.79-4 4v8h4v-8zm28-4h-8v4h8v8h4v-8c0-2.21-1.79-4-4-4zm0 32h-8v4h8c2.21 0 4-1.79 4-4v-8h-4v8zm-14-22c-4.42 0-8 3.58-8 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm0 12c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"/></svg>
         </div>
     `;
@@ -11,12 +11,29 @@
                 type: Number,
                 default: 48
             },
+            uniqueKey: {
+                type: String,
+                default: ''
+            },
             state: {
-                type: Number,
-                default: 20
+                type: Boolean,
+                default: false
+            },
+            handleChange: {
+                type: Function,
+                default: () => {}
             }
         },
-
-        template
+        template,
+        methods: {
+            handleClick() {
+                this.handleChange(this.uniqueKey);
+            }
+        },
+        computed: {
+            opacityState() {
+                return this.state ? 1 : 0.2;
+            }
+        }
     };
 })(this || (typeof window !== 'undefined' ? window : global));

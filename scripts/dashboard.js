@@ -33,6 +33,18 @@
                                         name: 'visibilityUpdate'
                                     }
                                 ]
+                            }),
+                            createElement(root.tasksList, {
+                                props: {
+                                    uniqueName: 'watchedTasks',
+                                    search: this.$localDockerIp +
+                                        ':4747/api/search?jql=' + escape('watcher = currentUser() and (status = "In test" or status = "QA Progress" or status = "Ready for merge")')
+                                },
+                                directives: [
+                                    {
+                                        name: 'visibilityUpdate'
+                                    }
+                                ]
                             })
                         ]
                     ),
