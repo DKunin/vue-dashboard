@@ -56,7 +56,7 @@
                     .get(
                         this.$localDockerIp +
                             ':4747/api/search' +
-                            '?jql=labels = techdebt-fe AND updated >= startOfWeek() ORDER BY updated DESC'
+                            '?jql=labels = techdebt-fe AND updated >= startOfWeek() and (assignee in (ichizh,aaromanov,sutkin,rkhafiyatullin,dkunin,kvkryarov,svdmitrievskiy,tvkorosteleva) or reporter in (ichizh,aaromanov,sutkin,rkhafiyatullin,dkunin,kvkryarov,svdmitrievskiy,tvkorosteleva)) ORDER BY updated DESC'
                     )
                     .then(
                         response => {
