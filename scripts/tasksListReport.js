@@ -1,4 +1,15 @@
 (function(root) {
+    function selectText(element) {
+        var text = document.querySelector(element);
+        var selection = document.getSelection();
+        var range = document.createRange();
+        range.selectNode(text);
+        selection.removeAllRanges();
+        selection.addRange(range);
+        document.execCommand('copy');
+        selection.removeAllRanges();
+    }
+
     const template = `
         <dashCard :updateData="updateData" nopadding hideTime>
             <span class="refresh-button copy-button" @click.prevent="copy">{{copyStatus}}</span>
@@ -69,7 +80,7 @@
                     );
             },
             copy: function() {
-                window.selectText('.search-list');
+                selectText('.search-list');
                 this.copyStatus = 'copied';
                 setTimeout(() => {
                     this.copyStatus = 'copy';

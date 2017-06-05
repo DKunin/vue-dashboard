@@ -30,25 +30,13 @@
   <body>
     <div id="app"></div>
     <script type="text/javascript">
-
-        function selectText(element) {
-            var text = document.querySelector(element);
-            var selection = document.getSelection();
-            var range = document.createRange();
-            range.selectNode(text);
-            selection.removeAllRanges();
-            selection.addRange(range);
-            document.execCommand('copy');
-            selection.removeAllRanges();
-        }
         let updateSettings;
 
         document.addEventListener('DOMContentLoaded', function initiateApplication() {
-            Object.defineProperty(Vue.prototype, '$localIp', { value: 'http://10.10.12.143' });
+            Object.defineProperty(Vue.prototype, '$localIp', { value: `http://${location.hostname}` });
             Object.defineProperty(Vue.prototype, '$localDockerIp', { value: 'http://192.168.99.100' });
 
             Vue.directive('visibilityUpdate', visibilityUpdate);
-
             Vue.component('focusIcon', focusIcon);
             Vue.component('dashCard', dashCard);
             Vue.component('tasksListReport', tasksListReport);
