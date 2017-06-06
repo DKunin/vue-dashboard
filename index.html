@@ -19,13 +19,13 @@
     <script type="text/javascript" src="./scripts/dashCard.js"></script>
     <script type="text/javascript" src="./scripts/favIcon.js"></script>
     <script type="text/javascript" src="./scripts/tasksList.js"></script>
-    <script type="text/javascript" src="./scripts/rescueTime.js"></script>
     <script type="text/javascript" src="./scripts/tasksListReport.js"></script>
     <script type="text/javascript" src="./scripts/stashList.js"></script>
     <script type="text/javascript" src="./scripts/planList.js"></script>
     <script type="text/javascript" src="./scripts/dashboard.js"></script>
     <script type="text/javascript" src="./scripts/settings.js"></script>
     <script type="text/javascript" src="./scripts/mainApp.js"></script>
+    <script type="text/javascript" src="./scripts/changedFilesList.js"></script>
   </head>
   <body>
     <div id="app"></div>
@@ -43,8 +43,8 @@
             Vue.component('tasksList', tasksList);
             Vue.component('stashList', stashList);
             Vue.component('planList', planList);
-            Vue.component('rescueTime', rescueTime);
             Vue.component('dashboard', dashboard);
+            Vue.component('changedFilesList', changedFilesList);
             Vue.component('favIcon', favIcon);
 
             const options = JSON.parse(

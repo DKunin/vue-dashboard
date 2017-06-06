@@ -91,9 +91,8 @@
                                     }
                                 ]
                             }),
-                            createElement(root.rescueTime, {
+                            createElement(root.changedFilesList, {
                                 props: {
-                                    resqueKey: this.state.resqueApi,
                                     hideTime: true
                                 },
                                 directives: [
