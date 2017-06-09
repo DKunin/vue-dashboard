@@ -1,4 +1,5 @@
 (function(root) {
+
     function selectText(element) {
         var text = document.querySelector(element);
         var selection = document.getSelection();
@@ -13,11 +14,11 @@
     const template = `
         <dashCard :updateData="updateData" nopadding hideTime>
             <span class="refresh-button copy-button" @click.prevent="copy">{{copyStatus}}</span>
-            <div v-if="!onlySolved(list).length && !loading" class="fw1 tc v-mid pa5 o-30">
+            <div v-if="!list.length && !loading" class="fw1 tc v-mid pa5 o-30">
                 no data
             </div>
             <div v-if="list" class="search-list">
-                <article :class="articleClass(issue.fields.status.name + issue.fields.resolution.name)" v-for="issue in onlySolved(list)" >
+                <article :class="articleClass(issue.fields.status.name + issue.fields.resolution.name)" v-for="issue in list" >
                   - {{issue.fields.summary}} 
                     <a
                       class="link black hover-bg-silver"
@@ -50,24 +51,13 @@
                     }
                 ];
             },
-            onlySolved: function(issues) {
-                return issues.filter(singleItem => {
-                    return (
-                        (singleItem.fields.status.name === 'Resolved' ||
-                            singleItem.fields.status.name === 'Closed') &&
-                        !singleItem.fields.labels.includes(
-                            'techdebt-fe-reported'
-                        )
-                    );
-                });
-            },
             updateData: function() {
                 this.loading = true;
                 this.$http
                     .get(
                         this.$localDockerIp +
                             ':4747/api/search' +
-                            '?jql=labels = techdebt-fe AND updated >= startOfWeek() and (assignee in (ichizh,aaromanov,sutkin,rkhafiyatullin,dkunin,kvkryarov,svdmitrievskiy,tvkorosteleva) or reporter in (ichizh,aaromanov,sutkin,rkhafiyatullin,dkunin,kvkryarov,svdmitrievskiy,tvkorosteleva)) ORDER BY updated DESC'
+                            '?jql=labels = techdebt-fe AND updated >=startOfDay()  AND (assignee in (ichizh, aaromanov, sutkin, rkhafiyatullin, dkunin, kvkryarov, svdmitrievskiy, tvkorosteleva) OR reporter in (ichizh, aaromanov, sutkin, rkhafiyatullin, dkunin, kvkryarov, svdmitrievskiy, tvkorosteleva)) and labels not in (techdebt-fe-reported) and status in (Resolved, Closed) ORDER BY status DESC, updated DESC'
                     )
                     .then(
                         response => {
