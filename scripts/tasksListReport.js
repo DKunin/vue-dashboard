@@ -13,7 +13,17 @@
 
     const template = `
         <dashCard :updateData="updateData" nopadding hideTime>
-            <span class="refresh-button copy-button" @click.prevent="copy">{{copyStatus}}</span>
+            <span :class="'refresh-button copy-button ' + (copyStatus ? 'copy-button_copied' : '')" @click.prevent="copy">
+                <svg class="to-copy-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <rect x="9" y="2" width="13" height="13" rx="2" ry="2" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                    <path d="M9 9H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2v-5" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                </svg>
+                <svg class="copied-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 11.07V12a10 10 0 1 1-5.93-9.14"/>
+                    <polyline points="23 3 12 14 9 11"/>
+                </svg>
+
+            </span>
             <div v-if="!list.length && !loading" class="fw1 tc v-mid pa5 o-30">
                 no data
             </div>
@@ -35,7 +45,7 @@
         data: () => ({
             list: [],
             loading: false,
-            copyStatus: 'copy'
+            copyStatus: false
         }),
         methods: {
             articleClass: function(name) {
@@ -71,9 +81,9 @@
             },
             copy: function() {
                 selectText('.search-list');
-                this.copyStatus = 'copied';
+                this.copyStatus = true;
                 setTimeout(() => {
-                    this.copyStatus = 'copy';
+                    this.copyStatus = false;
                 }, 3000);
             }
         },

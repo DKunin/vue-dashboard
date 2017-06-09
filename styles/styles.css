@@ -158,12 +158,17 @@ label {
     background-color: aliceblue;
     border: 0;
     cursor: pointer;
-    opacity: .1;
-    position: absolute;
-    right: 0;
+    opacity: .2;
     top: 0;
+    position: sticky;
+    float: right;
     transition: opacity .3s linear;
-    z-index: 2;
+    z-index: 3;
+}
+
+.refresh-button svg {
+    width: 16px;
+    height: 16px;
 }
 
 .refresh-button:hover {
@@ -174,7 +179,7 @@ label {
     opacity: 1;
 }
 
-.refresh-button-updating > span {
+.refresh-button-updating > svg {
     animation: spin 1s infinite ease-in-out;
     display: inline-block;
 }
@@ -182,6 +187,22 @@ label {
 .copy-button {
     padding: 4px;
     right: 30px;
+}
+
+.copy-button .to-copy-icon {
+    display: inline-block;
+}
+
+.copy-button .copied-icon {
+    display: none;
+}
+
+.copy-button_copied .to-copy-icon {
+    display: none;
+}
+
+.copy-button_copied .copied-icon {
+    display: inline-block;
 }
 
 @keyframes spin {
