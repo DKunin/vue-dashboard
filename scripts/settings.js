@@ -14,14 +14,6 @@
                   <label class="db fw6 lh-copy f6" for="stashUserName">username for stash</label>
                   <input v-model="stashUserName" class="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="text" name="stashUserName"  id="stashUserName">
                 </div>
-                <div class="mt3">
-                  <label class="db fw6 lh-copy f6" for="resqueApi">resqueApi</label>
-                  <input v-model="resqueApi" class="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="text" name="resqueApi"  id="resqueApi">
-                </div>
-                <div class="mt3">
-                  <label class="db fw6 lh-copy f6" for="newsApi">newsApi</label>
-                  <input v-model="newsApi" class="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="text" name="newsApi"  id="newsApi">
-                </div>
               </fieldset>
               <div class="">
                 <input class="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" type="submit" value="Save">

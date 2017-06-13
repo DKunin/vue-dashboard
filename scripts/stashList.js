@@ -16,7 +16,9 @@
     const template = `
         <dashCard :updateData="updateData" :hideTime="true" :loading="loading">
             <div class="tc dark-red pt6" v-if="user === ''">No username</div>
-            <div v-if="list === null && !loading">No data</div>
+            <div v-if="!list.length && !loading" class="fw1 tc v-mid pa5 o-30">
+                no data
+            </div>
             <article
                 :class="articleClass(request)"
                 v-for="request in list">
