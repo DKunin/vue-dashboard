@@ -125,6 +125,11 @@ label {
     display: none;
 }
 
+.stash-list-reviewer-self {
+    border-left: 4px solid #137752;
+    padding-left: 4px;
+}
+
 .left-side-navigation {
     float: left;
 }

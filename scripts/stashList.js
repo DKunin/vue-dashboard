@@ -42,7 +42,7 @@
                         v-for="reviewer in request.reviewers"
                         v-bind:class="[{ 
                             'stash-list-reviewer-green': reviewer.approved,
-                            'black': !reviewer.approved 
+                            'stash-list-reviewer-self': reviewer.user.name === user
                         }, 'dib tc mb1 mr1 v-mid fw2']" :title="reviewer.user.name">{{reviewer.user.slug}}</span>
                 </div>
             </article>
