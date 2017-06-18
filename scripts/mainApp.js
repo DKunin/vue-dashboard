@@ -1,7 +1,7 @@
 (function(root) {
     const routes = [
-        { path: '/', redirect: '/dashboard' },
-        { path: '/dashboard', component: root.dashboard, name: 'dash' },
+        { path: '/', redirect: '/dashboard/0' },
+        { path: '/dashboard/:pageNumb', component: dashboard, name: 'dash' },
         { path: '/settings', component: settings, name: 'settings' }
     ];
 
@@ -13,7 +13,7 @@
             <nav class="left-side-navigation">
               <ul>
                 <li>
-                    <router-link class="left-side-navigation-link" to="/dashboard">
+                    <router-link class="left-side-navigation-link" to="/dashboard/0">
                         <svg height="48" viewBox="0 0 48 48" width="48" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h48v48H0z" fill="none"/><path d="M6 26h16V6H6v20zm0 16h16V30H6v12zm20 0h16V22H26v20zm0-36v12h16V6H26z"/></svg>
                     </router-link>
                 </li>
