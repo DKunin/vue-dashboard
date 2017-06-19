@@ -90,6 +90,7 @@ label
 
     height: 95%;
     margin: 0 5px;
+    justify-content: center;
 }
 
 .flex-section
