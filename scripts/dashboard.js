@@ -26,7 +26,7 @@
                             createElement(root.tasksList, {
                                 props: {
                                     search: this.$localDockerIp +
-                                        ':4747/api/search?jql=assignee%20=%20currentUser()%20AND%20resolution%20=%20Unresolved%20order%20by%20updated%20DESC'
+                                        ':4747/api/search?jql=' + escape('assignee = currentUser() AND resolution = Unresolved and (status != "Ready for merge") order by updated DESC')
                                 },
                                 directives: [
                                     {
