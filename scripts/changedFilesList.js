@@ -1,14 +1,19 @@
 (function(root) {
     const template = `
         <dashCard :updateData="updateData" :hideTime="hideTime">
-            <div v-if="!plans.length && !loading">
+            <div  class="pa2">
+                <span v-for="type in types" class="ph1">
+                    <button :class="'f6 lh-cop ' + (selectedTypes.includes(type) ? 'b': '')" @click='processToggleFilter(type)'>{{type}}</button>
+                </span>
+            </div>
+            <div v-if="!files.length && !loading">
                 <div class="fw1 tc v-mid pa5 o-30">
                     no data
                 </div>
             </div>
-            <div v-if="plans">
+            <div v-if="files">
                 <div v-if="loading" class="loader"></div>
-                <div v-for="file in plans" class="f6 lh-cop bb b--black-05 pv3">
+                <div v-for="file in filteredFiles" class="f6 lh-cop bb b--black-05 pv3">
                     <a @click="openFile(file)">{{file}}</a>
                 </div>
             </div>
@@ -17,8 +22,9 @@
 
     root.changedFilesList = {
         data: () => ({
-            plans: [],
-            loading: false
+            files: [],
+            loading: false,
+            selectedTypes: []
         }),
         props: {
             hideTime: {
@@ -26,12 +32,39 @@
                 default: false
             }
         },
+        computed: {
+            types() {
+                return [...new Set(this.files.map(singlePlan => {
+                    return singlePlan.split('.').pop();
+                }))];
+            },
+            filteredFiles() {
+                if (!this.selectedTypes.length) {
+                    return this.files;
+                }
+
+                return this.files.filter(singleFile => {
+                    return this.selectedTypes.some(singleType => {
+                       return singleFile.includes(singleType);
+                    })
+                })
+            }
+        },
         methods: {
             openFile(fileName) {
                 new Image().src = `${this.$localIp }:7288/openeditor?options='/Users/dikunin/Projects/avito/${fileName}'`;
             },
+            processToggleFilter(type) {
+                console.log(type);
+                if (this.selectedTypes.includes(type)) {
+                    this.selectedTypes = this.selectedTypes.filter(singleValue => singleValue !== type);
+                } else {
+                    this.selectedTypes = this.selectedTypes.concat([type]);   
+                }
+
+            },
             updateData() {
-                this.plans = [];
+                this.files = [];
                 this.loading = true;
                 this.$http
                     .get(
@@ -41,7 +74,7 @@
                     .then(
                         response => {
                             this.loading = false;
-                            this.plans = typeof response.body === 'string' ?
+                            this.files = typeof response.body === 'string' ?
                                 response.body.trim().split('\n').filter(Boolean) :
                                 null;
                         },
