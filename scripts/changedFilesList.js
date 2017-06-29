@@ -34,9 +34,13 @@
         },
         computed: {
             types() {
-                return [...new Set(this.files.map(singlePlan => {
-                    return singlePlan.split('.').pop();
-                }))];
+                return [
+                    ...new Set(
+                        this.files.map(singlePlan => {
+                            return singlePlan.split('.').pop();
+                        })
+                    )
+                ];
             },
             filteredFiles() {
                 if (!this.selectedTypes.length) {
@@ -45,23 +49,24 @@
 
                 return this.files.filter(singleFile => {
                     return this.selectedTypes.some(singleType => {
-                       return singleFile.includes(singleType);
-                    })
-                })
+                        return singleFile.includes(singleType);
+                    });
+                });
             }
         },
         methods: {
             openFile(fileName) {
-                new Image().src = `${this.$localIp }:7288/openeditor?options='/Users/dikunin/Projects/avito/${fileName}'`;
+                new Image().src = `${this.$localIp}:7288/openeditor?options='/Users/dikunin/Projects/avito/${fileName}'`;
             },
             processToggleFilter(type) {
-                console.log(type);
                 if (this.selectedTypes.includes(type)) {
-                    this.selectedTypes = this.selectedTypes.filter(singleValue => singleValue !== type);
-                } else {
-                    this.selectedTypes = this.selectedTypes.concat([type]);   
+                    this.selectedTypes = this.selectedTypes.filter(
+                        singleValue => singleValue !== type
+                    );
                 }
-
+                else {
+                    this.selectedTypes = this.selectedTypes.concat([ type ]);
+                }
             },
             updateData() {
                 this.files = [];
@@ -75,8 +80,10 @@
                         response => {
                             this.loading = false;
                             this.files = typeof response.body === 'string' ?
-                                response.body.trim().split('\n').filter(Boolean) :
-                                null;
+                                response.body
+                                    .trim()
+                                    .split('\n')
+                                    .filter(Boolean) : null;
                         },
                         () => {
                             this.loading = false;
