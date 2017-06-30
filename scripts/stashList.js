@@ -39,6 +39,7 @@
                 </div>
                 <div>
                     <span
+                        @click={approve(request)}
                         v-for="reviewer in request.reviewers"
                         v-bind:class="[{ 
                             'stash-list-reviewer-green': reviewer.approved,
@@ -84,6 +85,26 @@
                         )
                     }
                 ];
+            },
+            approve(obj) {
+                const repo = obj.fromRef.repository.name;
+                const pullReqId = obj.id;
+                const project = obj.fromRef.repository.project.key;
+
+                this.$http
+                    .post(
+                        `${this.$localDockerIp}:4848/api/approve?project=${project}&repo=${repo}&pullRequestId=${pullReqId}`
+                    )
+                    .then(
+                        response => {
+                            console.log(response);
+                            this.updateData(true);
+                        },
+                        () => {
+                            this.loading = false;
+                            this.list = [];
+                        }
+                    );
             },
             processTitle: function(title) {
                 const withoutNumber = title.replace(/^\w{4}-\d+\W/, '');
