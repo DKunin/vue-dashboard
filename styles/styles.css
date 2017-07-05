@@ -346,3 +346,10 @@ label
 .page-controls a:not(.current-page) {
     opacity: .2;
 }
+.approve-button {
+    border: none;
+    outline: none;
+    background: none;
+    float: left;
+    cursor: pointer;
+}
