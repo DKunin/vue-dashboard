@@ -96,7 +96,7 @@
                 ];
             },
             approve(obj) {
-                if (!window.confirm("Approve?")) { 
+                if (!window.confirm('Approve?')) {
                     return;
                 }
                 const repo = obj.fromRef.repository.name;
