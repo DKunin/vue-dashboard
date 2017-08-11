@@ -67,7 +67,7 @@
                     .get(
                         this.$localDockerIp +
                             ':4747/api/search' +
-                            '?jql=labels = techdebt-fe AND updated >= startOfWeek() AND (assignee in (ichizh, aaromanov, sutkin, rkhafiyatullin, dkunin, kvkryarov, svdmitrievskiy, tvkorosteleva, dakharin, daiogansen) OR reporter in (ichizh, aaromanov, sutkin, rkhafiyatullin, dkunin, kvkryarov, svdmitrievskiy, tvkorosteleva, dakharin, daiogansen)) AND labels not in (techdebt-fe-reported) ORDER BY status DESC, updated DESC'
+                            '?jql=labels = techdebt-fe AND updated >= startOfWeek() AND (assignee in (ichizh, aaromanov, sutkin, rkhafiyatullin, dkunin, kvkryarov, svdmitrievskiy, tvkorosteleva, dakharin, daiogansen) OR reporter in (ichizh, aaromanov, sutkin, rkhafiyatullin, dkunin, kvkryarov, svdmitrievskiy, tvkorosteleva, dakharin, daiogansen)) AND status not in (open) and labels not in (techdebt-fe-reported) ORDER BY status DESC, updated DESC'
                     )
                     .then(
                         response => {
