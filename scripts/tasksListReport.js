@@ -29,7 +29,8 @@
             </div>
             <div v-if="list" class="search-list">
                 <article :class="articleClass(issue.fields.status.name + (issue.fields.resolution ? issue.fields.resolution.name : ''))" v-for="issue in list" >
-                  - {{issue.fields.summary}} 
+                    ({{issue.fields.status.name}})
+                  - {{issue.fields.summary}}
                     <a
                       class="link black hover-bg-silver"
                       tabindex="0"
