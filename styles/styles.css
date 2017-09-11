@@ -352,3 +352,22 @@ label
     background: none;
     cursor: pointer;
 }
+.github-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 3px;
+}
+.github-issue {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.label {
+    border-radius: 3px;
+    padding: 2px;
+    font-size: 10px;
+    display: inline-block;
+}
+.label.bug {
+    color: white;
+}

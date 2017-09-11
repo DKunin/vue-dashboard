@@ -1,9 +1,7 @@
 (function(root) {
     const initialState = {
-        stashUrl: '',
-        stashUserName: '',
-        resqueApi: '',
-        newsApi: ''
+        githubToken: '',
+        stashUserName: ''
     };
     const template = `
         <main class="pa4 black-80">
@@ -13,6 +11,10 @@
                 <div class="mt3">
                   <label class="db fw6 lh-copy f6" for="stashUserName">username for stash</label>
                   <input v-model="stashUserName" class="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="text" name="stashUserName"  id="stashUserName">
+                </div>
+                <div class="mt3">
+                  <label class="db fw6 lh-copy f6" for="githubToken">github token</label>
+                  <input v-model="githubToken" class="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="text" name="githubToken" id="githubToken">
                 </div>
               </fieldset>
               <div class="">
@@ -28,30 +30,27 @@
         methods: {
             saveSettings: function(event) {
                 event.preventDefault();
-                const { stashUserName, newsApi, resqueApi } = this;
+                const { stashUserName, githubToken } = this;
+
                 localStorage.setItem(
                     'settings',
                     JSON.stringify({
                         stashUserName,
-                        resqueApi,
-                        newsApi
+                        githubToken
                     })
                 );
-
                 updateSettings({
                     stashUserName,
-                    newsApi,
-                    resqueApi
+                    githubToken
                 });
                 this.$router.push('/');
             }
         },
         mounted: function() {
-            const { stashUserName, newsApi, resqueApi } =
+            const { stashUserName, githubToken } =
                 JSON.parse(localStorage.getItem('settings')) || initialState;
             this.$set(this, 'stashUserName', stashUserName);
-            this.$set(this, 'resqueApi', resqueApi);
-            this.$set(this, 'newsApi', newsApi);
+            this.$set(this, 'githubToken', githubToken);
         }
     };
 })(this || (typeof window !== 'undefined' ? window : global));

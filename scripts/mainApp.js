@@ -24,7 +24,7 @@
                 </li>
               </ul>
             </nav>
-            <router-view :state="{ stashUserName }" />
+            <router-view :state="{ stashUserName, githubToken }" />
         </main>
     `;
 
@@ -35,7 +35,7 @@
         name: 'mainApp',
         data: () => ({
             stashUserName: '',
-            resqueApi: 'noKey'
+            githubToken: ''
         })
     };
 })(this || (typeof window !== 'undefined' ? window : global));

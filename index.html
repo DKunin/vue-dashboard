@@ -27,6 +27,7 @@
     <script type="text/javascript" src="./scripts/settings.js"></script>
     <script type="text/javascript" src="./scripts/mainApp.js"></script>
     <script type="text/javascript" src="./scripts/changedFilesList.js"></script>
+    <script type="text/javascript" src="./scripts/githubIssues.js"></script>
   </head>
   <body>
     <div id="app"></div>
@@ -46,6 +47,7 @@
             Vue.component('planList', planList);
             Vue.component('dashboard', dashboard);
             Vue.component('changedFilesList', changedFilesList);
+            Vue.component('githubIssues', githubIssues);
             Vue.component('favIcon', favIcon);
 
             const options = JSON.parse(
@@ -54,14 +56,14 @@
 
             const app = new Vue(mainApp);
 
-            updateSettings = function ({ stashUserName, resqueApi, newsApi }) {
+            updateSettings = function ({ stashUserName, githubToken }) {
                 Vue.set(app, 'stashUserName', stashUserName);
-                Vue.set(app, 'resqueApi', resqueApi);
-                Vue.set(app, 'newsApi', newsApi);
+                Vue.set(app, 'githubToken', githubToken);
+
             };
             updateSettings(options);
         });
     </script>
-    <script type="text/javascript" src="./service-worker-loader.js"></script>
+    <!-- <script type="text/javascript" src="./service-worker-loader.js"></script> -->
   </body>
 </html>
