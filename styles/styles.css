@@ -380,6 +380,13 @@ label
     justify-content: flex-start;
     align-items: center;
 }
+.github-issue-info 
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .label
 {
     font-size: 10px;

@@ -5,23 +5,23 @@
             <article class="w-100 bb b--black-05 pb2 mt2 github-issue" v-if="list" v-for="issue in list" :key="issue.id">
                 <img class="github-avatar" :src="issue.assignee.avatar_url" alt="" />
                 <div class="pl2">
-                    <div>
-                        <a class="link black" target="_blank" :href="issue.html_url">{{ issue.title }}</a>
+                    <div class="github-issue-info">
+                        <a class="github-issue-link link black" target="_blank" :href="issue.html_url">{{ issue.title }}</a>
+                        <svg class="github-issue-comments" v-if="issue.comments" height="24" version="1.2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M18 7c.542 0 1 .458 1 1v7c0 .542-.458 1-1 1H9.171L9 16.171V16H6c-.542 0-1-.458-1-1V8c0-.542.458-1 1-1h12m0-2H6C4.35 5 3 6.35 3 8v7c0 1.65 1.35 3 3 3h1v3l3-3h8c1.65 0 3-1.35 3-3V8c0-1.65-1.35-3-3-3z"/>
+                            <text
+                                x="50%"
+                                y="60%"
+                                text-anchor="middle"
+                                font-family="Helvetica"
+                                font-size="9">
+                                {{issue.comments}}
+                            </text>
+                        </svg>
                     </div>
                     <div v-for="label in issue.labels" :class="'label ' + label.name" :style="'background-color: #' + label.color">
                         {{label.name}}
                     </div>
                 </div>
-                <svg v-if="issue.comments" height="24" version="1.2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M18 7c.542 0 1 .458 1 1v7c0 .542-.458 1-1 1H9.171L9 16.171V16H6c-.542 0-1-.458-1-1V8c0-.542.458-1 1-1h12m0-2H6C4.35 5 3 6.35 3 8v7c0 1.65 1.35 3 3 3h1v3l3-3h8c1.65 0 3-1.35 3-3V8c0-1.65-1.35-3-3-3z"/>
-                    <text
-                        x="50%"
-                        y="60%"
-                        text-anchor="middle"
-                        font-family="Helvetica"
-                        font-size="9">
-                        {{issue.comments}}
-                    </text>
-                </svg>
             </article>
             <div v-if="loading" class="loader">Loader</div>
         </dashCard>
