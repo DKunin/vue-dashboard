@@ -1,0 +1,9 @@
+{
+  "name": "Vue Dashboard",
+  "short_name": "VD",
+  "icons": [],
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#bdc3c7",
+  "theme_color": "#7f8c8d"
+}
