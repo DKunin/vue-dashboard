@@ -90,6 +90,7 @@ label
 
     height: 95%;
     margin: 0 5px;
+
     justify-content: center;
 }
 
@@ -225,12 +226,15 @@ label
 
     float: right;
 
+    height: 0;
+
     cursor: pointer;
     transition: opacity .3s linear;
 
     opacity: .2;
     border: 0;
-    background-color: aliceblue;
+    outline: none;
+    background-color: transparent;
 }
 
 .refresh-button svg
@@ -326,48 +330,67 @@ label
     height: 50px;
 }
 
-.page-controls {
+.page-controls
+{
     position: absolute;
+    right: 0;
     bottom: 0;
     left: 0;
-    right: 0;
-    height: 5%;
+
     display: flex;
+
+    height: 5%;
+
     justify-content: center;
     align-items: center;
 }
-.page-controls a {
+.page-controls a
+{
     font-size: 30px;
+
     padding: 0 20px;
 }
-.page-controls a.link:focus {
+.page-controls a.link:focus
+{
     outline: none;
 }
-.page-controls a:not(.current-page) {
+.page-controls a:not(.current-page)
+{
     opacity: .2;
 }
-.approve-button {
+.approve-button
+{
+    cursor: pointer;
+
     border: none;
     outline: none;
     background: none;
-    cursor: pointer;
 }
-.github-avatar {
+.github-avatar
+{
     width: 30px;
     height: 30px;
+
     border-radius: 3px;
 }
-.github-issue {
+.github-issue
+{
     display: flex;
+
     justify-content: flex-start;
     align-items: center;
 }
-.label {
-    border-radius: 3px;
-    padding: 2px;
+.label
+{
     font-size: 10px;
+
     display: inline-block;
+
+    padding: 2px;
+
+    border-radius: 3px;
 }
-.label.bug {
+.label.bug
+{
     color: white;
 }
