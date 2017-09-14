@@ -38,9 +38,13 @@
                     .then(
                         response => {
                             this.loading = false;
-                            this.plans = typeof response.body === 'string' ?
-                                response.body.trim().split('\n').filter(Boolean) :
-                                null;
+                            this.plans =
+                                typeof response.body === 'string'
+                                    ? response.body
+                                          .trim()
+                                          .split('\n')
+                                          .filter(Boolean)
+                                    : null;
                         },
                         () => {
                             this.loading = false;

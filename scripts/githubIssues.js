@@ -33,12 +33,19 @@
             uniqueName: { type: String, default: 'githubIssues' }
         },
         data: () => ({
-            list: JSON.parse(localStorage.getItem(this.uniqueName || 'githubIssues')) || [],
+            list:
+                JSON.parse(
+                    localStorage.getItem(this.uniqueName || 'githubIssues')
+                ) || [],
             loading: false
         }),
         computed: {
             query() {
-                if (this.search && !this.search.includes('undefined') && !this.search.match(/token=$/)) {
+                if (
+                    this.search &&
+                    !this.search.includes('undefined') &&
+                    !this.search.match(/token=$/)
+                ) {
                     return this.search;
                 }
                 return null;

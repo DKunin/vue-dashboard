@@ -39,7 +39,9 @@
             }
         },
         data: () => ({
-            list: JSON.parse(localStorage.getItem(this.uniqueName || 'tasks')) || [],
+            list:
+                JSON.parse(localStorage.getItem(this.uniqueName || 'tasks')) ||
+                [],
             loading: false
         }),
         computed: {
@@ -52,20 +54,29 @@
         },
         methods: {
             processFocusUpdate(key) {
-                this.list = this.list.map(singleItem => {
-                    if (singleItem.key === key) {
-                        singleItem.focused = !singleItem.focused;
-                    }
+                this.list = this.list
+                    .map(singleItem => {
+                        if (singleItem.key === key) {
+                            singleItem.focused = !singleItem.focused;
+                        }
 
-                    return singleItem;
-                }).sort((a, b) => (a.focused === b.focused) ? 0 : a.focused ? -1 : 1);
-                localStorage.setItem(this.uniqueName, JSON.stringify(this.list));
+                        return singleItem;
+                    })
+                    .sort(
+                        (a, b) =>
+                            a.focused === b.focused ? 0 : a.focused ? -1 : 1
+                    );
+                localStorage.setItem(
+                    this.uniqueName,
+                    JSON.stringify(this.list)
+                );
             },
             articleClass(name) {
                 return [
                     'w-100 bb b--black-05 pb2 mt2',
                     {
-                        'o-30': name.toLowerCase().indexOf('review') !== -1 ||
+                        'o-30':
+                            name.toLowerCase().indexOf('review') !== -1 ||
                             name.toLowerCase().indexOf('master') !== -1
                     }
                 ];
@@ -82,12 +93,21 @@
                         this.loading = false;
                         this.list = response.body
                             .map(singleItem => {
-                                const found = this.list.find(singleKey => singleKey.key === singleItem.key);
+                                const found = this.list.find(
+                                    singleKey =>
+                                        singleKey.key === singleItem.key
+                                );
                                 if (found) {
                                     singleItem.focused = found.focused;
                                 }
                                 return singleItem;
-                            }).sort((a, b) => (a.focused === b.focused) ? 0 : a.focused ? -1 : 1);
+                            })
+                            .sort(
+                                (a, b) =>
+                                    a.focused === b.focused
+                                        ? 0
+                                        : a.focused ? -1 : 1
+                            );
                     },
                     () => {
                         this.loading = false;

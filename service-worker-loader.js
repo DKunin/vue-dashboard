@@ -14,6 +14,7 @@
     );
 
     window.addEventListener('load', function() {
+        return false;
         if (
             'serviceWorker' in navigator &&
             (window.location.protocol === 'https:' || isLocalhost)

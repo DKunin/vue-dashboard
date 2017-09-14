@@ -94,6 +94,14 @@ label
     justify-content: center;
 }
 
+@media (max-width: 400px)
+{
+    .flex-container
+    {
+        height: auto;
+    }
+}
+
 .flex-section
 {
     min-width: 33%;
@@ -380,9 +388,10 @@ label
     justify-content: flex-start;
     align-items: center;
 }
-.github-issue-info 
+.github-issue-info
 {
     display: flex;
+
     justify-content: space-between;
     align-items: center;
 }

@@ -56,16 +56,16 @@
         },
         methods: {
             openFile(fileName) {
-                new Image().src = `${this.$localIp}:7288/openeditor?options='/Users/dikunin/Projects/avito/${fileName}'`;
+                new Image().src = `${this
+                    .$localIp}:7288/openeditor?options='/Users/dikunin/Projects/avito/${fileName}'`;
             },
             processToggleFilter(type) {
                 if (this.selectedTypes.includes(type)) {
                     this.selectedTypes = this.selectedTypes.filter(
                         singleValue => singleValue !== type
                     );
-                }
-                else {
-                    this.selectedTypes = this.selectedTypes.concat([ type ]);
+                } else {
+                    this.selectedTypes = this.selectedTypes.concat([type]);
                 }
             },
             updateData() {
@@ -79,11 +79,13 @@
                     .then(
                         response => {
                             this.loading = false;
-                            this.files = typeof response.body === 'string' ?
-                                response.body
-                                    .trim()
-                                    .split('\n')
-                                    .filter(Boolean) : null;
+                            this.files =
+                                typeof response.body === 'string'
+                                    ? response.body
+                                          .trim()
+                                          .split('\n')
+                                          .filter(Boolean)
+                                    : null;
                         },
                         () => {
                             this.loading = false;

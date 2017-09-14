@@ -15,7 +15,6 @@
         }
     };
     root.visibilityUpdate = visibilityUpdate;
-
 })(this || (typeof window !== 'undefined' ? window : global));
 
 // export default visibilityUpdate;

@@ -105,7 +105,8 @@
 
                 this.$http
                     .post(
-                        `${this.$localDockerIp}:4848/api/approve?project=${project}&repo=${repo}&pullRequestId=${pullReqId}`
+                        `${this
+                            .$localDockerIp}:4848/api/approve?project=${project}&repo=${repo}&pullRequestId=${pullReqId}`
                     )
                     .then(
                         () => {

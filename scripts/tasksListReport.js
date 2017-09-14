@@ -1,5 +1,4 @@
 (function(root) {
-
     function selectText(element) {
         var text = document.querySelector(element);
         var selection = document.getSelection();
@@ -55,9 +54,10 @@
                     'dt w-100 bb b--black-05 pb2 mt2',
                     'jira-task-item',
                     {
-                        'jira-task-item-fixed': lowerName.indexOf('fixed') !==
-                            -1,
-                        'o-30': lowerName.indexOf('review') !== -1 ||
+                        'jira-task-item-fixed':
+                            lowerName.indexOf('fixed') !== -1,
+                        'o-30':
+                            lowerName.indexOf('review') !== -1 ||
                             lowerName.indexOf('master') !== -1
                     }
                 ];

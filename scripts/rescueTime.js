@@ -44,7 +44,8 @@
         methods: {
             formatToday() {
                 const today = new Date();
-                return `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
+                return `${today.getFullYear()}-${today.getMonth() +
+                    1}-${today.getDate()}`;
             },
             formatTime(secNum) {
                 let hours = Math.floor(secNum / 3600);
@@ -77,7 +78,8 @@
                 this.loading = true;
                 this.$http
                     .get(
-                        `https://allow-any-origin.appspot.com/https://www.rescuetime.com/anapi/data?&key=${this.resqueKey}&restrict_kind=efficiency&restrict_begin=${this.formatToday()}&restrict_end=${this.formatToday()}&format=json`
+                        `https://allow-any-origin.appspot.com/https://www.rescuetime.com/anapi/data?&key=${this
+                            .resqueKey}&restrict_kind=efficiency&restrict_begin=${this.formatToday()}&restrict_end=${this.formatToday()}&format=json`
                     )
                     .then(response => response.json())
                     .then(
@@ -94,7 +96,7 @@
                                             singleItem[3]
                                         )]: this.formatTime(singleItem[1]),
                                         [this.processName(singleItem[3]) +
-                                            '_percent']: this.timeToPercent(
+                                        '_percent']: this.timeToPercent(
                                             singleItem[1],
                                             max
                                         )
