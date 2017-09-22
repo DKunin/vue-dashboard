@@ -23,6 +23,10 @@
                         {
                             class: {
                                 'flex-section': true
+                            },
+                            key: 'personal-tasks',
+                            data: {
+                                name: 'personal-tasks'
                             }
                         },
                         [
@@ -127,6 +131,10 @@
                         {
                             class: {
                                 'flex-section': true
+                            },
+                            key: 'mobile-releases',
+                            data: {
+                                name: 'mobile-releases'
                             }
                         },
                         [
@@ -138,6 +146,22 @@
                                         ':4747/api/search?jql=' +
                                         escape(
                                             'labels = 19.0 AND component = "Trust&Safety" AND project = "Avito iOS" ORDER BY priority DESC, issuetype DESC'
+                                        )
+                                },
+                                directives: [
+                                    {
+                                        name: 'visibilityUpdate'
+                                    }
+                                ]
+                            }),
+                            createElement(root.tasksList, {
+                                props: {
+                                    uniqueName: 'Android 19',
+                                    search:
+                                        this.$localDockerIp +
+                                        ':4747/api/search?jql=' +
+                                        escape(
+                                            'labels = 19.0 AND component = "Trust&Safety" AND project = "Avito Android" ORDER BY issuetype DESC'
                                         )
                                 },
                                 directives: [
