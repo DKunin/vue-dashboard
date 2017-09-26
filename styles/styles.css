@@ -320,6 +320,7 @@ label {
     border-color: #ffd351;
     color: #594300;
 }
+.pull-request-ticket-status-ready-for-merge,
 .pull-request-ticket-status-resolved {
     background-color: #14892c;
     border-color: #14892c;

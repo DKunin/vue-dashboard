@@ -41,7 +41,7 @@
                     :title="status.fields.status.description"
                     :href="status.url"
                     target="_blank"
-                    v-bind:class="['link black fw4','pull-request-ticket-status-' + status.fields.status.name.toLowerCase().replace(' ','-')]"
+                    v-bind:class="['link black fw4','pull-request-ticket-status-' + status.fields.status.name.toLowerCase().replace(/ /g,'-')]"
                     >
                         {{ status.key }} : {{ status.fields.status.name }}
                 </a>
