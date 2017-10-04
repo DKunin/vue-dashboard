@@ -1,37 +1,37 @@
 const template = `
-        <dashCard :updateData="updateData" :hideTime="true" :loading="loading" :customClass="panel">
-            <div v-if="!list.length && !loading" class="tc v-mid pa5 o-30">No data</div>
-            <div v-if="displayName">{{uniqueName}}</div>
-            <div v-if="displayName">
-                <progress :value="donePercent()" max="100">{{donePercent()}} %</progress>
+    <dashCard :updateData="updateData" :hideTime="true" :loading="loading" :customClass="panel">
+        <div v-if="!list.length && !loading" class="tc v-mid pa5 o-30">No data</div>
+        <div v-if="displayName">{{uniqueName}}</div>
+        <div v-if="displayName">
+            <progress :value="donePercent()" max="100">{{donePercent()}} %</progress>
+        </div>
+        <article v-if="list" :class="articleClass(issue.fields.status.name)" v-for="issue in list" >
+            <div class="fr mw1 dib">
+                <focusIcon :size="20" :state="issue.focused" :uniqueKey="issue.key" :handleChange="processFocusUpdate"/>
             </div>
-            <article v-if="list" :class="articleClass(issue.fields.status.name)" v-for="issue in list" >
-                <div class="fr mw1 dib">
-                    <focusIcon :size="20" :state="issue.focused" :uniqueKey="issue.key" :handleChange="processFocusUpdate"/>
-                </div>
-                <img alt="issue-type" class="fr mw1 dib" :src="issue.fields.issuetype.iconUrl" >
-                <img alt="priority" class="fr mw1 dib" :src="issue.fields.priority.iconUrl" >
-                <a
-                  class="link black hover-bg-silver"
-                  :href='"https://jr.avito.ru/browse/" + issue.key'
-                  target='_blank'>{{issue.key}}: {{issue.fields.summary}}
-                </a>
-                <div>
-                    <small :class="'db pv1 pull-request-ticket-status-' + issue.fields.status.name.toLowerCase().replace().replace(/ /g,'-')" >
-                        {{issue.fields.status.name}}
-                    </small>
-                </div>
-                  <a
-                    v-on:click="clickBranch(issue.fields.customfield_10010)"
-                    class="link black hover-bg-silver db" >{{issue.fields.customfield_10010}}
-                  </a>
-                <div class="dn">
-                  {{issue.fields.description}}
-                </div>
-            </article>
-            <div v-if="loading" class="loader">Loader</div>
-        </dashCard>
-    `;
+            <img alt="issue-type" class="fr mw1 dib" :src="issue.fields.issuetype.iconUrl" >
+            <img alt="priority" class="fr mw1 dib" :src="issue.fields.priority.iconUrl" >
+            <a
+              class="link black hover-bg-silver"
+              :href='"https://jr.avito.ru/browse/" + issue.key'
+              target='_blank'>{{issue.key}}: {{issue.fields.summary}}
+            </a>
+            <div>
+                <small :class="'db pv1 pull-request-ticket-status-' + issue.fields.status.name.toLowerCase().replace().replace(/ /g,'-')" >
+                    {{issue.fields.status.name}}
+                </small>
+            </div>
+              <a
+                v-on:click="clickBranch(issue.fields.customfield_10010)"
+                class="link black hover-bg-silver db" >{{issue.fields.customfield_10010}}
+              </a>
+            <div class="dn">
+              {{issue.fields.description}}
+            </div>
+        </article>
+        <div v-if="loading" class="loader">Loader</div>
+    </dashCard>
+`;
 
 const tasksList = {
     props: {

@@ -8,7 +8,8 @@ import dashboard from './dashboard.js';
 import favIcon from './favIcon.js';
 import githubIssues from './githubIssues.js';
 import singlePr from './singlePr.js';
-import mainApp from './mainApp.js';
+import focusIcon from './focusIcon.js';
+import app from './app.js';
 
 let updateSettings;
 
@@ -32,10 +33,11 @@ Vue.component('favIcon', favIcon);
 
 const options = JSON.parse(localStorage.getItem('settings') || '{}');
 
-const app = new Vue(mainApp);
+const appInstance = new Vue(app);
 
 updateSettings = function({ stashUserName }) {
-    Vue.set(app, 'stashUserName', stashUserName);
+    Vue.set(appInstance, 'stashUserName', stashUserName);
 };
 
 updateSettings(options);
+export default null;
