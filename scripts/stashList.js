@@ -19,7 +19,7 @@
             <div v-if="!list.length && !loading" class="fw1 tc v-mid pa5 o-30">
                 no data
             </div>
-            <singlePr v-for="request in list" :request="request" :user="user" :updateData="updateData"/>
+            <singlePr v-for="request in list" :request="request" :user="user" :updateData="updateData" />
             <div v-if="loading" class="loader"></div>
         </dashCard>
     `;

@@ -141,6 +141,8 @@
                             createElement(root.tasksList, {
                                 props: {
                                     uniqueName: 'iOs 19',
+                                    panel: 'dash-panel-full',
+                                    displayName: true,
                                     search:
                                         this.$localDockerIp +
                                         ':4747/api/search?jql=' +
@@ -153,10 +155,26 @@
                                         name: 'visibilityUpdate'
                                     }
                                 ]
-                            }),
+                            })
+                        ]
+                    ),
+                    createElement(
+                        'section',
+                        {
+                            class: {
+                                'flex-section': true
+                            },
+                            key: 'mobile-releases',
+                            data: {
+                                name: 'mobile-releases'
+                            }
+                        },
+                        [
                             createElement(root.tasksList, {
                                 props: {
                                     uniqueName: 'Android 19',
+                                    panel: 'dash-panel-full',
+                                    displayName: true,
                                     search:
                                         this.$localDockerIp +
                                         ':4747/api/search?jql=' +
@@ -189,15 +207,6 @@
                                 ]
                             })
                         ]
-                    ),
-                    createElement(
-                        'section',
-                        {
-                            class: {
-                                'flex-section': true
-                            }
-                        },
-                        []
                     )
                 ];
             }

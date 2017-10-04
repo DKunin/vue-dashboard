@@ -36,7 +36,7 @@
                 </span>
             </div>
             <div>
-                <a
+                <small><a
                     v-for="status in ticketStatuses"
                     :title="status.fields.status.description"
                     :href="status.url"
@@ -45,6 +45,7 @@
                     >
                         {{ status.key }} : {{ status.fields.status.name }}
                 </a>
+                </small>
             </div>
             </article>
     `;
@@ -83,6 +84,7 @@
                     .then(
                         () => {
                             this.updateData(true);
+                            this.updateStatus(this.request);
                         },
                         () => {
                         }
@@ -100,8 +102,6 @@
                     .then(
                         (result) => {
                             this.ticketStatuses = result.body.statuses;
-
-                            console.log(result);
                         },
                         () => {
                         }

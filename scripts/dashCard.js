@@ -24,6 +24,10 @@
                 type: Boolean,
                 default: false
             },
+            customClass: {
+                type: String,
+                default: ''
+            },
             hideTime: {
                 type: Boolean,
                 default: false
@@ -51,6 +55,9 @@
                 }
                 if (this.half) {
                     basic.push('dash-panel-half');
+                }
+                if (this.customClass) {
+                    basic.push(this.customClass);
                 }
                 return basic.join(' ');
             }

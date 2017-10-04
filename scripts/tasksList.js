@@ -1,7 +1,11 @@
 (function(root) {
     const template = `
-        <dashCard :updateData="updateData" :hideTime="true" :loading="loading">
+        <dashCard :updateData="updateData" :hideTime="true" :loading="loading" :customClass="panel">
             <div v-if="!list.length && !loading" class="tc v-mid pa5 o-30">No data</div>
+            <div v-if="displayName">{{uniqueName}}</div>
+            <div v-if="displayName">
+                <progress :value="donePercent()" max="100">{{donePercent()}} %</progress>
+            </div>
             <article v-if="list" :class="articleClass(issue.fields.status.name)" v-for="issue in list" >
                 <div class="fr mw1 dib">
                     <focusIcon :size="20" :state="issue.focused" :uniqueKey="issue.key" :handleChange="processFocusUpdate"/>
@@ -13,7 +17,11 @@
                   :href='"https://jr.avito.ru/browse/" + issue.key'
                   target='_blank'>{{issue.key}}: {{issue.fields.summary}}
                 </a>
-                <small class="db pv1">{{issue.fields.status.name}}</small>
+                <div>
+                    <small :class="'db pv1 pull-request-ticket-status-' + issue.fields.status.name.toLowerCase().replace().replace(/ /g,'-')" >
+                        {{issue.fields.status.name}}
+                    </small>
+                </div>
                   <a
                     v-on:click="clickBranch(issue.fields.customfield_10010)"
                     class="link black hover-bg-silver db" >{{issue.fields.customfield_10010}}
@@ -30,6 +38,8 @@
         props: {
             search: { type: String, default: '' },
             uniqueName: { type: String, default: 'tasks' },
+            displayName: { type: Boolean, default: false },
+            panel: { type: String, default: '' },
             clickBranch: {
                 type: Function,
                 default: branchNumber => {
@@ -53,6 +63,15 @@
             }
         },
         methods: {
+            computeDone(list) {
+                return list.filter(singleIssue => {
+                    return ['Resolved', 'Closed'].includes(singleIssue.fields.status.name)
+                }).length
+            },
+            donePercent() {
+                const number = (this.computeDone(this.list) * 100 / this.list.length)
+                return Number.isNaN(number) ? 0 : Math.ceil(number);
+            },
             processFocusUpdate(key) {
                 this.list = this.list
                     .map(singleItem => {
