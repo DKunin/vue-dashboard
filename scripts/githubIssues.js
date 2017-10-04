@@ -1,5 +1,4 @@
-(function(root) {
-    const template = `
+const template = `
         <dashCard :updateData="updateData" :hideTime="true" :loading="loading">
             <div v-if="!list.length && !loading" class="tc v-mid pa5 o-30">No data</div>
             <article class="w-100 bb b--black-05 pb2 mt2 github-issue" v-if="list" v-for="issue in list" :key="issue.id">
@@ -30,50 +29,52 @@
         </dashCard>
     `;
 
-    root.githubIssues = {
-        props: {
-            search: { type: String, default: '' },
-            uniqueName: { type: String, default: 'githubIssues' }
-        },
-        data: () => ({
+const githubIssues = {
+    props: {
+        search: { type: String, default: '' },
+        uniqueName: { type: String, default: 'githubIssues' }
+    },
+    data() {
+        return {
             list:
                 JSON.parse(
                     localStorage.getItem(this.uniqueName || 'githubIssues')
                 ) || [],
             loading: false
-        }),
-        computed: {
-            query() {
-                if (
-                    this.search &&
-                    !this.search.includes('undefined') &&
-                    !this.search.match(/token=$/)
-                ) {
-                    return this.search;
-                }
-                return null;
+        };
+    },
+    computed: {
+        query() {
+            if (
+                this.search &&
+                !this.search.includes('undefined') &&
+                !this.search.match(/token=$/)
+            ) {
+                return this.search;
             }
-        },
-        methods: {
-            updateData() {
-                if (!this.query) {
-                    return setTimeout(this.updateData, 500);
-                }
-
-                this.loading = true;
-
-                this.$http.get(this.query).then(
-                    response => {
-                        this.loading = false;
-                        this.list = response.body;
-                    },
-                    () => {
-                        this.loading = false;
-                        this.list = [];
-                    }
-                );
+            return null;
+        }
+    },
+    methods: {
+        updateData() {
+            if (!this.query) {
+                return setTimeout(this.updateData, 500);
             }
-        },
-        template
-    };
-})(this || (typeof window !== 'undefined' ? window : global));
+
+            this.loading = true;
+
+            this.$http.get(this.query).then(
+                response => {
+                    this.loading = false;
+                    this.list = response.body;
+                },
+                () => {
+                    this.loading = false;
+                    this.list = [];
+                }
+            );
+        }
+    },
+    template
+};
+export default githubIssues;

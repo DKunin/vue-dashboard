@@ -42,13 +42,14 @@ self.oninstall = function(e) {
             .open(CACHE_NAME)
             .then(function(cache) {
                 console.log('[serviceWorker]: Cache All'); // eslint-disable-line no-console
-                console.log('cache', urlsToCache);
+                console.log('cache', urlsToCache); // eslint-disable-line no-console
                 return cache.addAll(urlsToCache);
             })
             .then(function() {
-                console.log( // eslint-disable-line no-console
+                console.log(
+                    // eslint-disable-line no-console
                     '[serviceWorker]: Intalled And Skip Waiting on Install'
-                ); 
+                );
                 return self.skipWaiting();
             })
     );
@@ -83,7 +84,7 @@ self.onfetch = function(e) {
 self.onactivate = function(e) {
     console.log('[serviceWorker]: Actived'); // eslint-disable-line no-console
 
-    var whiteList = [ CACHE_NAME ];
+    var whiteList = [CACHE_NAME];
 
     e.waitUntil(
         caches

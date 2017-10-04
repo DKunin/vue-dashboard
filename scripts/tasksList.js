@@ -1,5 +1,4 @@
-(function(root) {
-    const template = `
+const template = `
         <dashCard :updateData="updateData" :hideTime="true" :loading="loading" :customClass="panel">
             <div v-if="!list.length && !loading" class="tc v-mid pa5 o-30">No data</div>
             <div v-if="displayName">{{uniqueName}}</div>
@@ -34,107 +33,105 @@
         </dashCard>
     `;
 
-    root.tasksList = {
-        props: {
-            search: { type: String, default: '' },
-            uniqueName: { type: String, default: 'tasks' },
-            displayName: { type: Boolean, default: false },
-            panel: { type: String, default: '' },
-            clickBranch: {
-                type: Function,
-                default: branchNumber => {
-                    // eslint-disable-next-line
-                    console.log(branchNumber);
-                }
+const tasksList = {
+    props: {
+        search: { type: String, default: '' },
+        uniqueName: { type: String, default: 'tasks' },
+        displayName: { type: Boolean, default: false },
+        panel: { type: String, default: '' },
+        clickBranch: {
+            type: Function,
+            default: branchNumber => {
+                // eslint-disable-next-line
+                console.log(branchNumber);
             }
-        },
-        data: () => ({
+        }
+    },
+    data() {
+        return {
             list:
                 JSON.parse(localStorage.getItem(this.uniqueName || 'tasks')) ||
                 [],
             loading: false
-        }),
-        computed: {
-            query() {
-                if (this.search && !this.search.includes('undefined')) {
-                    return this.search;
-                }
-                return null;
+        };
+    },
+    computed: {
+        query() {
+            if (this.search && !this.search.includes('undefined')) {
+                return this.search;
             }
-        },
-        methods: {
-            computeDone(list) {
-                return list.filter(singleIssue => {
-                    return ['Resolved', 'Closed'].includes(singleIssue.fields.status.name)
-                }).length
-            },
-            donePercent() {
-                const number = (this.computeDone(this.list) * 100 / this.list.length)
-                return Number.isNaN(number) ? 0 : Math.ceil(number);
-            },
-            processFocusUpdate(key) {
-                this.list = this.list
-                    .map(singleItem => {
-                        if (singleItem.key === key) {
-                            singleItem.focused = !singleItem.focused;
-                        }
-
-                        return singleItem;
-                    })
-                    .sort(
-                        (a, b) =>
-                            a.focused === b.focused ? 0 : a.focused ? -1 : 1
-                    );
-                localStorage.setItem(
-                    this.uniqueName,
-                    JSON.stringify(this.list)
+            return null;
+        }
+    },
+    methods: {
+        computeDone(list) {
+            return list.filter(singleIssue => {
+                return ['Resolved', 'Closed'].includes(
+                    singleIssue.fields.status.name
                 );
-            },
-            articleClass(name) {
-                return [
-                    'w-100 bb b--black-05 pb2 mt2',
-                    {
-                        'o-30':
-                            name.toLowerCase().indexOf('review') !== -1 ||
-                            name.toLowerCase().indexOf('master') !== -1
+            }).length;
+        },
+        donePercent() {
+            const number = this.computeDone(this.list) * 100 / this.list.length;
+            return Number.isNaN(number) ? 0 : Math.ceil(number);
+        },
+        processFocusUpdate(key) {
+            this.list = this.list
+                .map(singleItem => {
+                    if (singleItem.key === key) {
+                        singleItem.focused = !singleItem.focused;
                     }
-                ];
-            },
-            updateData() {
-                if (!this.query) {
-                    return setTimeout(this.updateData, 500);
+
+                    return singleItem;
+                })
+                .sort(
+                    (a, b) => (a.focused === b.focused ? 0 : a.focused ? -1 : 1)
+                );
+            localStorage.setItem(this.uniqueName, JSON.stringify(this.list));
+        },
+        articleClass(name) {
+            return [
+                'w-100 bb b--black-05 pb2 mt2',
+                {
+                    'o-30':
+                        name.toLowerCase().indexOf('review') !== -1 ||
+                        name.toLowerCase().indexOf('master') !== -1
                 }
+            ];
+        },
+        updateData() {
+            if (!this.query) {
+                return setTimeout(this.updateData, 500);
+            }
 
-                this.loading = true;
+            this.loading = true;
 
-                this.$http.get(this.query).then(
-                    response => {
-                        this.loading = false;
-                        this.list = response.body
-                            .map(singleItem => {
-                                const found = this.list.find(
-                                    singleKey =>
-                                        singleKey.key === singleItem.key
-                                );
-                                if (found) {
-                                    singleItem.focused = found.focused;
-                                }
-                                return singleItem;
-                            })
-                            .sort(
-                                (a, b) =>
-                                    a.focused === b.focused
-                                        ? 0
-                                        : a.focused ? -1 : 1
+            this.$http.get(this.query).then(
+                response => {
+                    this.loading = false;
+                    this.list = response.body
+                        .map(singleItem => {
+                            const found = this.list.find(
+                                singleKey => singleKey.key === singleItem.key
                             );
-                    },
-                    () => {
-                        this.loading = false;
-                        this.list = [];
-                    }
-                );
-            }
-        },
-        template
-    };
-})(this || (typeof window !== 'undefined' ? window : global));
+                            if (found) {
+                                singleItem.focused = found.focused;
+                            }
+                            return singleItem;
+                        })
+                        .sort(
+                            (a, b) =>
+                                a.focused === b.focused ? 0 : a.focused ? -1 : 1
+                        );
+                },
+                () => {
+                    this.loading = false;
+                    this.list = [];
+                }
+            );
+        }
+    },
+    template
+};
+
+export default tasksList;

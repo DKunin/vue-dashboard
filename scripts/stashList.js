@@ -1,4 +1,3 @@
-(function(root) {
     function mineWeight(bool) {
         return bool ? 1 : 0;
     }
@@ -24,7 +23,7 @@
         </dashCard>
     `;
 
-    root.stashList = {
+    const stashList = {
         name: 'stashList',
         props: {
             user: {
@@ -81,4 +80,5 @@
         },
         template
     };
-})(this || (typeof window !== 'undefined' ? window : global));
+
+export default stashList;

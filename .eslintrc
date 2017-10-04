@@ -153,6 +153,10 @@
         "node": true,
         "worker": true
     },
+    "parserOptions": {
+        "ecmaVersion": 7,
+        "sourceType": "module"
+    },
     "ecmaFeatures": {
         "arrowFunctions": true,
         "binaryLiterals": true,

@@ -1,5 +1,4 @@
-(function(root) {
-    const template = `
+const template = `
         <dashCard :updateData="updateData" :hideTime="hideTime">
             <div  class="pa2">
                 <span v-for="type in types" class="ph1">
@@ -20,79 +19,82 @@
         </dashCard>
     `;
 
-    root.changedFilesList = {
-        data: () => ({
+const changedFilesList = {
+    data() {
+        return {
             files: [],
             loading: false,
             selectedTypes: []
-        }),
-        props: {
-            hideTime: {
-                type: Boolean,
-                default: false
-            }
+        };
+    },
+    props: {
+        hideTime: {
+            type: Boolean,
+            default: false
+        }
+    },
+    computed: {
+        types() {
+            return [
+                ...new Set(
+                    this.files.map(singlePlan => {
+                        return singlePlan.split('.').pop();
+                    })
+                )
+            ];
         },
-        computed: {
-            types() {
-                return [
-                    ...new Set(
-                        this.files.map(singlePlan => {
-                            return singlePlan.split('.').pop();
-                        })
-                    )
-                ];
-            },
-            filteredFiles() {
-                if (!this.selectedTypes.length) {
-                    return this.files;
-                }
+        filteredFiles() {
+            if (!this.selectedTypes.length) {
+                return this.files;
+            }
 
-                return this.files.filter(singleFile => {
-                    return this.selectedTypes.some(singleType => {
-                        return singleFile.includes(singleType);
-                    });
+            return this.files.filter(singleFile => {
+                return this.selectedTypes.some(singleType => {
+                    return singleFile.includes(singleType);
                 });
+            });
+        }
+    },
+    methods: {
+        openFile(fileName) {
+            new Image().src = `${this
+                .$localIp}:7288/openeditor?options='/Users/dikunin/Projects/avito/${fileName}'`;
+        },
+        processToggleFilter(type) {
+            if (this.selectedTypes.includes(type)) {
+                this.selectedTypes = this.selectedTypes.filter(
+                    singleValue => singleValue !== type
+                );
+            } else {
+                this.selectedTypes = this.selectedTypes.concat([type]);
             }
         },
-        methods: {
-            openFile(fileName) {
-                new Image().src = `${this
-                    .$localIp}:7288/openeditor?options='/Users/dikunin/Projects/avito/${fileName}'`;
-            },
-            processToggleFilter(type) {
-                if (this.selectedTypes.includes(type)) {
-                    this.selectedTypes = this.selectedTypes.filter(
-                        singleValue => singleValue !== type
-                    );
-                } else {
-                    this.selectedTypes = this.selectedTypes.concat([type]);
-                }
-            },
-            updateData() {
-                this.files = [];
-                this.loading = true;
-                this.$http
-                    .get(
-                        this.$localIp +
-                            ':4949/command/_Users_dikunin_Projects_work-calendar-exchange_changed-files'
-                    )
-                    .then(
-                        response => {
-                            this.loading = false;
-                            this.files =
-                                typeof response.body === 'string'
-                                    ? response.body
-                                          .trim()
-                                          .split('\n')
-                                          .filter(Boolean)
-                                    : null;
-                        },
-                        () => {
-                            this.loading = false;
-                        }
-                    );
-            }
-        },
-        template
-    };
-})(this || (typeof window !== 'undefined' ? window : global));
+        updateData() {
+            this.files = [];
+            this.loading = true;
+            this.$http
+                .get(
+                    this.$localIp +
+                        ':4949/command/_Users_dikunin_Projects_work-calendar-exchange_changed-files'
+                )
+                .then(
+                    response => {
+                        this.loading = false;
+                        this.files =
+                            typeof response.body === 'string'
+                                ? response.body
+                                      .trim()
+                                      .split('\n')
+                                      .filter(Boolean)
+                                : null;
+                    },
+                    () => {
+                        this.loading = false;
+                    }
+                );
+        }
+    },
+    template
+};
+
+export default changedFilesList;

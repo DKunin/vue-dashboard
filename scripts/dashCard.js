@@ -1,4 +1,3 @@
-(function(root) {
     const template = `
         <div :class="computedClass">
             <button :class="'refresh-button ' + (loading ? 'refresh-button refresh-button-updating': '')" v-on:click.prevent="forceUpdate">
@@ -14,7 +13,7 @@
         </div>
     `;
 
-    root.dashCard = {
+    const dashCard = {
         props: {
             updateData: {
                 type: Function,
@@ -67,4 +66,5 @@
         }),
         template
     };
-})(this || (typeof window !== 'undefined' ? window : global));
+
+export default dashCard;

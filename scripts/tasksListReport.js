@@ -1,16 +1,15 @@
-(function(root) {
-    function selectText(element) {
-        var text = document.querySelector(element);
-        var selection = document.getSelection();
-        var range = document.createRange();
-        range.selectNode(text);
-        selection.removeAllRanges();
-        selection.addRange(range);
-        document.execCommand('copy');
-        selection.removeAllRanges();
-    }
+function selectText(element) {
+    var text = document.querySelector(element);
+    var selection = document.getSelection();
+    var range = document.createRange();
+    range.selectNode(text);
+    selection.removeAllRanges();
+    selection.addRange(range);
+    document.execCommand('copy');
+    selection.removeAllRanges();
+}
 
-    const template = `
+const template = `
         <dashCard :updateData="updateData" nopadding hideTime>
             <span :class="'refresh-button copy-button ' + (copyStatus ? 'copy-button_copied' : '')" @click.prevent="copy">
                 <svg class="to-copy-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -41,56 +40,56 @@
         </dashCard>
     `;
 
-    root.tasksListReport = {
-        data: () => ({
-            list: [],
-            loading: false,
-            copyStatus: false
-        }),
-        methods: {
-            articleClass: function(name) {
-                let lowerName = name.toLowerCase();
-                return [
-                    'dt w-100 bb b--black-05 pb2 mt2',
-                    'jira-task-item',
-                    {
-                        'jira-task-item-fixed':
-                            lowerName.indexOf('fixed') !== -1,
-                        'o-30':
-                            lowerName.indexOf('review') !== -1 ||
-                            lowerName.indexOf('master') !== -1
+const tasksListReport = {
+    data: () => ({
+        list: [],
+        loading: false,
+        copyStatus: false
+    }),
+    methods: {
+        articleClass: function(name) {
+            let lowerName = name.toLowerCase();
+            return [
+                'dt w-100 bb b--black-05 pb2 mt2',
+                'jira-task-item',
+                {
+                    'jira-task-item-fixed': lowerName.indexOf('fixed') !== -1,
+                    'o-30':
+                        lowerName.indexOf('review') !== -1 ||
+                        lowerName.indexOf('master') !== -1
+                }
+            ];
+        },
+        updateData: function() {
+            this.loading = true;
+            this.$http
+                .get(
+                    this.$localDockerIp +
+                        ':4747/api/search' +
+                        '?jql=labels = techdebt-fe AND (updated >= startOfWeek() AND resolved >= startOfWeek()) AND (assignee in (ichizh, aaromanov, sutkin, rkhafiyatullin, dkunin, kvkryarov, svdmitrievskiy, tvkorosteleva, dakharin, daiogansen) OR reporter in (ichizh, aaromanov, sutkin, rkhafiyatullin, dkunin, kvkryarov, svdmitrievskiy, tvkorosteleva, dakharin, daiogansen)) AND status not in (open) and labels not in (techdebt-fe-reported) ORDER BY status DESC, updated DESC'
+                )
+                .then(
+                    response => {
+                        this.loading = false;
+                        this.list = response.body;
+                    },
+                    () => {
+                        this.loading = false;
                     }
-                ];
-            },
-            updateData: function() {
-                this.loading = true;
-                this.$http
-                    .get(
-                        this.$localDockerIp +
-                            ':4747/api/search' +
-                            '?jql=labels = techdebt-fe AND (updated >= startOfWeek() AND resolved >= startOfWeek()) AND (assignee in (ichizh, aaromanov, sutkin, rkhafiyatullin, dkunin, kvkryarov, svdmitrievskiy, tvkorosteleva, dakharin, daiogansen) OR reporter in (ichizh, aaromanov, sutkin, rkhafiyatullin, dkunin, kvkryarov, svdmitrievskiy, tvkorosteleva, dakharin, daiogansen)) AND status not in (open) and labels not in (techdebt-fe-reported) ORDER BY status DESC, updated DESC'
-                    )
-                    .then(
-                        response => {
-                            this.loading = false;
-                            this.list = response.body;
-                        },
-                        () => {
-                            this.loading = false;
-                        }
-                    );
-            },
-            copy: function() {
-                selectText('.search-list');
-                this.copyStatus = true;
-                setTimeout(() => {
-                    this.copyStatus = false;
-                }, 3000);
-            }
+                );
         },
-        mounted: function() {
-            this.updateData();
-        },
-        template
-    };
-})(this || (typeof window !== 'undefined' ? window : global));
+        copy: function() {
+            selectText('.search-list');
+            this.copyStatus = true;
+            setTimeout(() => {
+                this.copyStatus = false;
+            }, 3000);
+        }
+    },
+    mounted: function() {
+        this.updateData();
+    },
+    template
+};
+
+export default tasksListReport;

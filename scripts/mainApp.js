@@ -1,13 +1,16 @@
-(function(root) {
-    const routes = [
-        { path: '/', redirect: '/dashboard/0' },
-        { path: '/dashboard/:pageNumb', component: dashboard, name: 'dash' },
-        { path: '/settings', component: settings, name: 'settings' }
-    ];
+import dashboard from './dashboard.js';
+import settings from './settings.js';
 
-    const router = new VueRouter({ routes });
-    window.router = router;
-    const template = `
+const routes = [
+    { path: '/', redirect: '/dashboard/0' },
+    { path: '/dashboard/:pageNumb', component: dashboard, name: 'dash' },
+    { path: '/settings', component: settings, name: 'settings' }
+];
+
+const router = new VueRouter({ routes });
+window.router = router;
+
+const template = `
         <main>
             <favIcon text="d" fill="purple"/>
             <nav class="left-side-navigation">
@@ -28,14 +31,15 @@
         </main>
     `;
 
-    root.mainApp = {
-        router,
-        el: '#app',
-        template,
-        name: 'mainApp',
-        data: () => ({
-            stashUserName: '',
-            githubToken: ''
-        })
-    };
-})(this || (typeof window !== 'undefined' ? window : global));
+const mainApp = {
+    router,
+    el: '#app',
+    template,
+    name: 'mainApp',
+    data: () => ({
+        stashUserName: '',
+        githubToken: ''
+    })
+};
+
+export default mainApp;

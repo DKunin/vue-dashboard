@@ -1,5 +1,4 @@
-(function(root) {
-    const template = `
+const template = `
         <article
                 :class="articleClass(request)">
             <div class="pv1">
@@ -50,100 +49,99 @@
             </article>
     `;
 
-    root.singlePr = {
-        data: () => ({
+const singlePr = {
+    data() {
+        return {
             ticketStatuses: []
-        }),
-        props: {
-            user: {
-                type: String,
-                default: ''
-            },
-            request: {
-                type: Object,
-                default: true
+        };
+    },
+    props: {
+        user: {
+            type: String,
+            default: ''
+        },
+        request: {
+            type: Object,
+            default: true
+        }
+    },
+    mounted() {
+        this.updateStatus(this.request);
+    },
+    methods: {
+        approve(obj) {
+            if (!window.confirm('Approve?')) {
+                return;
             }
-        },
-        mounted() {
-            this.updateStatus(this.request);
-        },
-        methods: {
-            approve(obj) {
-                if (!window.confirm('Approve?')) {
-                    return;
-                }
-                const repo = obj.fromRef.repository.name;
-                const pullReqId = obj.id;
-                const project = obj.fromRef.repository.project.key;
+            const repo = obj.fromRef.repository.name;
+            const pullReqId = obj.id;
+            const project = obj.fromRef.repository.project.key;
 
-                this.$http
-                    .post(
-                        `${this
-                            .$localDockerIp}:4848/api/approve?project=${project}&repo=${repo}&pullRequestId=${pullReqId}`
-                    )
-                    .then(
-                        () => {
-                            this.updateData(true);
-                            this.updateStatus(this.request);
-                        },
-                        () => {
-                        }
-                    );
-            },
-            updateStatus(obj) {
-                const repo = obj.fromRef.repository.name;
-                const pullReqId = obj.id;
-                const project = obj.fromRef.repository.project.key;
-                this.$http
-                    .get(
-                        `${this
-                            .$localDockerIp}:4848/api/prs/details?project=${project}&repo=${repo}&pullRequestId=${pullReqId}`
-                    )
-                    .then(
-                        (result) => {
-                            this.ticketStatuses = result.body.statuses;
-                        },
-                        () => {
-                        }
-                    );
-            },
-            articleClass: function(request) {
-                return [
-                    'stash-list-item pv1 ph2 mv2 v-mid bb b--black-05',
-                    {
-                        'o-30': request.title.indexOf('WIP') !== -1,
-                        'bg-white': request.mine,
-                        'stash-list-item-green': !this.isConflicted(
-                            request.properties
-                        ),
-                        'stash-list-item-red': this.isConflicted(
-                            request.properties
-                        ),
-                        'stash-list-item-yellow': this.doesNeedWork(
-                            request.reviewers
-                        )
-                    }
-                ];
-            },
-            isConflicted: function(properties) {
-                if (properties.mergeResult) {
-                    return (
-                        properties.mergeResult.outcome.trim() === 'CONFLICTED'
-                    );
-                }
-                return false;
-            },
-            doesNeedWork: function(reviewers) {
-                return reviewers.some(({ status }) => status === 'NEEDS_WORK');
-            },
-            processTitle: function(title) {
-                const withoutNumber = title.replace(/^\w{4}-\d+\W/, '');
-                if (withoutNumber.length < 40) {
-                    return withoutNumber;
-                }
-                return withoutNumber;
-            },
+            this.$http
+                .post(
+                    `${this
+                        .$localDockerIp}:4848/api/approve?project=${project}&repo=${repo}&pullRequestId=${pullReqId}`
+                )
+                .then(
+                    () => {
+                        this.updateData(true);
+                        this.updateStatus(this.request);
+                    },
+                    () => {}
+                );
         },
-        template
-    };
-})(this || (typeof window !== 'undefined' ? window : global));
+        updateStatus(obj) {
+            const repo = obj.fromRef.repository.name;
+            const pullReqId = obj.id;
+            const project = obj.fromRef.repository.project.key;
+            this.$http
+                .get(
+                    `${this
+                        .$localDockerIp}:4848/api/prs/details?project=${project}&repo=${repo}&pullRequestId=${pullReqId}`
+                )
+                .then(
+                    result => {
+                        this.ticketStatuses = result.body.statuses;
+                    },
+                    () => {}
+                );
+        },
+        articleClass: function(request) {
+            return [
+                'stash-list-item pv1 ph2 mv2 v-mid bb b--black-05',
+                {
+                    'o-30': request.title.indexOf('WIP') !== -1,
+                    'bg-white': request.mine,
+                    'stash-list-item-green': !this.isConflicted(
+                        request.properties
+                    ),
+                    'stash-list-item-red': this.isConflicted(
+                        request.properties
+                    ),
+                    'stash-list-item-yellow': this.doesNeedWork(
+                        request.reviewers
+                    )
+                }
+            ];
+        },
+        isConflicted: function(properties) {
+            if (properties.mergeResult) {
+                return properties.mergeResult.outcome.trim() === 'CONFLICTED';
+            }
+            return false;
+        },
+        doesNeedWork: function(reviewers) {
+            return reviewers.some(({ status }) => status === 'NEEDS_WORK');
+        },
+        processTitle: function(title) {
+            const withoutNumber = title.replace(/^\w{4}-\d+\W/, '');
+            if (withoutNumber.length < 40) {
+                return withoutNumber;
+            }
+            return withoutNumber;
+        }
+    },
+    template
+};
+
+export default singlePr;

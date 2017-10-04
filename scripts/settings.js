@@ -1,9 +1,8 @@
-(function(root) {
-    const initialState = {
-        githubToken: '',
-        stashUserName: ''
-    };
-    const template = `
+const initialState = {
+    githubToken: '',
+    stashUserName: ''
+};
+const template = `
         <main class="pa4 black-80">
             <form class="measure center" v-on:submit="saveSettings">
               <fieldset class="ba b--transparent ph0 mh0">
@@ -24,33 +23,36 @@
         </main>
     `;
 
-    root.settings = {
-        data: () => initialState,
-        template,
-        methods: {
-            saveSettings: function(event) {
-                event.preventDefault();
-                const { stashUserName, githubToken } = this;
+const settings = {
+    data() {
+        return initialState;
+    },
+    template,
+    methods: {
+        saveSettings: function(event) {
+            event.preventDefault();
+            const { stashUserName, githubToken } = this;
 
-                localStorage.setItem(
-                    'settings',
-                    JSON.stringify({
-                        stashUserName,
-                        githubToken
-                    })
-                );
-                updateSettings({
+            localStorage.setItem(
+                'settings',
+                JSON.stringify({
                     stashUserName,
                     githubToken
-                });
-                this.$router.push('/');
-            }
-        },
-        mounted: function() {
-            const { stashUserName, githubToken } =
-                JSON.parse(localStorage.getItem('settings')) || initialState;
-            this.$set(this, 'stashUserName', stashUserName);
-            this.$set(this, 'githubToken', githubToken);
+                })
+            );
+            updateSettings({
+                stashUserName,
+                githubToken
+            });
+            this.$router.push('/');
         }
-    };
-})(this || (typeof window !== 'undefined' ? window : global));
+    },
+    mounted: function() {
+        const { stashUserName, githubToken } =
+            JSON.parse(localStorage.getItem('settings')) || initialState;
+        this.$set(this, 'stashUserName', stashUserName);
+        this.$set(this, 'githubToken', githubToken);
+    }
+};
+
+export default settings;

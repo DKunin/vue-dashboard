@@ -1,5 +1,4 @@
-(function(root) {
-    const template = `
+const template = `
         <dashCard :updateData="updateData" :hideTime="hideTime">
             <div v-if="!plans.length && !loading">
                 <div class="fw1 tc v-mid pa5 o-30">
@@ -15,43 +14,46 @@
         </dashCard>
     `;
 
-    root.planList = {
-        data: () => ({
+const planList = {
+    data() {
+        return {
             plans: [],
             loading: false
-        }),
-        props: {
-            hideTime: {
-                type: Boolean,
-                default: false
-            }
-        },
-        methods: {
-            updateData: function() {
-                this.plans = [];
-                this.loading = true;
-                this.$http
-                    .get(
-                        this.$localIp +
-                            ':4949/command/_Users_dikunin_Projects_work-calendar-exchange_calendar'
-                    )
-                    .then(
-                        response => {
-                            this.loading = false;
-                            this.plans =
-                                typeof response.body === 'string'
-                                    ? response.body
-                                          .trim()
-                                          .split('\n')
-                                          .filter(Boolean)
-                                    : null;
-                        },
-                        () => {
-                            this.loading = false;
-                        }
-                    );
-            }
-        },
-        template
-    };
-})(this || (typeof window !== 'undefined' ? window : global));
+        };
+    },
+    props: {
+        hideTime: {
+            type: Boolean,
+            default: false
+        }
+    },
+    methods: {
+        updateData: function() {
+            this.plans = [];
+            this.loading = true;
+            this.$http
+                .get(
+                    this.$localIp +
+                        ':4949/command/_Users_dikunin_Projects_work-calendar-exchange_calendar'
+                )
+                .then(
+                    response => {
+                        this.loading = false;
+                        this.plans =
+                            typeof response.body === 'string'
+                                ? response.body
+                                      .trim()
+                                      .split('\n')
+                                      .filter(Boolean)
+                                : null;
+                    },
+                    () => {
+                        this.loading = false;
+                    }
+                );
+        }
+    },
+    template
+};
+
+export default planList;
