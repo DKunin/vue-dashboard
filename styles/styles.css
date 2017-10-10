@@ -325,6 +325,7 @@ label {
     color: #594300;
 }
 .pull-request-ticket-status-closed,
+.pull-request-ticket-status-waiting-for-release,
 .pull-request-ticket-status-ready-for-merge,
 .pull-request-ticket-status-resolved {
     background-color: #14892c;
