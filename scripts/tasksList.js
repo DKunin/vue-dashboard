@@ -1,5 +1,5 @@
 const template = `
-    <dashCard :updateData="updateData" :hideTime="true" :loading="loading" :customClass="panel">
+    <dashCard :search="search" :updateData="updateData" :hideTime="true" :loading="loading" :customClass="panel">
         <div v-if="!list.length && !loading" class="tc v-mid pa5 o-30">No data</div>
         <div v-if="displayName">{{uniqueName}}</div>
         <div v-if="displayName">

@@ -9,6 +9,7 @@ import favIcon from './favIcon.js';
 import githubIssues from './githubIssues.js';
 import singlePr from './singlePr.js';
 import focusIcon from './focusIcon.js';
+import searchIcon from './searchIcon.js';
 import app from './app.js';
 
 let updateSettings;
@@ -17,7 +18,7 @@ Object.defineProperty(Vue.prototype, '$localIp', {
     value: 'http://127.0.0.1'
 });
 Object.defineProperty(Vue.prototype, '$localDockerIp', {
-    value: 'http://192.168.99.100'
+    value: 'http://192.168.64.2'
 });
 
 Vue.component('githubIssues', githubIssues);
@@ -30,6 +31,8 @@ Vue.component('planList', planList);
 Vue.component('singlePr', singlePr);
 Vue.component('dashboard', dashboard);
 Vue.component('favIcon', favIcon);
+Vue.component('focusIcon', focusIcon);
+Vue.component('searchIcon', searchIcon);
 
 const options = JSON.parse(localStorage.getItem('settings') || '{}');
 
