@@ -18,7 +18,7 @@ Object.defineProperty(Vue.prototype, '$localIp', {
     value: 'http://127.0.0.1'
 });
 Object.defineProperty(Vue.prototype, '$localDockerIp', {
-    value: 'http://192.168.64.2'
+    value: 'http://192.168.64.3'
 });
 
 Vue.component('githubIssues', githubIssues);
