@@ -12,8 +12,6 @@ import focusIcon from './focusIcon.js';
 import searchIcon from './searchIcon.js';
 import app from './app.js';
 
-let updateSettings;
-
 Object.defineProperty(Vue.prototype, '$localIp', {
     value: 'http://127.0.0.1'
 });
@@ -38,9 +36,10 @@ const options = JSON.parse(localStorage.getItem('settings') || '{}');
 
 const appInstance = new Vue(app);
 
-updateSettings = function({ stashUserName }) {
+window.updateSettings = function({ stashUserName, githubToken }) {
     Vue.set(appInstance, 'stashUserName', stashUserName);
+    Vue.set(appInstance, 'githubToken', githubToken);
 };
 
-updateSettings(options);
+window.updateSettings(options);
 export default null;

@@ -40,7 +40,7 @@ const settings = {
                     githubToken
                 })
             );
-            updateSettings({
+            window.updateSettings({
                 stashUserName,
                 githubToken
             });

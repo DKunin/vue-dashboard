@@ -22,6 +22,7 @@ const dashboard = {
             ];
         },
         pageOne(createElement) {
+            console.log(this.state);
             return [
                 createElement(
                     'section',
