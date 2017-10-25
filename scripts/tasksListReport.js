@@ -1,13 +1,4 @@
-function selectText(element) {
-    var text = document.querySelector(element);
-    var selection = document.getSelection();
-    var range = document.createRange();
-    range.selectNode(text);
-    selection.removeAllRanges();
-    selection.addRange(range);
-    document.execCommand('copy');
-    selection.removeAllRanges();
-}
+import selectText from './selectText.js';
 
 const template = `
         <dashCard :updateData="updateData" nopadding hideTime>

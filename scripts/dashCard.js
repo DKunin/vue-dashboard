@@ -1,3 +1,5 @@
+import selectText from './selectText.js';
+
 const template = `
         <div :class="computedClass">
             <button :class="'refresh-button ' + (loading ? 'refresh-button refresh-button-updating': '')" v-on:click.prevent="forceUpdate">
@@ -7,9 +9,9 @@ const template = `
                         <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
                     </svg>
             </button>
-            <a v-if="search" :href="unescape(search)" target="_blank" class="refresh-button" >
-                    <search-icon />
-            </a>
+            <button type="button" v-if="search" @click="copyPath(unescape(search))" class="refresh-button" >
+                <search-icon />
+            </button>
             <slot>∅</slot>
             <small v-if="!hideTime" class="dash-panel-time">{{updatedTime}}</small>
         </div>
@@ -48,9 +50,13 @@ const dashCard = {
         }
     },
     methods: {
-        forceUpdate: function() {
+        forceUpdate() {
             this.$set(this, 'updatedTime', new Date());
             this.updateData(true);
+        },
+        copyPath(text) {
+            let changedText = text.split('?')[1];
+            selectText({ text: changedText });
         }
     },
     computed: {
