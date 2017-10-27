@@ -39,7 +39,7 @@ const app = {
         return {
             stashUserName: '',
             githubToken: ''
-        }
+        };
     }
 };
 

@@ -83,9 +83,9 @@ const changedFilesList = {
                         this.files =
                             typeof response.body === 'string'
                                 ? response.body
-                                      .trim()
-                                      .split('\n')
-                                      .filter(Boolean)
+                                    .trim()
+                                    .split('\n')
+                                    .filter(Boolean)
                                 : null;
                     },
                     () => {

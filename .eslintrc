@@ -18,10 +18,7 @@
         ],
         "no-with": 2,
         "brace-style": [
-            2,
-            "stroustrup", {
-                "allowSingleLine": true
-            }
+            2
         ],
         "no-mixed-spaces-and-tabs": 2,
         "no-multiple-empty-lines": 2,
@@ -31,8 +28,7 @@
             "property"
         ],
         "operator-linebreak": [
-            2,
-            "after"
+            0
         ],
         "padded-blocks": [
             2,
@@ -62,8 +58,7 @@
             }
         ],
         "array-bracket-spacing": [
-            2,
-            "always"
+            0
         ],
         "space-in-parens": [
             2,
@@ -156,31 +151,6 @@
     "parserOptions": {
         "ecmaVersion": 7,
         "sourceType": "module"
-    },
-    "ecmaFeatures": {
-        "arrowFunctions": true,
-        "binaryLiterals": true,
-        "blockBindings": true,
-        "classes": true,
-        "defaultParams": true,
-        "destructuring": true,
-        "forOf": true,
-        "generators": true,
-        "modules": true,
-        "objectLiteralComputedProperties": true,
-        "objectLiteralDuplicateProperties": true,
-        "objectLiteralShorthandMethods": true,
-        "objectLiteralShorthandProperties": true,
-        "octalLiterals": true,
-        "regexUFlag": true,
-        "regexYFlag": true,
-        "restParams": true,
-        "spread": true,
-        "superInFunctions": true,
-        "templateStrings": true,
-        "unicodeCodePointEscapes": true,
-        "globalReturn": true,
-        "experimentalObjectRestSpread": true
     },
     "plugins": []
 }

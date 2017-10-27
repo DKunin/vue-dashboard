@@ -4,8 +4,7 @@ function selectText(element) {
     let text = '';
     if (typeof element === 'string') {
         text = document.querySelector(element);
-    }
-    else {
+    } else {
         var newTextNode = document.createElement('span');
         newTextNode.innerText = element.text;
         document.body.appendChild(newTextNode);

@@ -45,7 +45,6 @@ const githubIssues = {
     },
     computed: {
         query() {
-            console.log(this.search);
             if (
                 this.search &&
                 !this.search.includes('undefined') &&
