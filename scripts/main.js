@@ -13,10 +13,10 @@ import searchIcon from './searchIcon.js';
 import app from './app.js';
 
 Object.defineProperty(Vue.prototype, '$localIp', {
-    value: 'http://127.0.0.1'
+    value: 'http://dashboard.dev'
 });
 Object.defineProperty(Vue.prototype, '$localDockerIp', {
-    value: 'http://192.168.64.5'
+    value: 'http://dashboard.dev'
 });
 
 Vue.component('githubIssues', githubIssues);
