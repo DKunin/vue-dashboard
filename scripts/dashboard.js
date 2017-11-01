@@ -146,13 +146,31 @@ const dashboard = {
                         createElement(tasksList, {
                             props: {
                                 uniqueName: 'iOs 20',
-                                panel: 'dash-panel-full',
+                                panel: '',
                                 displayName: true,
                                 search:
                                     this.$localDockerIp +
                                     ':4747/api/search?jql=' +
                                     escape(
                                         'labels = 20.0 AND component = "Trust&Safety" AND project = "Avito iOS" ORDER BY priority DESC, issuetype DESC'
+                                    )
+                            },
+                            directives: [
+                                {
+                                    name: 'visibilityUpdate'
+                                }
+                            ]
+                        }),
+                        createElement(tasksList, {
+                            props: {
+                                uniqueName: 'iOs 21',
+                                panel: '',
+                                displayName: true,
+                                search:
+                                    this.$localDockerIp +
+                                    ':4747/api/search?jql=' +
+                                    escape(
+                                        'labels = 21.0 AND component = "Trust&Safety" AND project = "Avito iOS" ORDER BY priority DESC, issuetype DESC'
                                     )
                             },
                             directives: [
@@ -178,13 +196,31 @@ const dashboard = {
                         createElement(tasksList, {
                             props: {
                                 uniqueName: 'Android 20',
-                                panel: 'dash-panel-full',
+                                panel: '',
                                 displayName: true,
                                 search:
                                     this.$localDockerIp +
                                     ':4747/api/search?jql=' +
                                     escape(
                                         'labels = 20.0 AND component = "Trust&Safety" AND project = "Avito Android" ORDER BY issuetype DESC'
+                                    )
+                            },
+                            directives: [
+                                {
+                                    name: 'visibilityUpdate'
+                                }
+                            ]
+                        }),
+                        createElement(tasksList, {
+                            props: {
+                                uniqueName: 'Android 21',
+                                panel: '',
+                                displayName: true,
+                                search:
+                                    this.$localDockerIp +
+                                    ':4747/api/search?jql=' +
+                                    escape(
+                                        'labels = 21.0 AND component = "Trust&Safety" AND project = "Avito Android" ORDER BY issuetype DESC'
                                     )
                             },
                             directives: [
