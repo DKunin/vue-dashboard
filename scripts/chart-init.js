@@ -1,25 +1,61 @@
-let data = {
-    labels: ['12.01.17', '13.01.17', '14.01.17', '15.01.17', '16.01.17'],
+'use strict';
 
+const labels = [
+    '30.10.2017',
+    '31.10.2017',
+    '1.11.2017',
+    '2.11.2017',
+    '3.11.2017',
+    '6.11.2017',
+    '7.11.2017',
+    '8.11.2017',
+    '9.11.2017',
+    '10.11.2017'
+];
+
+const perfectValues = [87, 78, 69, 60, 51, 42, 33, 24, 15, 6];
+const burnDownValues = [87, 83, 74];
+
+const newAvStep =
+    (burnDownValues[0] - burnDownValues[burnDownValues.length - 1]) /
+    burnDownValues.length;
+
+const newPerspective = new Array(labels.length - 1).fill(1).reduce(function(
+    newArray
+) {
+    const newValue = Math.floor(newArray[newArray.length - 1] - newAvStep);
+    return newArray.concat([
+        newValue < 0 ? 0 : newValue
+    ]);
+},
+[burnDownValues[0]]);
+
+let data = {
+    labels,
     datasets: [
         {
             title: 'Some Data',
             color: 'light-blue',
-            values: [50, 40, 30, 20, 10]
+            values: perfectValues
         },
         {
             title: 'Another Set',
             color: 'violet',
-            values: [50, 47, 20]
+            values: burnDownValues
+        },
+        {
+            title: 'Perspective Set',
+            color: 'grey',
+            values: newPerspective
         }
     ]
 };
 
 new Chart({
     parent: '#chart',
-    title: 'My Awesome Chart',
+    title: '',
     data: data,
     type: 'line',
-    height: 250
+    height: 300
 });
 // chart.show_averages();
