@@ -13,8 +13,8 @@ const labels = [
     '10.11.2017'
 ];
 
-const perfectValues = [87, 78, 69, 60, 51, 42, 33, 24, 15, 6];
-const burnDownValues = [87, 83, 74];
+const perfectValues = [ 77, 69, 61, 53, 45, 37, 29, 21, 13, 5 ];
+const burnDownValues = [ 77, 74, 65, 51, 44 ];
 
 const newAvStep =
     (burnDownValues[0] - burnDownValues[burnDownValues.length - 1]) /
@@ -58,4 +58,3 @@ new Chart({
     type: 'line',
     height: 300
 });
-// chart.show_averages();
