@@ -10,7 +10,7 @@ const template = `
                 <focusIcon :size="20" :state="issue.focused" :uniqueKey="issue.key" :handleChange="processFocusUpdate"/>
             </div>
             <img alt="issue-type" class="fr mw1 dib" :src="issue.fields.issuetype.iconUrl" >
-            <img alt="priority" class="fr mw1 dib" :src="issue.fields.priority.iconUrl" >
+            <img alt="priority" class="fr mw1 dib" :src="issue.fields.priority ? issue.fields.priority.iconUrl : ''" >
             <a
               class="link black hover-bg-silver"
               :href='"https://jr.avito.ru/browse/" + issue.key'
