@@ -147,12 +147,13 @@ const dashboard = {
                             props: {
                                 uniqueName: 'iOs 22',
                                 panel: '',
+                                customClass: 'panel dash-panel-full',
                                 displayName: true,
                                 search:
                                     this.$localDockerIp +
                                     ':4747/api/search?jql=' +
                                     escape(
-                                        'labels = 22.0 AND component = "Trust&Safety" AND project = "Avito iOS" ORDER BY priority DESC, issuetype DESC'
+                                        '(project = "Trust & Safety" AND component = iOs OR project = "Avito iOS" AND component = "Trust&Safety") AND labels = 22.0 AND type not in subTaskIssueTypes() ORDER BY issuetype DESC'
                                     )
                             },
                             directives: [
@@ -179,12 +180,13 @@ const dashboard = {
                             props: {
                                 uniqueName: 'Android 22',
                                 panel: '',
+                                customClass: 'panel dash-panel-full',
                                 displayName: true,
                                 search:
                                     this.$localDockerIp +
                                     ':4747/api/search?jql=' +
                                     escape(
-                                        'labels = 22.0 AND component = "Trust&Safety" AND project = "Avito Android" ORDER BY issuetype DESC'
+                                        '(project = "Trust & Safety" AND component = Android OR project = "Avito Android" AND component = "Trust&Safety") AND labels = 22.0 AND type not in subTaskIssueTypes() ORDER BY issuetype DESC'
                                     )
                             },
                             directives: [
@@ -196,23 +198,23 @@ const dashboard = {
                     ]
                 ),
 
-                createElement(
-                    'section',
-                    {
-                        class: {
-                            'flex-section': true
-                        }
-                    },
-                    [
-                        createElement(tasksListReport, {
-                            directives: [
-                                {
-                                    name: 'visibilityUpdate'
-                                }
-                            ]
-                        })
-                    ]
-                )
+                // createElement(
+                //     'section',
+                //     {
+                //         class: {
+                //             'flex-section': true
+                //         }
+                //     },
+                //     [
+                //         createElement(tasksListReport, {
+                //             directives: [
+                //                 {
+                //                     name: 'visibilityUpdate'
+                //                 }
+                //             ]
+                //         })
+                //     ]
+                // )
             ];
         }
     },

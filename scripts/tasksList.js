@@ -1,5 +1,5 @@
 const template = `
-    <dashCard :search="search" :updateData="updateData" :hideTime="true" :loading="loading" :customClass="panel">
+    <dashCard :search="search" :updateData="updateData" :hideTime="true" :loading="loading" :customClass="customClass">
         <div v-if="!list.length && !loading" class="tc v-mid pa5 o-30">No data</div>
         <div v-if="displayName">{{uniqueName}}</div>
         <div v-if="displayName">
@@ -36,6 +36,7 @@ const template = `
 const tasksList = {
     props: {
         search: { type: String, default: '' },
+        customClass: { type: String, default: 'panel' },
         uniqueName: { type: String, default: 'tasks' },
         displayName: { type: Boolean, default: false },
         panel: { type: String, default: '' },
