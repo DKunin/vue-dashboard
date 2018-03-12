@@ -88,8 +88,7 @@ const dashboard = {
                         }),
                         createElement(githubIssues, {
                             props: {
-                                search: `https://api.github.com/issues?access_token=${this
-                                    .state.githubToken}`
+                                search: `https://api.github.com/issues?access_token=${this.state.githubToken}&state=open`
                             },
                             directives: [
                                 {
